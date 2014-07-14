@@ -14,4 +14,4 @@ The documentation can be found [here](http://wordpress.org/plugins/nomad-world-m
 
 Demo
 -------
-A working demo of the plugin can be found [here](http://nomadworldmap.com)
+A working demo of the plugin can be found [here](http://nomadworldmap.com).
