@@ -1,0 +1,474 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Nomad World Map v1.1.4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2013-12-15 22:02:01+0000\n"
+"Last-Translator: admin <glumik2@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%100/10==1 ? 2 : n%10==1 ? 0 : (n+9)%10>3 ? 2 : 1;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: Czech\n"
+"X-Poedit-Country: CZECH REPUBLIC\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: admin/nwm-admin-functions.php:718
+#@ nwm
+msgid "FAQ"
+msgstr ""
+
+#: admin/nwm-admin-functions.php:721
+#@ nwm
+msgid "How do I show the map on my page?"
+msgstr ""
+
+#: admin/nwm-admin-functions.php:722
+#@ nwm
+msgid "Add this shortcode <code>[nwm_map]</code> to the page where you want to show the map."
+msgstr ""
+
+#: admin/nwm-admin-functions.php:725
+#@ nwm
+msgid "Can I specify the dimensions of the map?"
+msgstr ""
+
+#: admin/nwm-admin-functions.php:726
+#@ nwm
+msgid "Yes, just add the width and height as an attribute to the shortcode. For example <code>[nwm_map height=\"500\" width=\"500\"]</code>."
+msgstr ""
+
+#: admin/nwm-admin-functions.php:729
+#@ nwm
+msgid "How do I specify which map is shown?"
+msgstr ""
+
+#: admin/nwm-admin-functions.php:730
+#@ nwm
+msgid "You can add the id attribute to the <code>[nwm_map]</code> shortcode. This will show the map with ID 3 on your page. <code>[nwm_map id=\"3\"]</code>. <br> The map ID can be found on the \"Manage Maps\" page. If no ID is set it will show the default map with ID 1."
+msgstr ""
+
+#: admin/nwm-admin-functions.php:733
+#@ nwm
+msgid "Can I show a list of all the destination on the map?"
+msgstr ""
+
+#: admin/nwm-admin-functions.php:734
+#@ nwm
+msgid "Yes, this shortcode <code>[nwm_list id=\"1\"]</code> will show the destination list for the map with id 1. If no ID is set, it will default to 1. <br><br> Other shortcode options for the list: <br><br> <code>[nwm_list id=\"1\" dates=\"all\"]</code> Shows both the arrival and departure dates <br> <code>[nwm_list id=\"1\" dates=\"arrival\"]</code> Only show the arrival dates <br> <code>[nwm_list id=\"1\" dates=\"departure\"]</code> Only show the departure dates"
+msgstr ""
+
+#: admin/nwm-admin-functions.php:737
+#@ nwm
+msgid "When I search for a blog post title it returns no results?"
+msgstr ""
+
+#: admin/nwm-admin-functions.php:738
+#@ nwm
+msgid "Make sure the blog post you search for is published, and that the search input matches exactly with the title you see in the blog post editor. Otherwise please open a support request in the <a href=\"http://wordpress.org/support/plugin/nomad-world-map\">support form</a>."
+msgstr ""
+
+#: admin/nwm-admin-functions.php:741
+#@ nwm
+msgid "Where can I suggest new features?"
+msgstr ""
+
+#: admin/nwm-admin-functions.php:742
+#@ nwm
+msgid "You can suggest new features <a href=\"http://nomadworldmap.uservoice.com/\">here</a>, or vote for existing suggestions from others."
+msgstr ""
+
+#: admin/nwm-manage-maps.php:13
+#@ nwm
+msgid "Manage Maps"
+msgstr "Nastavení mapy"
+
+#: admin/nwm-manage-maps.php:20
+#@ nwm
+msgid "Map entries successfully removed"
+msgstr ""
+
+#: admin/nwm-manage-maps.php:23
+#@ nwm
+msgid "Map(s) successfully deleted"
+msgstr "Mapa(y) byly úspěšně smazány"
+
+#: admin/nwm-manage-maps.php:26
+#@ nwm
+msgid "Name updated"
+msgstr "Aktualizace názvu"
+
+#: admin/nwm-manage-maps.php:33
+#@ nwm
+msgid "Invalid map name"
+msgstr "Chybný název mapy"
+
+#: admin/nwm-manage-maps.php:37
+#@ nwm
+msgid "All the map entries are removed. But the map with ID 1 is used as the default map and cannot be removed"
+msgstr ""
+
+#: admin/nwm-manage-maps.php:50
+#@ nwm
+msgid "Bulk actions"
+msgstr ""
+
+#: admin/nwm-manage-maps.php:51
+#@ nwm
+msgid "Delete"
+msgstr "Smazat"
+
+#: admin/nwm-manage-maps.php:52
+#@ nwm
+msgid "Remove route entries"
+msgstr ""
+
+#: admin/nwm-manage-maps.php:54
+#@ nwm
+msgid "Apply"
+msgstr "Použít"
+
+#: admin/nwm-manage-maps.php:55
+#@ nwm
+msgid "Add new map"
+msgstr "Přidat novou mapu"
+
+#: admin/nwm-manage-maps.php:63
+#: admin/nwm-manage-maps.php:103
+#@ nwm
+msgid "Select All"
+msgstr ""
+
+#: admin/nwm-manage-maps.php:66
+#: admin/nwm-manage-maps.php:106
+#@ nwm
+msgid "ID"
+msgstr ""
+
+#: admin/nwm-manage-maps.php:67
+#: admin/nwm-manage-maps.php:107
+#@ nwm
+msgid "Name"
+msgstr "Jméno"
+
+#: admin/nwm-manage-maps.php:68
+#: admin/nwm-manage-maps.php:108
+#@ nwm
+msgid "Entries"
+msgstr ""
+
+#: admin/nwm-manage-maps.php:91
+#@ nwm
+msgid "Edit name"
+msgstr "Editace jména"
+
+#: admin/nwm-manage-maps.php:120
+#: admin/nwm-manage-maps.php:135
+#@ nwm
+msgid "Map name"
+msgstr "Jméno mapy"
+
+#: admin/nwm-manage-maps.php:124
+#@ nwm
+msgid "Update"
+msgstr "Aktualizace"
+
+#: admin/nwm-manage-maps.php:125
+#: admin/nwm-manage-maps.php:140
+#@ nwm
+msgid "Cancel"
+msgstr ""
+
+#: admin/nwm-manage-maps.php:139
+#@ nwm
+msgid "Add"
+msgstr "Přidat"
+
+#: admin/nwm-map-editor.php:17
+#@ nwm
+msgid "Current map:"
+msgstr ""
+
+#: admin/nwm-map-editor.php:30
+#@ nwm
+msgid "Add location"
+msgstr "Přidat místo"
+
+#: admin/nwm-map-editor.php:31
+#@ nwm
+msgid "Edit location"
+msgstr "Editovat místo"
+
+#: admin/nwm-map-editor.php:37
+#@ nwm
+msgid "City / Country:"
+msgstr "Město/Země"
+
+#: admin/nwm-map-editor.php:41
+#@ nwm
+msgid "You can drag the red marker to a specific location"
+msgstr ""
+
+#: admin/nwm-map-editor.php:45
+#@ nwm
+msgid "Location content:"
+msgstr "Obsah lokace"
+
+#: admin/nwm-map-editor.php:47
+#@ nwm
+msgid "Post excerpt"
+msgstr "Výpisek"
+
+#: admin/nwm-map-editor.php:48
+#@ nwm
+msgid "Custom content"
+msgstr "Vlastní obsah"
+
+#: admin/nwm-map-editor.php:49
+#@ nwm
+msgid "Travel schedule"
+msgstr "Plán cesty"
+
+#: admin/nwm-map-editor.php:53
+#@ nwm
+msgid "Title of the post you want to link to:"
+msgstr ""
+
+#: admin/nwm-map-editor.php:55
+#@ nwm
+msgid "Link: "
+msgstr ""
+
+#: admin/nwm-map-editor.php:60
+#@ nwm
+msgid "Title:"
+msgstr "Název:"
+
+#: admin/nwm-map-editor.php:61
+#@ nwm
+msgid "Link:"
+msgstr ""
+
+#: admin/nwm-map-editor.php:63
+#@ nwm
+msgid "Description:"
+msgstr "Popis:"
+
+#: admin/nwm-map-editor.php:65
+#@ nwm
+msgid "Keep it short, 25 words remaining."
+msgstr "Nechat krátký  (25 slov )"
+
+#: admin/nwm-map-editor.php:72
+#: admin/nwm-map-editor.php:132
+#@ nwm
+msgid "Thumbnail"
+msgstr "Náhled"
+
+#: admin/nwm-map-editor.php:76
+#@ nwm
+msgid "Change thumbnail"
+msgstr "Změnit náhled"
+
+#: admin/nwm-map-editor.php:77
+#@ nwm
+msgid "Use default"
+msgstr "Nastavit původní"
+
+#: admin/nwm-map-editor.php:82
+#@ nwm
+msgid "Travel dates"
+msgstr "Datum cesty"
+
+#: admin/nwm-map-editor.php:84
+#@ nwm
+msgid "Arrival:"
+msgstr "Příjezd: "
+
+#: admin/nwm-map-editor.php:89
+#@ nwm
+msgid "Departure:"
+msgstr "Odjezd:"
+
+#: admin/nwm-map-editor.php:94
+#@ nwm
+msgid "If no dates are set, then the publish date of the linked post is shown as the travel date."
+msgstr ""
+
+#: admin/nwm-map-editor.php:103
+#@ nwm
+msgid "- Select destination to edit -"
+msgstr "- Vybrat destinaci k editaci - "
+
+#: admin/nwm-map-editor.php:127
+#@ nwm
+msgid "Order"
+msgstr "Řazení"
+
+#: admin/nwm-map-editor.php:128
+#: includes/nwm-frontend-functions.php:85
+#@ nwm
+msgid "Location"
+msgstr "Intinerář cesty"
+
+#: admin/nwm-map-editor.php:129
+#@ nwm
+msgid "Url"
+msgstr "URL"
+
+#: admin/nwm-map-editor.php:130
+#: includes/nwm-frontend-functions.php:91
+#: includes/nwm-frontend-functions.php:95
+#@ nwm
+msgid "Arrival"
+msgstr "Příjezd"
+
+#: admin/nwm-map-editor.php:131
+#: includes/nwm-frontend-functions.php:92
+#: includes/nwm-frontend-functions.php:98
+#@ nwm
+msgid "Departure"
+msgstr "Odjezd"
+
+#: admin/nwm-map-settings.php:12
+#@ nwm
+msgid "Nomad World Map Settings"
+msgstr "Nastavení Nomad World Map Settings"
+
+#: admin/nwm-map-settings.php:14
+#@ nwm
+msgid "Settings updated"
+msgstr "Aktualizace nastavení"
+
+#: admin/nwm-map-settings.php:21
+#@ nwm
+msgid "General"
+msgstr ""
+
+#: admin/nwm-map-settings.php:24
+#@ nwm
+msgid "Draw lines between the markers?"
+msgstr ""
+
+#: admin/nwm-map-settings.php:28
+#@ nwm
+msgid "Draw curved lines on the map?"
+msgstr ""
+
+#: admin/nwm-map-settings.php:32
+#@ nwm
+msgid "On pageload zoom to:"
+msgstr ""
+
+#: admin/nwm-map-settings.php:36
+#@ nwm
+msgid "Zoom level:"
+msgstr "Úroveň přiblížení"
+
+#: admin/nwm-map-settings.php:40
+#@ nwm
+msgid "Map type:"
+msgstr "Typ mapy"
+
+#: admin/nwm-map-settings.php:44
+#@ nwm
+msgid "Past route color:"
+msgstr ""
+
+#: admin/nwm-map-settings.php:48
+#@ nwm
+msgid "Future route color:"
+msgstr ""
+
+#: admin/nwm-map-settings.php:58
+#@ nwm
+msgid "Content Options"
+msgstr ""
+
+#: admin/nwm-map-settings.php:61
+#@ nwm
+msgid "Show the post thumbnails in a circle?"
+msgstr ""
+
+#: admin/nwm-map-settings.php:65
+#@ nwm
+msgid "Include a \"read more\" link for blog post?"
+msgstr ""
+
+#: admin/nwm-map-settings.php:69
+#@ nwm
+msgid "Show the location content in the:"
+msgstr ""
+
+#: admin/nwm-map-settings.php:72
+#@ nwm
+msgid "Slider"
+msgstr ""
+
+#: admin/nwm-map-settings.php:74
+#@ nwm
+msgid "Tooltip (this will remove the slider)"
+msgstr ""
+
+#: admin/nwm-map-settings.php:78
+#@ nwm
+msgid "Show the location name under the header?"
+msgstr ""
+
+#: admin/nwm-map-settings.php:88
+#@ nwm
+msgid "Map Controls"
+msgstr ""
+
+#: admin/nwm-map-settings.php:91
+#@ nwm
+msgid "Show the street view controls?"
+msgstr ""
+
+#: admin/nwm-map-settings.php:95
+#@ nwm
+msgid "Position of the map controls"
+msgstr ""
+
+#: admin/nwm-map-settings.php:98
+#@ nwm
+msgid "Left"
+msgstr "Vlevo"
+
+#: admin/nwm-map-settings.php:100
+#@ nwm
+msgid "Right"
+msgstr "Vpravo"
+
+#: admin/nwm-map-settings.php:104
+#@ nwm
+msgid "Zoom control style"
+msgstr ""
+
+#: admin/nwm-map-settings.php:107
+#@ nwm
+msgid "Small"
+msgstr "Malá"
+
+#: admin/nwm-map-settings.php:109
+#@ nwm
+msgid "Large"
+msgstr "Velká"
+
+#: admin/nwm-map-settings.php:121
+#@ nwm
+msgid "About"
+msgstr ""
+
+#: admin/nwm-map-settings.php:130
+#@ nwm
+msgid "Update Settings"
+msgstr "Aktualizace nastavení"
+

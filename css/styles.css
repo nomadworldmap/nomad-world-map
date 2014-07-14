@@ -1,0 +1,334 @@
+/*
+File:           styles.css
+Description:	Front-end styles for Nomad World Map
+More Info:	http://nomadworldmap.com
+*/
+
+.nwm-wrap {
+    position:relative;
+    margin-bottom:20px;
+    width: 99%;
+    border: 3px solid #FFFFFF;
+    background:#fff;
+    box-shadow:0 0 5px rgba(0, 0, 0, 0.2);
+    overflow:hidden;
+}
+
+.nwm-wrap.nwm-map-carousel {
+    width:99%;
+}
+
+#nwm-outer .nomad-world-map {
+    height:350px;
+}
+
+.nwm-destination-list .nwm-back, 
+.nwm-destination-list .nwm-forward,
+.marker-content div .nwm-thumb,
+.nwm-active-destination div .nwm-thumb {
+    background:url(../img/graphic.png) left top no-repeat;
+}
+
+/* Make sure the map images are not scaled and show a box shadow */
+#nwm-outer .nomad-world-map img, 
+#nwm-outer .nomad-world-map div {
+    max-width:none !important; 
+    box-shadow:none;
+    background:none;
+}
+
+#nwm-outer .marker-content {
+    width:350px;
+}
+#nwm-outer .marker-content p {
+    margin-bottom:0;
+}
+#nwm-outer .marker-content h1 {
+    margin-bottom:20px;
+    font-size:18px; 
+    clear:none; 
+}
+#nwm-outer .marker-content h1 span {
+    display:block; 
+    font-weight:normal; 
+    font-size:14px;
+}
+#nwm-outer .marker-thumb {
+    float:left; 
+    margin-right:12px;
+}
+#nwm-outer .marker-thumb img {
+    border-radius:4px;
+    box-shadow:none;
+}
+		
+.nwm-destination-list {
+    position:relative; 
+    margin:20px 0; 
+    width:100%; 
+    min-height:132px;
+    overflow:hidden;
+}
+#nwm-outer .nwm-destination-list p {
+    margin:10px 0 0 0;
+    color:#000;
+}
+	
+#nwm-outer .nwm-wrap .nwm-destination-list ul {
+    margin:0 15% !important;
+}	
+#nwm-outer .nwm-wrap .nwm-destination-list li {
+    float:left; 
+    position:relative;
+    width:100%; 
+    display:none; 
+    list-style:none !important;
+    margin:0 !important;
+}
+.nwm-destination-list .nwm-preloader {
+    position:absolute; 
+    left:23px; 
+    top:23px;
+}
+.nwm-destination-list .nwm-travel-schedule {
+    margin-top:0;
+}	
+#nwm-outer .nwm-destination-list h2 {
+    margin:0
+} 
+#nwm-outer .nwm-destination-list h2, 
+#nwm-outer .marker-content h2 {
+    font-weight:bold;
+    font-size:16px;
+    clear:none;
+}
+
+#nwm-outer .nwm-destination-list h2 a:hover, 
+#nwm-outer .marker-content h2 a:hover {
+    text-decoration:none;
+}
+
+#nwm-outer .nwm-destination-list h2 span, 
+#nwm-outer .marker-content h2 span {
+    display:block;
+    font-size:14px; 
+    font-weight:normal; 
+}
+
+#nwm-outer .nwm-wrap .nwm-destination-list li.nwm-active-destination {
+    min-height:115px;
+    display:block;
+}
+
+#nwm-outer .nwm-destination-list .nwm-active-destination:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+} 
+
+.nwm-control {
+    position:absolute; 
+    /* top:45%; */ 
+    top:58px;
+    width:10%; 
+}
+.nwm-control:hover {
+    cursor:pointer;
+}
+
+.nwm-map-carousel .nwm-control {top:45%;}
+
+.nwm-destination-list .nwm-back, 
+.nwm-destination-list .nwm-forward {
+    height:20px; 
+    width:11px;
+    padding:0;
+    margin:0;
+}
+
+.nwm-destination-list .nwm-back {
+    left:15px; 
+    background-position:0 -20px;
+}
+.nwm-destination-list .nwm-back:hover {
+    background-position:0 0;
+}
+.nwm-destination-list .nwm-forward {
+    right:15px; 
+    background-position:-11px -20px;
+}
+.nwm-destination-list .nwm-forward:hover {
+    background-position:-11px 0;
+}
+
+#nwm-outer .nwm-thumb {
+    float:left; 
+    width:64px; 
+    height:64px;
+    margin-right:15px; 
+    border-radius:4px; 
+}
+#nwm-outer .nwm-active-destination div {
+    float:left; 
+    height:64px;
+}	
+#nwm-outer .nwm-active-destination div .nwm-thumb,
+#nwm-outer .marker-content div .nwm-thumb {
+    background-position:-23px 0;
+    background-color:#ebebeb;
+}
+#nwm-outer .nwm-destination-list img,
+#nwm-outer span.nwm-circle {
+    box-shadow:none;
+}
+#nwm-outer .nomad-world-map .nwm-circle,
+.nwm-destination-list .nwm-circle {	
+    border-radius:33px !important;
+}
+.nwm-content {
+    float:left; 
+    width:75%;
+}
+
+#nwm-outer .nomad-world-map div.marker-style {
+    float:left;
+    position:relative;
+    padding:6px 12px;
+    background:#fff; 
+    border-radius:3px; 
+    box-shadow:0 1px 2px rgba(0, 0, 0, 0.5);
+    white-space:nowrap;
+    font-size:12px;
+    color:#000;
+}
+
+#nwm-outer .nwm-no-slider .nomad-world-map div.marker-style {
+    min-width:175px;
+}
+
+.marker-style span {
+    font-weight:normal; 
+    margin-top:2px;
+}
+#nwm-outer .nomad-world-map div.marker-style:before {
+    position:absolute;
+    height:14px;
+    width:6px;
+    display:block;
+    left:-6px;
+    top:9px;
+    background:url(../img/marker-triangle.png) left top no-repeat;
+    content:"";
+}
+
+#nwm-list {
+    list-style:none; 
+    margin-left:0;
+}
+#nwm-list li {
+    padding:10px 0;
+    border-bottom:1px dotted #ccc; 		
+    overflow:hidden;
+}
+#nwm-list li div {
+    float:left;
+}
+.nwm-count {
+    margin-right:10px;
+}
+#nwm-list li a {
+    display:block;
+}
+
+.nwm-destination-list .nwm-read-more {
+    display:inline; 
+    margin-left:5px;
+}
+
+/* Tooltip content */
+.nwm-no-slider #nwm-outer .nomad-world-map div.marker-style {
+    padding: 10px;
+}
+
+#nwm-outer .nomad-world-map .nwm-marker-wrap {
+    display: table;
+}
+#nwm-outer .nomad-world-map .nwm-marker-img {
+    float: left; 
+    display:table-cell;
+    width: 64px; 
+    margin: 4px 10px 4px -2px;
+}
+
+#nwm-outer .nomad-world-map .marker-txt {
+    display: table-cell;
+    vertical-align: top;
+}
+
+#nwm-outer .nomad-world-map .marker-txt p,
+#nwm-outer .nomad-world-map .marker-txt span {
+    font-size: 12px !important;
+}
+
+.marker-txt h2, .marker-txt h2 a {
+    margin:0; 
+    font-size:14px !important;
+    font-weight:bold; 
+    line-height:normal; 
+    clear:none;
+}
+.marker-txt h2 span, .nwm-read-more {
+    display:block;
+}
+.marker-txt p {
+    margin:0;
+}
+
+#nwm-outer .nomad-world-map .nwm-read-more {
+    margin-top:5px;
+    font-size:12px !important;
+}
+
+/* Location list table styles  */
+#nwm-route-list {
+    border-bottom:1px solid #EDEDED;
+
+}
+#nwm-route-list th {
+    height:auto !important;
+}
+#nwm-route-list th, 
+#nwm-route-list td {
+    text-align:left !important; 
+    padding:5px 10px 5px 0;
+    border-top:1px solid #EDEDED;
+}
+#nwm-route-list .nwm-location-count {
+    width:25px; 
+    padding-left:10px; 
+    padding-right:15px;
+}
+#nwm-route-list .nwm-future-color {
+    background-color:#fcfcfc;
+}
+
+@media (max-width: 800px) {
+    .nwm-destination-list ul {
+            margin:0 11%;
+    }	
+}
+
+@media (max-width: 450px) {
+    .nwm-wrap {
+        width:98%;
+    }
+}
+
+@media (max-width: 320px) {
+    .nwm-destination-list ul {
+            margin:0 19%;
+    }	
+}

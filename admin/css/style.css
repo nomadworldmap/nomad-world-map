@@ -1,0 +1,474 @@
+#nwm-menu {
+	float:left; 
+	width:100%;
+	padding-left:7px;
+	border-bottom:1px solid #ccc;
+	margin-bottom:20px;
+}
+#nwm-menu li {
+	float:left; 
+	margin:0 7px 0 0; 
+	background:#fff;
+} 
+#nwm-menu li a {
+	display:block; 
+	padding:9px 12px; 
+	border-radius:3px 3px 0 0; 
+	border:1px solid #ccc; 
+	border-bottom:none;
+	text-decoration:none;
+}
+#nwm-menu li.nwm-active-item {
+	background:#fff; 
+	border-bottom:1px solid #fff; 
+	margin-bottom:-1px;
+}
+		
+#nwm-settings-form h2 {
+	border:none;
+}
+#nwm-wrap .postbox h3 {
+	padding:7px 9px; 
+	margin-bottom:0;
+}
+#nwm-wrap .postbox h3:hover {
+	cursor:default;
+} 
+#nwm-destination-wrap {
+	float:left; 
+	width:340px; 
+	margin:0 20px 0 0;
+	overflow:hidden; 
+}
+
+.nwn-new-destination-wrap, 
+.nwn-current-destinations-wrap {
+	position:relative;
+	overflow:hidden;
+}
+.nwn-current-destinations-wrap {
+	margin-top:20px;
+}
+
+#nwm-destination-list td {
+	height:34px;
+}
+
+.nwm-tab {
+	float:left;
+}
+.nwm-hide, 
+.nwm-tab {
+	display:none;
+}
+.nwm-active, 
+#nwm-destination-wrap em,
+.nwm-marker-wrap span {
+	display:block;
+}
+.nwm-desc {
+	margin:5px 0 0 2px;
+}
+
+#nwm-destination-wrap .nwm-error {
+	border:1px solid #c01313;
+}
+/*.nwm-marker-option {
+	margin-bottom:10px;
+}*/
+.gmap-wrap {
+	position: relative;
+	margin-left: 364px; 
+}
+	
+#gmap-nwm {
+	float:left; 
+	height:526px; 
+	width:100%; 
+	border-radius:3px; 
+}
+#gmap-nwm.no-float {
+	float:none;
+}
+#gmap-nwm label span {
+	display:block; 
+	font-style:italic;
+}
+#nwm-trip-cat {
+	height:auto; 
+	padding:5px; 
+	width:160px;
+}
+#nwm-trips label, 
+#nwm-wrap label,
+#nwm-add-map-box label,
+#nwm-edit-name-box label  {
+	display:block; 
+	font-weight:bold; 
+	margin:0 0 5px 2px;
+}
+
+#nwm-add-map-box label,
+#nwm-edit-name-box label {font-weight:normal;}
+#nwm-map-selector {
+	position:absolute; 
+	right:0; 
+	top:0;
+	padding-right:15px;
+}
+#nwm-map-selector img {   
+	position: absolute;
+    right: 0;
+    top: 3px;
+	margin:0;
+}
+#nwm-map-list {
+	margin:0 10px 0 5px;
+}
+
+#nwm-map-selector label {
+	display:inline;
+} 
+
+#nwm-custom-text .nwm-textarea-wrap label {
+	float:left; 
+	display:inline;
+}
+#nwm-blog-excerpt label, 
+#nwm-custom-text label {
+	font-weight:normal;
+}
+
+.textinput {
+	width:205px; 
+	padding:5px;
+}
+
+#nwm-add-trip:hover {
+	cursor:pointer;
+}
+
+#nwm-search-link {
+	margin:5px 0 5px 2px;
+}
+#nwm-destination-wrap .nwm-active {
+	float:left; 
+	margin:0;
+}
+#nwm-marker-content, 
+#nwm-search-link {
+	float:left; 
+	width:100%;
+}
+#nwm-search-link .nwm-active,
+.nwm-textarea-wrap .nwm-preloader,
+.nwm-marker-wrap  {
+	margin-top:0;
+}
+#nwm-update-trip {
+	float:left; 
+	margin:0 10px 12px 0;
+}
+
+/*.nwm-marker-wrap {float:left; margin-bottom:10px;}*/
+#nwm-nonce-fail {
+	float:left; 
+	margin:4px 0 10px 0;
+	color:#830000;	
+	font-weight:bold; 
+}
+#nwm-destination-list tbody {
+	background:#fff;
+}
+#nwm-destination-list td {
+	border-top:1px dotted #ccc;
+}
+#nwm-destination-list td.nwm-order span {
+    float:left; 
+    color:#000; 
+    font-weight:bold; 
+    text-align:center;
+}
+#nwm-destination-list tbody tr:hover {
+    background-color:#fcfcfc; 
+    cursor:move;
+}
+#nwm-destination-list th, 
+#nwm-destination-list td {
+    padding:10px;
+    text-align:left;  
+    line-height:auto;
+}
+
+#nwm-destination-list .nwm-arrival span,
+#nwm-destination-list .nwm-departure span {
+    white-space:nowrap;
+}
+
+#nwm-wrap .nwm-location img {
+    margin-right: 5px;
+}
+
+.nwm-url a {
+    display:block;
+    height:16px;
+    height:16px;
+    text-indent:-9999px; 
+    background:url('../img/url.png') left top no-repeat;
+}
+
+.nwm-blog-title {
+	float:left; 
+	margin-top:5px;
+	clear:both;
+}
+.nwm-btn {
+	width:85px !important;
+}
+
+#nwm-destination-wrap textarea { 
+	width:319px; 
+	height:115px; 
+	resize:none;
+}
+
+/* 	
+#nwm-marker-content-option label {
+	float:left; 
+	margin-bottom:none; 
+	margin-top:5px;
+}
+*/
+
+#nwm-add-trip, 
+#nwm-post-title, 
+#find-nwm-title {
+	float:left;
+}
+#find-nwm-title {
+	margin:2px 0 0 3px;
+}
+
+#nwm-preload-img, 
+.nwm-preloader {
+	float:left; 
+	margin:5px 0 0 10px;
+}
+
+.nwm-save-msg {
+	float: left;
+    font-weight: bold;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+/* Thumbnails */
+#nwm-thumb-wrap { 	
+    float:left; 
+    width:100%; 
+    margin-bottom:12px;
+}
+
+.nwm-thumb, 
+.nwm-circle {
+    float:left;
+    border-radius:33px;	
+    width:64px; 
+    height:64px;
+    margin:10px 15px 10px 0; 
+}
+
+.nwm-thumb {
+    background:#EBEBEB url(../../img/graphic.png) -23px 0 no-repeat;
+}
+
+#nwm-thumb-wrap .button-primary {
+    float:left; 
+    margin-right:10px;
+}
+#nwm-thumb-wrap div {float:left; width:100%; clear:both;}
+#nwm-thumb-wrap strong {display:block;}
+
+#nwm-destination-list .nwm-thumb, 
+#nwm-destination-list .nwm-circle {
+	width:34px;
+	height:34px;
+	margin:0;
+	}
+
+/* Datepickers */
+.nwm-dates {
+	float:left; 
+	width:100%; 
+	margin-bottom:10px;
+}
+.nwm-dates a {
+	text-decoration:none;
+}
+.nwm-dates p {
+	margin:0 0 5px 0;
+}
+.nwm-form-info {
+	position:relative;
+}
+.nwm-form-info span {
+	display:none;
+}
+.nwm-form-info:hover span {
+	position:absolute;
+	left:-20px;
+	top:-100px;
+	width:230px;
+	padding:10px;
+	display:block; 
+	background:#fff; 
+	border-radius:3px;
+	border:1px solid #ccc;
+	border-radius:3px;
+	box-shadow:0 0 5px rgba(0, 0, 0, 0.2);
+	cursor:pointer;
+}	
+.nwm-form-info span:before {
+	position:absolute;
+	left:15px;
+	bottom:-16px;
+	height:0;
+	width:0;
+	display:block;
+	border:8px solid transparent;
+	content:"";
+	border-top:8px solid #fff;	
+}	
+	
+#nwm-wrap .nwm-dates label { 
+	float: left;
+    font-weight: normal;
+    margin:5px 5px 0 0;
+}
+
+#nwm-wrap .nwm-dates input {
+	width:75px;
+}
+.nwm-dates div {
+	float:left; 
+	margin-right:10px;
+}
+
+/* Route list */
+#nwm-add-trip {
+	margin-bottom:10px;
+}
+#nwm-destination-list th.nwm-order, 
+#nwm-destination-list td.nwm-order {
+	padding-left:25px;
+}
+.delete-nwm-destination {
+	float:left;
+}
+#nwm-wrap label:hover {
+	cursor:default;
+}
+
+/* Settings Form */
+.nwm-marker-lines {
+	float:left; 
+	margin-bottom:10px; 
+	width:100%;
+}
+#nwm-settings-form label {
+	display:inline-block; 
+	width:220px; 
+	margin:0;
+	font-weight:normal; 
+}
+.nwm-radioboxes {
+	margin:10px 0 0 0;
+}
+#nwm-settings-form label {
+	margin-right:10px;
+}
+#nwm-settings-form .nwm-radioboxes label {
+	margin-right:10px; 
+	width:auto;
+}
+.nwm-marker-lines label, 
+.wp-picker-container {
+	float:left;
+}
+.wp-picker-container {
+	margin:-4px 0 0 5px;
+}
+
+/* Travel Schedule */
+#nwm-schedule label {  
+	float: left;
+    padding-top: 4px;
+    width: 70px;
+}
+#nwm-travel-schedule {
+	margin-top:20px;
+}
+
+.nwm-update-btn {
+	clear:both;
+}
+
+#nwm-settings-form .postbox-container {
+	margin-right:20px;
+}
+#nwm-settings-form .postbox-container.side {
+	width:25%;
+}
+
+#nwm-settings-form .postbox-container .postbox {
+    float: left;
+    width:100%;
+}
+
+/* Latlng input fields */
+#nwm-latlng-label {
+    margin-top:10px !important;
+}
+.nwm-latlng-input #gmap-nwm {
+    height:587px;
+}
+
+/* Faq */
+#nwm-faq dt {
+	margin-bottom:4px;
+	font-weight:bold;
+	font-size:110%;
+}
+
+#nwm-faq dd {
+	margin-left: 0;	
+}
+
+#nwm-faq dl {
+	margin-bottom: 17px;	
+}
+
+/* Widget */
+#widgets-right .nwm-widget-labels {
+    margin-top:10px;
+}
+
+#widgets-right .nwm-widget-labels label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#nwm-widget-description textarea {
+    display: block;
+    width: 225px;
+}
+
+@media screen and (max-width: 840px) {
+    .gmap-wrap {margin-left:277px;}
+    .textinput {width:167px;}
+    #nwm-destination-wrap {width:255px;}	
+    .nwm-active, #nwm-destination-wrap textarea {width:233px;}
+    #nwm-search-link span a {display:block;}
+    #gmap-nwm {height:316px;}
+    #nwm-settings-form .postbox-container.side {width:auto;}
+}

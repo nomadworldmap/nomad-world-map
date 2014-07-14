@@ -1,0 +1,35 @@
+#adminmenu #toplevel_page_nwm_map_editor .wp-menu-image:before {
+    content: "\f231";
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 1em;
+    text-align: center;
+    text-decoration: inherit;
+    text-transform: none;
+    width: 1em;
+}
+
+/* Hide the pre 3.8 menu icon */
+#adminmenu toplevel_page_nwm_map_editor .wp-menu-image img {
+    display:none;
+}
+
+#gmap-nwm {
+    border-radius:0 !important;
+    height:576px !important;
+}
+
+#nwm-destination-wrap .nwm-active {
+    padding-bottom:0 !important;
+}
+
+#nwm-widget-description textarea {
+    display:block;
+    width:276px !important;
+}
+
+#nwm-wrap .nwm-btn {
+    width: 90px !important;
+}
