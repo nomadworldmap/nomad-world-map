@@ -1031,7 +1031,7 @@ function updateDestinationCount() {
 
 /* We need to set the width of each td element to prevent the tr from collapsing when it's moved around with sortable */
 function setTdWidth() {
-	$( "td" ).each( function() {
+	$( "#nwm-wrap td" ).each( function() {
 		$(this).css( "width", $( this ).width() + "px" );
 	});
 }
