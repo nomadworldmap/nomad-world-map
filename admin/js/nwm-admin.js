@@ -1592,7 +1592,11 @@ $(document.body).on( "click", "#nwm-media-upload", function( e ) {
 
 	uploadFrame.on( "select", function(){
 		var media_attachment = uploadFrame.state().get( "selection" ).first().toJSON();
-		setLocationThumb( media_attachment.sizes.thumbnail.url, media_attachment.id ); 
+		
+		if(media_attachment.sizes.length > 0)
+			setLocationThumb( media_attachment.sizes.thumbnail.url, media_attachment.id ); 
+		else
+			setLocationThumb( media_attachment.url, media_attachment.id );
 	});
 
 	uploadFrame.open();
