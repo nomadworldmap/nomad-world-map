@@ -9,7 +9,7 @@ Support
 If you need support, then please don't post it here but use the
 [support forums](http://wordpress.org/support/plugin/nomad-world-map) instead. 
 
-The Documentation can be found [here](http://wordpress.org/plugins/nomad-world-map/faq/).
+The documentation can be found [here](http://wordpress.org/plugins/nomad-world-map/faq/).
 
 
 Demo
