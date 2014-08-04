@@ -1,12 +1,12 @@
 jQuery( document ).ready( function( $ ) { 
 
 var map, geocoder, preloadImgSrc, uploadFrame, 
-	flightLines = {},
-	markersArray = [], 
+	flightLines		= {},
+	markersArray	= [], 
 	flightPlanArray = [],
-	preloadImgSrc = $( "#nwm-preload-img img" ).attr( "src" ),
-	defaultLatlng = new google.maps.LatLng( "52.378153", "4.899363" ),
-	url = window.location.href;
+	preloadImgSrc   = $( "#nwm-preload-img img" ).attr( "src" ),
+	defaultLatlng	= new google.maps.LatLng( "52.378153", "4.899363" ),
+	url				= window.location.href;
 
 /* Load Google Maps */
 function initializeGmap() {
@@ -17,7 +17,7 @@ function initializeGmap() {
 			streetViewControl: false
 		};
 
-	map = new google.maps.Map( document.getElementById( "gmap-nwm" ), myOptions );
+	map		 = new google.maps.Map( document.getElementById( "gmap-nwm" ), myOptions );
 	geocoder = new google.maps.Geocoder();	
 	
 	rebuildFlightPlan();
@@ -37,9 +37,9 @@ function rebuildFlightPlan() {
 		
 		/* Add all the markers to the map */
 		$( "#nwm-destination-list tbody tr" ).each( function( i ) {
-			latlng = $(this).attr( "data-latlng" ).split( "," );
+			latlng   = $(this).attr( "data-latlng" ).split( "," );
 			location = new google.maps.LatLng( latlng[0], latlng[1] );	
-			alt = $(this).find( ".nwm-location" ).text();
+			alt		 = $(this).find( ".nwm-location" ).text();
 			addMarker( location, alt, draggable = false );
 			flightPlanArray.push( location );
 		});
@@ -71,9 +71,9 @@ function deleteOverlays() {
 
 /* Draw lines between all markers */
 function drawFlightPlan( flightPlanCoordinates ) {	
-	var trCount = $( "#nwm-destination-list tbody tr" ).length,
-		tableId = $( "#nwm-destination-list" ).attr( "data-map-id" ),
-		mapListId = $( "#nwm-map-list" ).val(),
+	var trCount    = $( "#nwm-destination-list tbody tr" ).length,
+		tableId    = $( "#nwm-destination-list" ).attr( "data-map-id" ),
+		mapListId  = $( "#nwm-map-list" ).val(),
 		flightPath = new google.maps.Polyline({
 			path: flightPlanCoordinates,
 			geodesic: true,
@@ -162,7 +162,7 @@ function geocodeDraggedPosition( pos ) {
 		if ( responses && responses.length > 0 ) {
 			updateLocationFields( responses );
 		} else {
-			alert( 'Cannot determine address at this location.' );
+			alert( nwmL10n.addressFailed );
 		}
 	});
 }
@@ -170,9 +170,9 @@ function geocodeDraggedPosition( pos ) {
 /* Update the input fields with the received data */
 function updateLocationFields( responses ) {
 	var fullLocation = filterApiResponse( responses ),
-		coordinates = stripCoordinates( responses[0].geometry.location ),
-		lat = roundLatlng( coordinates[0], 6 ),
-		lng = roundLatlng( coordinates[1], 6 );
+		coordinates  = stripCoordinates( responses[0].geometry.location ),
+		lat			 = roundLatlng( coordinates[0], 6 ),
+		lng			 = roundLatlng( coordinates[1], 6 );
 	
 	$( "#nwm-latlng" ).val( lat + "," + lng );
 	$( "#nwm-searched-location" ).val( fullLocation.location );
@@ -190,7 +190,7 @@ function filterApiResponse( responses ) {
 		
 		/* filter out country name */
 		if ( /^country,political$/.test( responses[0].address_components[i].types ) ) {
-			countryLong = responses[0].address_components[i].long_name;
+			countryLong  = responses[0].address_components[i].long_name;
 			countryShort = responses[0].address_components[i].short_name;
 		}
 		
@@ -235,8 +235,8 @@ function filterApiResponse( responses ) {
 
 /* strip the '(' and ')' from the captured coordinates, and split them */
 function stripCoordinates( coordinates ) {
-	var latlng = [],
-		selected = coordinates.toString(),
+	var latlng    = [],
+		selected  = coordinates.toString(),
 		latlngStr = selected.split( ",",2 );
 	
 	latlng[0] = latlngStr[0].replace( "(", "" );
@@ -281,7 +281,7 @@ function codeAddress() {
 			$( "#nwm-country-code" ).val( fullLocation.country_code );
 			setCurrentCoordinates( responses[0].geometry.location );
 		} else {
-			alert( "Geocode was not successful for the following reason: " + status );
+			alert( nwmL10n.geocodeFailed + status );
 		}
     }
 )};
@@ -314,7 +314,7 @@ $( "#nwm-map-list" ).change( function () {
 				
 	$.post( ajaxurl, ajaxData, function( response ) {	
 		if ( response == -1 ) {
-			alert('Security check failed, reload the page and try again.');
+			alert( nwmL10n.securityFailed );
 		} else {
 			if ( response.success ) {
 				$( "#nwm-destination-list tbody" ).html( response.data );	
@@ -330,7 +330,7 @@ $( "#nwm-map-list" ).change( function () {
 						
 			/* Hide the edit fields and rebuild the dropdown list */
 			$( "#nwm-edit-destination #nwm-form" ).hide();
-			rebuildEditDropdown();
+			rebuildDropdowns();
 		}
 		
 		$( ".nwm-preloader" ).remove();
@@ -364,7 +364,7 @@ $( "#nwm-marker-content-option" ).change( function () {
 
 		if ( routeId == dropdownValue ) {
 			setTravelDates( routeId ); /* If arrival / departure dates exist set them in the edit screen */
-			return false
+			return false;
 		}
 	});	
 	
@@ -378,19 +378,22 @@ $( "#nwm-form" ).on( "click", "#nwm-add-trip", function() {
 
 /* Add a new trip to the database */
 function addTrip( elem ) {
-	var destinationUrl, 
-		postId = $( "#nwm-post-id" ).val(),
-		mapId = $( "#nwm-map-list" ).val(),
-		thumbId = $( "#nwm-thumb-wrap img" ).attr( "data-img-id" ),
-		countryCode = $( "#nwm-country-code" ).val(),
-		destinationLatlng = $( "#nwm-latlng" ).val(),
-		destinationName = $.trim( $( "#nwm-searched-location" ).val() ),
-		dropdownValue = $( "#nwm-marker-content-option" ).val();
+	var destinationUrl,
+		tripData = {
+			postId: $( "#nwm-post-id" ).val(),
+			mapId: $( "#nwm-map-list" ).val(),
+			thumbId: $( "#nwm-thumb-wrap img" ).attr( "data-img-id" ),
+			countryCode: $( "#nwm-country-code" ).val(),
+			destinationLatlng: $( "#nwm-latlng" ).val(),
+			destinationName: $.trim( $( "#nwm-searched-location" ).val() ),
+			dropdownValue: $( "#nwm-marker-content-option" ).val()
+		};
+
 	
 	/* Show the preloader next to the clicked button */
 	showPreloader( elem );
 	
-	if ( dropdownValue == "nwm-blog-excerpt" ) {
+	if ( tripData.dropdownValue == "nwm-blog-excerpt" ) {
 		destinationUrl = $( "#nwm-search-link a" ).attr( "href" );
 		destinationUrl = ( typeof( destinationUrl ) !== "undefined" ) ? destinationUrl : "";
 	} else {
@@ -402,58 +405,49 @@ function addTrip( elem ) {
 	}
 	
 	/* Make sure we have a latlng value and a destination name before saving the data */
-	if ( checkFormData( destinationLatlng, destinationName ) ) {
-		saveDestination( destinationLatlng, postId, mapId, thumbId, destinationName, destinationUrl, countryCode );
+	if ( checkFormData( tripData.destinationLatlng, tripData.destinationName ) ) {
+		saveDestination( tripData );
 	}	
 }
 
 /* Save the new destination */
-function saveDestination( destinationLatlng, postId, mapId, thumbId, destinationName, destinationUrl, countryCode ) {
-	var lastData, ajaxData, preloadImg,	
+function saveDestination( tripData ) {
+	var ajaxData,
+		lastData = {
+			map_id: tripData.mapId,
+			thumb_id: tripData.thumbId
+		},
 		markerContentOption = $( "#nwm-marker-content-option" ).val(),
-		saveNonce = $( "#nwm-add-destination" ).data( "nonce-save" );
+		saveNonce			= $( "#nwm-add-destination" ).data( "nonce-save" );
 	
 	/* Build a data object based on the selected dropdown value. */
 	if ( markerContentOption == "nwm-custom-text" ) {
-		lastData = {
-			map_id: mapId,
-			thumb_id: thumbId,
-			custom: {
-				latlng:	destinationLatlng,
-				location: destinationName,
-				country_code: countryCode,
-				title: $( "#nwm-custom-title" ).val(),
-				content: $( "#nwm-custom-text textarea" ).val(),
-				url: destinationUrl,
-				arrival: $( "#nwm-from-date" ).val(),
-				departure: $( "#nwm-till-date" ).val()
-			}
-		}
+		lastData.custom = {
+			latlng:	tripData.destinationLatlng,
+			location: tripData.destinationName,
+			country_code: tripData.countryCode,
+			title: $( "#nwm-custom-title" ).val(),
+			content: $( "#nwm-custom-text textarea" ).val(),
+			url: tripData.destinationUrl,
+			arrival: $( "#nwm-from-date" ).val(),
+			departure: $( "#nwm-till-date" ).val()
+		};
 	} else if ( markerContentOption == "nwm-travel-schedule" ) {
-		lastData = {
-			map_id: mapId,
-			thumb_id: thumbId,
-			schedule: {
-				latlng:	destinationLatlng,
-				location: destinationName,
-				country_code: countryCode,
-				arrival: $( "#nwm-from-date" ).val(),
-				departure: $( "#nwm-till-date" ).val()
-			}
-		}	
+		lastData.schedule = {
+			latlng:	tripData.destinationLatlng,
+			location: tripData.destinationName,
+			country_code: tripData.countryCode,
+			arrival: $( "#nwm-from-date" ).val(),
+			departure: $( "#nwm-till-date" ).val()
+		};	
 	} else {
-		lastData = {
-			post_id: postId,
-			map_id: mapId,
-			thumb_id: thumbId,
-			excerpt: {
-				latlng:	destinationLatlng,
-				location: destinationName,
-				country_code: countryCode,
-				arrival: $( "#nwm-from-date" ).val(),
-				departure: $( "#nwm-till-date" ).val()
-			}
-		}
+		lastData.excerpt = {
+			latlng:	tripData.destinationLatlng,
+			location: tripData.destinationName,
+			country_code: tripData.countryCode,
+			arrival: $( "#nwm-from-date" ).val(),
+			departure: $( "#nwm-till-date" ).val()
+		};
 	}
 					
 	lastData = JSON.stringify( lastData );
@@ -464,23 +458,22 @@ function saveDestination( destinationLatlng, postId, mapId, thumbId, destination
 		 _ajax_nonce: saveNonce
 	};
 
-	preloadImg = $( "#nwm-preload-img" ).html();
-	$( "#find-nwm-title" ).after(preloadImg);
+	$( "#find-nwm-title" ).after( $( "#nwm-preload-img" ).html() );
 	$( "#nwm-add-trip" ).attr( "disabled", "disabled" );
 
 	$.post( ajaxurl, ajaxData, function( response ) {				
 		
 		/* Check if we have a valid response */
 		if ( response == -1 ) {
-			alert( "Security check failed, reload the page and try again." );
+			alert( nwmL10n.securityFailed );
 		} else {	
 			if ( response.success ) {
 				/* Make sure the response contains a number */
-				if( !isNaN( response.id ) ) {		
-					addNewDestinationRow( destinationLatlng, postId, thumbId, countryCode, destinationName, destinationUrl, response );
+				if( !isNaN( response.id ) ) {	
+					addNewDestinationRow( tripData, response );
 					resetTravelDates();
 							
-					$( "#nwm-add-trip" ).after( "<span class='nwm-save-msg'>Location added...</span>" );	
+					$( "#nwm-add-trip" ).after( "<span class='nwm-save-msg'>" + nwmL10n.locationAdded + "</span>" );	
 					setTimeout( function() {
 						$( ".nwm-save-msg" ).fadeOut( "slow", function() {
 							$( this ).remove();
@@ -497,9 +490,9 @@ function saveDestination( destinationLatlng, postId, mapId, thumbId, destination
 				}
 			} else {
 				if ( typeof response.data !== "undefined" ) {
-					alert(response.data.msg);
+					alert( response.data.msg );
 				} else {
-					alert( "Failed to save the data, please try again" );
+					alert( nwmL10n.saveFailed );
 				}
 			}
 			
@@ -516,10 +509,10 @@ function removeErrorClasses() {
 /* Make sure we have all the required data (latlng, location name, and in some situation the dates) before saving it */
 function checkFormData( destinationLatlng, destinationName ) {
 	var errors,
-		customTitle = $( "#nwm-custom-title" ),
-		customDesc = $( "#nwm-custom-desc" ),
-		fromDate = $( "#nwm-from-date" ),
-		tillDate = $( "#nwm-till-date" ),
+		customTitle	  = $( "#nwm-custom-title" ),
+		customDesc	  = $( "#nwm-custom-desc" ),
+		fromDate	  = $( "#nwm-from-date" ),
+		tillDate	  = $( "#nwm-till-date" ),
 		dropdownValue = $( "#nwm-marker-content-option" ).val();
 		
 	removeErrorClasses();
@@ -620,7 +613,7 @@ function checkDates( fromDate, tillDate ) {
 		tillCompareDate = new Date( tillDate.val().toString() );
 
 	if ( fromCompareDate > tillCompareDate ) {
-		alert( "The arrival date has to be before or equal to the departure date." );
+		alert( nwmL10n.arrivalDataError );
 		fromDate.addClass( "nwm-error" );
 		return false;
 	} else {
@@ -630,10 +623,10 @@ function checkDates( fromDate, tillDate ) {
 
 /* Handle the clicks on the delete button */
 $("#nwm-destination-list").on( "click", ".delete-nwm-destination", function( e ) {	
-	var elem = $( this ), 
-		$tr = elem.closest( "tr" ), 
-		routeId = $tr.data( "nwm-id" ),
-		postId = $tr.data( "post-id" ),
+	var elem		= $( this ), 
+		$tr			= elem.closest( "tr" ), 
+		routeId		= $tr.data( "nwm-id" ),
+		postId		= $tr.data( "post-id" ),
 		deleteNonce = $tr.find( "input[name=delete_nonce]" ).val();
 	
 	showPreloader( elem );
@@ -666,7 +659,7 @@ function deleteDestination( routeId, postId, deleteNonce, btn ) {
 		type: "POST"
 	}).done(function( response ) {
 		if ( response == -1 ) {
-			alert( "Security check failed, reload the page and try again." );
+			alert( nwmL10n.securityFailed );
 			$( ".nwm-preloader" ).remove();
 			btn.removeAttr( "disabled" );
 		} else {	
@@ -676,9 +669,7 @@ function deleteDestination( routeId, postId, deleteNonce, btn ) {
 					
 					/* Remove the delete item from the dropdown list */
 					$( "#nwm-edit-list option[value=" + routeId + "], .nwm-delete-btn-wrap" ).remove();
-					
-					rebuildEditDropdown();
-					
+										
 					/* Only hide the form if the last item (edit destination is selected */
 					if ( $( "#nwm-menu li" ).last().hasClass( "nwm-active-item" ) ) {
 						$( "#nwm-form" ).hide();
@@ -686,13 +677,12 @@ function deleteDestination( routeId, postId, deleteNonce, btn ) {
 					
 					$( "#nwm-searched-location, #nwm-latlng, #nwm-post-id" ).val( "" );
 					
-					/* Update the count of the destination list */
 					updateDestinationCount();
-					
+					rebuildDropdowns();
 					rebuildFlightPlan();
 				});
 			} else {
-				alert( "Failed to delete the data, please try again" );
+				alert( nwmL10n.deleteFailed );
 				$( ".nwm-preloader" ).remove();
 				btn.removeAttr( "disabled" );
 			}
@@ -701,76 +691,74 @@ function deleteDestination( routeId, postId, deleteNonce, btn ) {
 	});	
 }
 
-function rebuildEditDropdown() {
-	var dropdownList,destination, nwmId, dropdownItem,
+function rebuildDropdowns() {
+	var dropdownEditList = "", dropdownSortList = "", destination, 
+		dropdownEditItem = "", 
+		dropdownSortItem = "",
 		i = 1;
 	
 	/* Loop over the tr elements, collect the nwm-id's and rebuild the dropdown list */
 	$( "#nwm-destination-list tbody tr" ).each( function () {
-		destination = $(this).find( ".nwm-location" ).text();
-		nwmId = $(this).data( "nwm-id" );				
-		dropdownItem = "<option value=" + nwmId + ">"+ i + ' - ' + destination + "</option>";
-		dropdownList += dropdownItem;
+		destination	  = $(this).find( ".nwm-location" ).text();
+		
+		dropdownEditItem  = "<option value=" + $(this).data( "nwm-id" ) + ">" + i + ' - ' + destination + "</option>";
+		dropdownEditList += dropdownEditItem;
+		
+		dropdownSortItem  = "<option value=" + i + ">" + nwmL10n.before + ' ' + i +' - ' + destination + "</option>";
+		dropdownSortList += dropdownSortItem;
+		
 		i++;
 	});
 					
-	/* Update the dropdown list with the new order */
-	populateDropdown( dropdownList );		
+	/* Update the edit dropdown list with the correct order */
+	populateEditDropdown( dropdownEditList );
+	
+	/* Update the sort dropdown list with the correct order */
+	populateSortDropdown( dropdownSortList );	
 }
 
 /* Update the destination data */
-function updateDestination( markerContentOption, nwmId, thumbId, latlng, countryCode, location, updateNonce ) {
-	var lastData, ajaxData, tr, listOrder, thumbSrc, thumbImg, flagLocation,
+function updateDestination( tripData ) {
+	var ajaxData, tr, listOrder, thumbSrc, thumbImg, flagLocation,
+		locationPosition = $( "#nwm-position" ).val(),
+		lastData = {
+			nwm_id: tripData.nwmId,
+			thumb_id: tripData.thumbId,
+			map_id: $( "#nwm-map-list" ).val(),
+			previous: $( "#nwm-post-type" ).val()
+		},
 		arrivalDate = "", 
 		departureDate = "";
 	
-	if ( markerContentOption == "nwm-custom-text" ) {
-		lastData = {
-			nwm_id: nwmId,
-			thumb_id: thumbId,
-			map_id: $( "#nwm-map-list" ).val(),
-			previous: $( "#nwm-post-type" ).val(),
-			custom: {
-				latlng:	latlng,
-				location: location,
-				country_code: countryCode,
-				title: $( "#nwm-custom-title" ).val(),
-				content: $( "#nwm-custom-text textarea" ).val(),
-				url: $( "#nwm-custom-url" ).val(),
-				arrival: $( "#nwm-from-date" ).val(),
-				departure: $( "#nwm-till-date" ).val()
-			}
-		 }
-	} else if ( markerContentOption == "nwm-travel-schedule" ) {
-		lastData = {
-			nwm_id: nwmId,
-			thumb_id: thumbId,
-			map_id: $( "#nwm-map-list" ).val(),
-			previous: $( "#nwm-post-type" ).val(),
-			schedule: {
-				latlng:	latlng,
-				location: location,
-				country_code: countryCode,
-				arrival: $( "#nwm-from-date" ).val(),
-				departure: $( "#nwm-till-date" ).val()
-			}
-		 }	
+	if ( tripData.markerContentOption == "nwm-custom-text" ) {
+		lastData.custom = {
+			latlng:	tripData.latlng,
+			location: tripData.location,
+			country_code: tripData.countryCode,
+			title: $( "#nwm-custom-title" ).val(),
+			content: $( "#nwm-custom-text textarea" ).val(),
+			url: $( "#nwm-custom-url" ).val(),
+			arrival: $( "#nwm-from-date" ).val(),
+			departure: $( "#nwm-till-date" ).val()
+		 };
+	} else if ( tripData.markerContentOption == "nwm-travel-schedule" ) {
+		lastData.schedule = {
+			latlng:	tripData.latlng,
+			location: tripData.location,
+			country_code: tripData.countryCode,
+			arrival: $( "#nwm-from-date" ).val(),
+			departure: $( "#nwm-till-date" ).val()
+		 };	
 	} else {
-		lastData = {
-			nwm_id: nwmId,
-			thumb_id: thumbId,
-			map_id: $( "#nwm-map-list" ).val(),
-			previous: $( "#nwm-post-type" ).val(),
-			excerpt: {
-				post_id: $( "#nwm-post-id" ).val(),
-				last_id: $( "[data-nwm-id=" + nwmId + "]" ).attr( "data-post-id" ),
-				latlng:	latlng,
-				location: location,
-				country_code: countryCode,
-				arrival: $( "#nwm-from-date" ).val(),
-				departure: $( "#nwm-till-date" ).val()
-			}
-		}
+		lastData.excerpt = {
+			post_id: $( "#nwm-post-id" ).val(),
+			last_id: $( "[data-nwm-id=" + tripData.nwmId + "]" ).attr( "data-post-id" ),
+			latlng:	tripData.latlng,
+			location: tripData.location,
+			country_code: tripData.countryCode,
+			arrival: $( "#nwm-from-date" ).val(),
+			departure: $( "#nwm-till-date" ).val()
+		};
 	}
 	
 	lastData = JSON.stringify( lastData );
@@ -778,33 +766,33 @@ function updateDestination( markerContentOption, nwmId, thumbId, latlng, country
 	ajaxData = {
 		action:"update_location",
 		last_update: lastData,
-		 _ajax_nonce: updateNonce
+		 _ajax_nonce: tripData.updateNonce
 	};
 	
 	$.post( ajaxurl, ajaxData, function( response ) {	
 		if ( response == - 1) {
-			alert( "Security check failed, reload the page and try again." );
+			alert( nwmL10n.securityFailed );
 		} else {			
 			if ( response.success ) {
-				flagLocation = "<img src=" + nwmMarker.path + 'flags/' +  countryCode.toLowerCase() + ".png >" + location;
-				tr = $( "[data-nwm-id=" + nwmId + "]" );
+				flagLocation = "<img src=" + nwmMarker.path + 'flags/' +  tripData.countryCode.toLowerCase() + ".png >" + tripData.location;
+				tr = $( "[data-nwm-id=" + tripData.nwmId + "]" );
 				tr.find( ".nwm-location" ).html( flagLocation );
-				tr.attr( "data-latlng", latlng );	
-				tr.attr( "data-country", countryCode );	
+				tr.attr( "data-latlng", tripData.latlng );	
+				tr.attr( "data-country", tripData.countryCode );	
 				thumbSrc = $( "#nwm-edit-destination .nwm-circle" ).attr( "src" );
 
 				if ( typeof( thumbSrc ) !== "undefined" ) {			
 					if ( tr.find( ".nwm-thumb-td img").length ) {
 						tr.find( ".nwm-thumb-td img" ).attr( "src", thumbSrc );
 					} else {
-						thumbImg = "<img class='nwm-circle' data-img-id=" + thumbId + " src=" + thumbSrc + " width='64' height='64' />";
+						thumbImg = "<img class='nwm-circle' data-img-id=" + tripData.thumbId + " src=" + thumbSrc + " width='64' height='64' />";
 						tr.find( ".nwm-thumb-td" ).html( thumbImg );
 					}
 				} else {
 					tr.find( ".nwm-thumb-td img" ).remove();	
 				}
 				
-				if ( markerContentOption == "nwm-blog-excerpt" ) {
+				if ( tripData.markerContentOption == "nwm-blog-excerpt" ) {
 					tr.attr( "data-post-id", $( "#nwm-post-id" ).val() );
 					$( "#nwm-custom-text input, #nwm-custom-desc" ).val( "" );
 					$( "#nwm-post-type" ).val( "blog" );
@@ -812,18 +800,18 @@ function updateDestination( markerContentOption, nwmId, thumbId, latlng, country
 					tr.attr( "data-post-id", 0 );
 				}
 				
-				if ( markerContentOption == "nwm-custom-text" ) {
+				if ( tripData.markerContentOption == "nwm-custom-text" ) {
 					$( "#nwm-search-link span" ).empty(); 
 					$( "#nwm-post-id" ).val( "0" );
 					$( "#nwm-post-type" ).val( "custom" );
 				}
 				
-				if ( tr.attr( "data-travel-schedule" ) && ( markerContentOption != "nwm-travel-schedule" ) ) {
+				if ( tr.attr( "data-travel-schedule" ) && ( tripData.markerContentOption != "nwm-travel-schedule" ) ) {
 					tr.removeAttr( "data-travel-schedule" );
 					$( "#nwm-post-type" ).val( "schedule" );
 				}
 				
-				if ( !tr.attr( "data-travel-schedule" ) && ( markerContentOption == "nwm-travel-schedule" ) ) {
+				if ( !tr.attr( "data-travel-schedule" ) && ( tripData.markerContentOption == "nwm-travel-schedule" ) ) {
 					tr.attr({'data-post-id' : 0, 'data-travel-schedule' : 1});
 					/*
 					Make sure the url value from the blog post excerpt field is empty. If there first was a blog post excerpt, 
@@ -848,21 +836,38 @@ function updateDestination( markerContentOption, nwmId, thumbId, latlng, country
 
 				/* Update the name of the dropdown list */
 				listOrder = tr.find( ".nwm-order span" ).html();
-				$( "#nwm-edit-list option[value=" + nwmId + "]" ).html( listOrder + ' - ' + location );
+				$( "#nwm-edit-list option[value=" + tripData.nwmId + "]" ).html( listOrder + ' - ' + tripData.location );
 				
 				/* Make sure we only add the msg once */
 				if ( !$( "#nwm-form .nwm-save-msg" ).length ) {
-					$( ".nwm-delete-btn-wrap" ).after( "<span class='nwm-save-msg'>Location updated...</span>" );
+					$( ".nwm-delete-btn-wrap" ).after( "<span class='nwm-save-msg'>" + nwmL10n.locationUpdated + "</span>" );
 				}
 				
 				/* Check if we need to update, or remove the current dates */
 				if ( $( "#nwm-from-date" ).val() ) {
-					arrivalDate = "<input type='hidden' value=" + $( "#nwm-from-date" ).val() + " name='arrival_date'><span>" + $( "#nwm-form input[name=from_date]" ).val() + "</span>";
+					arrivalDate   = "<input type='hidden' value=" + $( "#nwm-from-date" ).val() + " name='arrival_date'><span>" + $( "#nwm-form input[name=from_date]" ).val() + "</span>";
 					departureDate = "<input type='hidden' value=" + $( "#nwm-till-date" ).val() + " name='departure_date'><span>" + $( "#nwm-form input[name=till_date]" ).val() + "</span>";
 				}
 				
 				tr.find( ".nwm-arrival" ).html( arrivalDate ).end()
 				  .find( ".nwm-departure" ).html( departureDate );
+			  	
+				/* Check if the position of the location in the list has changed */
+				if ( locationPosition >= 0 ) {
+					var tripTarget = $( "[data-nwm-id=" + tripData.nwmId + "]" );
+					var tripCopy   = tripTarget.clone();
+					
+					/* Insert the location after the last item, or before a specific location? */
+					if ( locationPosition == 0 ) {					
+						$( "#nwm-destination-list tbody tr" ).last().after( tripCopy );
+					} else {
+						$( "#nwm-destination-list tbody tr" ).eq( locationPosition-1 ).before( tripCopy );
+					}
+					
+					tripTarget.remove();
+					updateDestinationCount();
+					updateSortOrder();
+				}
 				
 				/* Fade out the save msg */	
 				setTimeout( function() {
@@ -871,7 +876,7 @@ function updateDestination( markerContentOption, nwmId, thumbId, latlng, country
 					});
 				}, 2000);
 			} else {
-				alert( "Update failed, please try again" );
+				alert( nwmL10n.updateFailed );
 			}
 			
 			$( ".nwm-preloader" ).remove();	
@@ -880,18 +885,21 @@ function updateDestination( markerContentOption, nwmId, thumbId, latlng, country
 }
 
 /* Add the new created destination to the table */
-function addNewDestinationRow( destinationLatlng, postId, thumbId, countryCode, destinationName, destinationUrl, response ) {
+function addNewDestinationRow( tripData, response ) {
 	var lastElement, lastDestination, trCount,
-		selectedOption = $( "#nwm-marker-content-option" ).val(),
-		travelSchedule = "",
-		departureDate = "",
-		arrivalDate = "",
-		thumb = "",
-		url = ""; 
+		selectedOption   = $( "#nwm-marker-content-option" ).val(),
+		locationPosition = $("#nwm-position").val(),
+		nwmId			 = "",
+		listData	     = "",
+		travelSchedule   = "",
+		departureDate    = "",
+		arrivalDate      = "",
+		thumb		     = "",
+		url			     = ""; 
 	
 	/* If the input is custom set the post id to 0. This 0 is used to indicate custom content should be loaded if the data is edited */	
 	if ( ( selectedOption == "nwm-custom-text" ) || ( selectedOption == "nwm-travel-schedule" ) ) {
-		postId = 0;
+		tripData.postId = 0;
 	}
 	
 	if ( selectedOption == "nwm-travel-schedule" ) {
@@ -906,32 +914,44 @@ function addNewDestinationRow( destinationLatlng, postId, thumbId, countryCode, 
 		departureDate = "<input type='hidden' name='departure_date' value=" + $( "#nwm-till-date" ).val() + ">";
 	}
 	
-	if ( destinationUrl ) {
-		url = "<a target='_blank' title=" + destinationUrl + " href=" + destinationUrl + "></a>";	
+	if ( tripData.destinationUrl ) {
+		url = "<a target='_blank' title=" + tripData.destinationUrl + " href=" + tripData.destinationUrl + "></a>";	
 	}
 	
-	if ( thumbId ) {
-		thumb = "<img class='nwm-circle' src=" + $( "#nwm-thumb-wrap img" ).attr( "src" ) + " data-thumb-id=" + thumbId + " width='24' height='24' />";
+	if ( tripData.thumbId ) {
+		thumb = "<img class='nwm-circle' src=" + $( "#nwm-thumb-wrap img" ).attr( "src" ) + " data-thumb-id=" + tripData.thumbId + " width='24' height='24' />";
 	}
+		
+	listData = '<tr' + travelSchedule + ' data-latlng="' + tripData.destinationLatlng + '" data-country="' + tripData.countryCode + '" data-post-id="' + tripData.postId + '" data-nwm-id="">' + 
+			   '<td class="nwm-order"><span></span></td>' +
+			   '<td class="nwm-location"><img src=' + nwmMarker.path + 'flags/' + tripData.countryCode.toLowerCase() + '.png >' + tripData.destinationName + '</td>' +
+			   '<td class="nwm-url">' + url + '</td>' +
+			   '<td class="nwm-arrival">' + arrivalDate + '<span>' + $( "input[name=from_date]" ).val() + '</span></td>' +
+			   '<td class="nwm-departure">' + departureDate + '<span>' + $( "input[name=till_date]" ).val() + '</span></td>' +
+			   '<td class="nwm-thumb-td">' + thumb + '</td>' +
+			   '<td><input class="delete-nwm-destination button" type="button" name="text" value='+ nwmL10n.delete +' /><input type="hidden" value="" name="delete_nonce"><input type="hidden" value="" name="update_nonce"><input type="hidden" value="" name="load_nonce"></td>' +
+			   '</tr>';
 
 	/* Add the latest entry to the table, and set the data attribute values, location name and url */
-	$("#nwm-destination-list").append(
-		'<tr' + travelSchedule + ' data-latlng="' + destinationLatlng + '" data-country="' + countryCode + '" data-post-id="' + postId + '" data-nwm-id="">' + 
-		'<td class="nwm-order"><span></span></td>' +
-		'<td class="nwm-location"><img src=' + nwmMarker.path + 'flags/' +  countryCode.toLowerCase() + '.png >' + destinationName + '</td>' +
-		'<td class="nwm-url">' + url + '</td>' +
-		'<td class="nwm-arrival">' + arrivalDate + '<span>' + $("input[name=from_date]").val() + '</span></td>' +
-		'<td class="nwm-departure">' + departureDate + '<span>' + $("input[name=till_date]").val() + '</span></td>' +
-		'<td class="nwm-thumb-td">' + thumb + '</td>' +
-		'<td><input class="delete-nwm-destination button" type="button" name="text" value="Delete" /><input type="hidden" value="" name="delete_nonce"><input type="hidden" value="" name="update_nonce"><input type="hidden" value="" name="load_nonce"></td>' +
-		'</tr>'
-	);
+	if ( locationPosition == 0 ) {
+		$( "#nwm-destination-list" ).append( listData );
+		lastElement = $( "#nwm-destination-list tbody tr" ).last();	
+	} else {
+		$( "#nwm-destination-list tbody td.nwm-order span" ).each( function () {
+			if ( $( this ).text() == locationPosition ) {
+				nwmId = $( this ).parents( "tr" ).attr( "data-nwm-id" );
+				$( "[data-nwm-id=" + nwmId + "]" ).before( listData );
+				lastElement = $( "[data-nwm-id=" + nwmId + "]" ).prev( "tr" );
+				
+				return false;
+			}			
+		});
+	}
 	
 	/* Set the width of the new added td so that it doesnt collapse when dragged */
 	setTdWidth();	
 	
-	/* Find the last tr element and add the returned id to the data attribute */	
-	lastElement = $( "#nwm-destination-list tbody tr" ).last();				
+	/* Add the id to the data attribute and set the correct nonce values */	
 	lastElement.attr( "data-nwm-id", response.id);
 	lastDestination = lastElement.find( ".nwm-location" ).text();
 	trCount = $( "#nwm-destination-list tbody tr" ).length;
@@ -945,6 +965,10 @@ function addNewDestinationRow( destinationLatlng, postId, thumbId, countryCode, 
 	/* Loop over the tr's and count them to make sure the order still makes sense */
 	updateDestinationCount();
 	
+	if ( locationPosition !== 0 ) {
+		updateSortOrder();
+	}
+	
 	/* Empty all used input fields, and remove the preloader */				
 	$( "#nwm-destination-wrap input[type=text], #nwm-destination-wrap input[type=url], #nwm-destination-wrap input[type=hidden]" ).not( "#nwm-search-nonce" ).val( "" );
 	$( "#nwm-search-link span" ).empty();	
@@ -952,23 +976,18 @@ function addNewDestinationRow( destinationLatlng, postId, thumbId, countryCode, 
 
 /* If the order of the locations has changed by dragging them around, then save the new location order */
 function updateSortOrder( sortedItem ) {
-	var postId, location, routeId, dropdownItem, ajaxData,
-		updateNonce = $( "#nwm-destination-list" ).data( "nonce-sort" ),
-		i = 1,
-		routeOrder = "",
-		postIds  = "",
-		dropdownList = "";
+	var postId, routeId, ajaxData,
+		updateNonce		 = $( "#nwm-destination-list" ).data( "nonce-sort" ),
+		i				 = 1,
+		routeOrder		 = "",
+		postIds			 = "";
 	
 	/* Loop over the tr elements and collect the nwm-id's */
 	$( "#nwm-destination-list tbody tr" ).each( function () {
-		postId = $(this).data( "post-id" );
-		location = $(this).find( ".nwm-location" ).text();
-		routeId = $(this).data( "nwm-id" );
+		postId		= $(this).data( "post-id" );
+		routeId		= $(this).data( "nwm-id" );
 		routeOrder += routeId+',';
-		
-		dropdownItem = "<option value=" + routeId + ">" + i + ' - ' + location + "</option>";
-		dropdownList += dropdownItem;
-								
+					
 		/* 
 		We use this list to determine if we need to grab a 
 		new thumbnail / excerpt when the user saves a wp post.
@@ -980,15 +999,17 @@ function updateSortOrder( sortedItem ) {
 		i++;
 	});
 	
-	/* Update the dropdown list with the new order */
-	populateDropdown( dropdownList );
+	rebuildDropdowns();
+	
 	$( "#nwm-edit-destination #nwm-form" ).hide();
 	
 	/* Remove the trailing , */
 	routeOrder = routeOrder.substring(0, routeOrder.length - 1);
-	postIds = postIds.substring(0, postIds.length - 1);
+	postIds	   = postIds.substring(0, postIds.length - 1);
 	
-	sortedItem.find( ".delete-nwm-destination" ).after( "<img class='nwm-preloader' src=" + preloadImgSrc + " />").show();
+	if ( typeof( sortedItem ) !== "undefined" ) {
+		sortedItem.find( ".delete-nwm-destination" ).after( "<img class='nwm-preloader' src=" + preloadImgSrc + " />" ).show();
+	}
 	
 	/* Set the data for the ajax call */	
 	ajaxData = {
@@ -1001,7 +1022,7 @@ function updateSortOrder( sortedItem ) {
 
 	$.post( ajaxurl, ajaxData, function( response ) {			
 		if ( response == -1 ) {
-			alert( "Security check failed, reload the page and try again." );
+			alert( nwmL10n.securityFailed );
 		} else {
 			rebuildFlightPlan();	
 		}
@@ -1013,11 +1034,27 @@ function updateSortOrder( sortedItem ) {
 }
 
 /* Populate the dropdown list of destination to edit in the updated order */
-function populateDropdown( dropdownList ) {
-	var dropdown = "<option selected='selected'> - Select destination to edit - </option>";
+function populateEditDropdown( dropdownList ) {
+	var dropdown = "<option selected='selected'> - " + nwmL10n.selectDestination + " - </option>";
 		dropdown += dropdownList;
 		
 	$( "#nwm-edit-list" ).html( dropdown );
+}
+
+/* Populate the sort dropdown list */
+function populateSortDropdown( dropdownList ) {
+	var dropdown = "", 
+		dropdownPosition = "<option value='0'> - " + nwmL10n.locationPosition + " - </option>",
+		dropdownCurrent  = "<option value='-1' selected='selected'>" + nwmL10n.currentPosition + "</option>";
+	
+	if ( $( "#nwm-edit-destination" ).hasClass( "nwm-active" ) ) {
+		dropdown += dropdownCurrent;
+	}
+	
+	dropdown += dropdownPosition;
+	dropdown += dropdownList;
+		
+	$( "#nwm-position" ).html( dropdown );
 }
 
 /* Update the destination count */
@@ -1031,7 +1068,7 @@ function updateDestinationCount() {
 
 /* We need to set the width of each td element to prevent the tr from collapsing when it's moved around with sortable */
 function setTdWidth() {
-	$( "td" ).each( function() {
+	$( "#nwm-wrap td" ).each( function() {
 		$(this).css( "width", $( this ).width() + "px" );
 	});
 }
@@ -1049,7 +1086,7 @@ $( "#nwm-destination-list tbody" ).sortable({
 	update: function( event, ui ) {
 		updateDestinationCount(),
 		updateSortOrder(ui.item)
-	}, 
+	}
 });
 	
 $( "#nwm-menu li a" ).on( "click", function() {
@@ -1066,6 +1103,9 @@ $( "#nwm-menu li a" ).on( "click", function() {
 	$( "#nwm-country-code, #nwm-latlng" ).val( "" );
 					
 	if ( id == "nwm-edit-destination" ) {
+		$( "#nwm-position" ).find( "option" ).removeAttr( "selected" );
+		$( "#nwm-position" ).find( "option" ).first().before( "<option selected='selected' value='-1'>" + nwmL10n.currentPosition + "</option>" );
+		
 		editForm();
 	} else {
 		form = $( "#nwm-edit-destination form" ).clone(true);	
@@ -1092,6 +1132,16 @@ $( "#nwm-menu li a" ).on( "click", function() {
 		
 		$( "#nwm-update-trip" ).val( "Save" ).attr( "id", "nwm-add-trip" );
 		$( "#" + id + "" ).addClass( "nwm-active" );
+				
+		/* If the first item is the 'current position' option then remove it */
+		if ( $( "#nwm-position option" ).first().val() == -1 ) {
+			$( "#nwm-position option" ).first().remove();
+		}
+		
+		/* Make sure the date description is shown when required */
+		if ( $( "#nwm-marker-content-option" ).val() == "nwm-blog-excerpt" ) {
+			$( ".nwm-date-desc" ).show();
+		}
 		
 		rebuildFlightPlan();
 		resetTravelDates();
@@ -1105,7 +1155,7 @@ $( "#nwm-menu li a" ).on( "click", function() {
 /* Show the edit form */
 function editForm() {
 	var contentState = $( "#nwm-marker-content-option" ).val(),
-		form = $( "#nwm-add-destination form" ).clone(true);	
+		form		 = $( "#nwm-add-destination form" ).clone( true );	
 		
 	$( "#nwm-edit-list option:first" ).prop( "selected", true );
 	$( "#nwm-add-destination form" ).remove();
@@ -1136,22 +1186,27 @@ function editForm() {
 
 /* Handle the clicks on the update button */
 $( "#nwm-form" ).on( "click", "#nwm-update-trip", function() {	
-	var markerContentOption, updateNonce, nwmId, thumbId, 
-		latlng = $( "#nwm-latlng" ).val(),
+	var tripData	= {},
+		latlng		= $( "#nwm-latlng" ).val(),
 		countryCode = $( "#nwm-country-code" ).val(),
-		location = $( "#nwm-searched-location" ).val();
+		location	= $( "#nwm-searched-location" ).val();
 	
 	/* Check if we have all the data we need */
 	if ( checkFormData( latlng, location ) ) {
-		markerContentOption = $( "#nwm-marker-content-option" ).val();
-		updateNonce = $( "#nwm-edit-destination" ).find( "input[name=update_nonce]" ).val();
-		nwmId = $( "#nwm-edit-list" ).val();
-		thumbId = $( "#nwm-thumb-wrap img" ).attr( "data-img-id" );
+		tripData = {
+			markerContentOption: $( "#nwm-marker-content-option" ).val(),
+			updateNonce: $( "#nwm-edit-destination" ).find( "input[name=update_nonce]" ).val(),
+			nwmId: $( "#nwm-edit-list" ).val(),
+			thumbId: $( "#nwm-thumb-wrap img" ).attr( "data-img-id" ),
+			countryCode: countryCode,
+			location: location,
+			latlng: latlng
+		};
 
 		/* Make sure there is a valid ID */
-		if ( !isNaN( nwmId ) ) {					
+		if ( !isNaN( tripData.nwmId ) ) {					
 			showPreloader( $( ".nwm-delete-btn-wrap" ) );
-			updateDestination( markerContentOption, nwmId, thumbId, latlng, countryCode, location, updateNonce );
+			updateDestination( tripData );
 		} else {
 			$( "#nwm-edit-list" ).addClass( "nwm-error" );
 		}		
@@ -1182,10 +1237,10 @@ $( "#nwm-blog-excerpt" ).on( "click", "input[type=button]", function( e ) {
 	
 		$.post( ajaxurl, ajaxData, function( response ) {				
 			if ( response == -1 ) {
-				$( "#nwm-add-trip" ).after( "<span id='nwm-nonce-fail'>Security check failed, reload the page and try again.</span>" );
+				$( "#nwm-add-trip" ).after( "<span id='nwm-nonce-fail'>" + nwmL10n.securityFailed + "</span>" );
 			} else {									
-				if ( response.post.id == null ) {
-					$( "#nwm-search-link span" ).html( "<strong>No blog post found, please try again!</strong>" );
+				if ( response.post.id == null ) { 
+					$( "#nwm-search-link span" ).html( "<strong>" + nwmL10n.noPostsFound + "</strong>" );
 					$( "#nwm-post-title" ).val( "" );
 				} else {
 					$( "#nwm-search-link span" ).html( "<a href=" + response.post.permalink + " target='_blank'>" + response.post.permalink + "</a>" );
@@ -1213,16 +1268,16 @@ $( "#nwm-blog-excerpt" ).on( "click", "input[type=button]", function( e ) {
 /* Handle changes to the edit list */
 $( "#nwm-edit-list" ).change( function() {
 	$( "#nwm-edit-list" ).removeClass( "nwm-error" );
-	setEditFormContent( $(this).val() );
+	setEditFormContent( $( this ).val() );
 });
 
 /* Set the travel dates for the selected location */
 function setTravelDates( routeId ) {
 	var $tr = $( "[data-nwm-id=" + routeId + "]" ),
-		countryCode = $tr.attr( "data-country" ),
-		arrivalDate = $tr.find( "input[name=arrival_date]" ).val(),
-		arrivalFullDate = $tr.find( ".nwm-arrival span" ).text(),
-		departureDate = $tr.find( "input[name=departure_date]" ).val(),
+		countryCode		  = $tr.attr( "data-country" ),
+		arrivalDate		  = $tr.find( "input[name=arrival_date]" ).val(),
+		arrivalFullDate	  = $tr.find( ".nwm-arrival span" ).text(),
+		departureDate     = $tr.find( "input[name=departure_date]" ).val(),
 		departureFullDate = $tr.find( ".nwm-departure span" ).text();
 	
 	$( "#nwm-from-date" ).val( arrivalDate );
@@ -1246,12 +1301,12 @@ function setEditFormContent( dropdownValue ) {
 
 			/* Check if the ID on the tr element matches with the id from the dropdown list */					
 			if ( routeId == dropdownValue ) {
-				destination = $( "[data-nwm-id=" + routeId + "] .nwm-location" ).text();
-				tr = $( "#nwm-destination-list tbody tr:eq(" + index + ")" );
-				latlng = tr.attr( "data-latlng" );
-				postId = tr.attr( "data-post-id" );
-				thumbId = tr.find( ".nwm-thumb-td img" ).attr( "data-thumb-id" );
-				thumbSrc = tr.find( ".nwm-thumb-td img" ).attr( "src" );
+				destination	   = $( "[data-nwm-id=" + routeId + "] .nwm-location" ).text();
+				tr			   = $( "#nwm-destination-list tbody tr:eq(" + index + ")" );
+				latlng		   = tr.attr( "data-latlng" );
+				postId		   = tr.attr( "data-post-id" );
+				thumbId		   = tr.find( ".nwm-thumb-td img" ).attr( "data-thumb-id" );
+				thumbSrc	   = tr.find( ".nwm-thumb-td img" ).attr( "src" );
 				travelSchedule = tr.attr( "data-travel-schedule" );
 				
 				/* If we have no src then show the placeholder */
@@ -1300,7 +1355,7 @@ function setEditFormContent( dropdownValue ) {
 				/* Show a single draggable marker on the map */
 				setDraggableLocation( latlng, zoom = 6 );
 	
-				return false
+				return false;
 			}
 		});
 		
@@ -1348,7 +1403,7 @@ function loadCustomText( routeId ) {
 	
 	$.post( ajaxurl, ajaxData, function( response ) {	
 		if ( response == -1 ) {
-			alert( "Security check failed, reload the page and try again." );
+			alert( nwmL10n.securityFailed );
 		} else {			
 			if( response.success ) {
 				$( "#nwm-custom-url" ).val( response.url );
@@ -1356,7 +1411,7 @@ function loadCustomText( routeId ) {
 				$( "#nwm-custom-title" ).val( response.title );
 				$( "textarea[data-length]" ).limitMaxlength();
 			} else {
-				alert( "There was a problem loading the data, reload the page and try again." );
+				alert( nwmL10n.loadFailed );
 			}
 		}
 		
@@ -1370,7 +1425,7 @@ Otherwise just update the nonce value that belongs to the selected dropdown item
 */
 function checkEditButton( routeId ) {
 	var deleteData,
-		$trElement = $( "[data-nwm-id='" + routeId + "']" ),
+		$trElement  = $( "[data-nwm-id='" + routeId + "']" ),
 		updateNonce = $trElement.find( "input[name=update_nonce]" ).val(),
 		deleteNonce = $trElement.find( "input[name=delete_nonce]" ).val();
 
@@ -1383,14 +1438,14 @@ function checkEditButton( routeId ) {
 		$( "#nwm-form .delete-nwm-destination" ).addClass( "nwm-edit-form" );
 		
 		$( ".nwm-delete-btn-wrap" ).on( "click", "input", function() {
-			var elem = $(this),		
+			var elem		= $(this),		
 				deleteNonce = elem.next().val(),
-				routeId = $( "#nwm-edit-list" ).val(),
-				postId = $( "#nwm-post-id" ).val();
+				routeId		= $( "#nwm-edit-list" ).val(),
+				postId		= $( "#nwm-post-id" ).val();
 	
 			showPreloader( elem );
 			deleteDestination( routeId, postId, deleteNonce );
-		})
+		});
 	}	
 }
 
@@ -1427,8 +1482,8 @@ function loadCalendar() {
 /* update the hidden input field with the current lat/long values. */
 function setCurrentCoordinates( clickedCoordinates ) {
 	var coordinates = stripCoordinates( clickedCoordinates ),
-		lat = roundLatlng( coordinates[0], 6 ),
-		lng = roundLatlng( coordinates[1], 6 );
+		lat			= roundLatlng( coordinates[0], 6 ),
+		lng			= roundLatlng( coordinates[1], 6 );
 		
 	$( "#nwm-searched-location" ).removeClass( "nwm-error" );
 	$( "#nwm-latlng" ).val( lat + ',' + lng );
@@ -1439,7 +1494,7 @@ $( "#nwm-add-map" ).on( "click", function() {
 		width: 325,
 		resizable : false,
 		modal: true,
-		title: "Add new map"
+		title: nwmL10n.addMapName
 	});
 	
 	$( "#nwm-add-map-box .dialog-cancel" ).on( "click", function() {	
@@ -1451,13 +1506,13 @@ $( "#nwm-add-map" ).on( "click", function() {
 
 $( ".nwm-edit-name" ).on( "click", function() {	
 	var mapName = $(this).parents( "td" ).find( ".nwm-current-name" ).text(),
-		mapId = $(this).parents( "tr" ).find( "input[type=checkbox]" ).val();
+		mapId   = $(this).parents( "tr" ).find( "input[type=checkbox]" ).val();
 		
 	$( "#nwm-edit-name-box" ).dialog({
 		width: 325,
 		resizable : false,
 		modal: true,
-		title: 'Edit map name'
+		title: nwmL10n.editMapName
 	});
 
 	$( "#nwm-edit-name-box input[type=text]" ).val( mapName );
@@ -1526,14 +1581,14 @@ $.fn.limitMaxlength = function( options ){
 		}
 		
 		if ( wordcount >= maxlength ) {
-			$( "#char-limit" ).html( "<em><span style='color: #DD0000;'>0 words remaining</span></em>" );
+			$( "#char-limit" ).html( "<em><span style='color: #DD0000;'>" + nwmL10n.noWordsRemaining + "</span></em>" );
 			limited = $.trim(text).split(" ", maxlength);
 			limited = limited.join(" ");
 			$(this).val(limited);
 		} else {
-			$( "#char-limit" ).html( "<em>" + (maxlength - wordcount) + ' words remaining ' + "</em>" );
+			$( "#char-limit" ).html( "<em>" + (maxlength - wordcount) + ' ' + nwmL10n.wordsRemaining + "</em>" );
 		} 
-	}
+	};
 
 	this.each(onEdit);
 
@@ -1579,7 +1634,7 @@ $(document.body).on( "click", "#nwm-media-upload", function( e ) {
 	}
 
 	uploadFrame = wp.media.frames.uploadFrame = wp.media({
-		title: "Set location image",
+		title: nwmL10n.locationImage,
 		frame: "select",
 		multiple: false,
 		library: {
@@ -1592,7 +1647,12 @@ $(document.body).on( "click", "#nwm-media-upload", function( e ) {
 
 	uploadFrame.on( "select", function(){
 		var media_attachment = uploadFrame.state().get( "selection" ).first().toJSON();
-		setLocationThumb( media_attachment.sizes.thumbnail.url, media_attachment.id ); 
+		
+		if ( media_attachment.sizes.length > 0 ) {
+ 			setLocationThumb( media_attachment.sizes.thumbnail.url, media_attachment.id );
+		} else {
+			setLocationThumb( media_attachment.url, media_attachment.id );
+		}
 	});
 
 	uploadFrame.open();
@@ -1616,13 +1676,10 @@ $( "#nwm-reset-thumb" ).on( "click", function() {
 });
 
 /* Widgets -> Toggle the input fields for manual / auto location detection */
-//$( document ).on( "change", ".nwm-display-radiobox", function() {
 $( document ).on( "change", "#nwm-display-options select", function() {
 	var radioValue = $(this).val(),
 		$parent = $(this).parents( "form" ); // For some reason, accessing the id directly fails. It only works if we first select the form parent?
-
-		console.log( radioValue );
-
+		
 	if ( radioValue == "text_style" ) {
 		$parent.find( "#nwm-zoom-level" ).hide();
 	} else {
@@ -1633,6 +1690,14 @@ $( document ).on( "change", "#nwm-display-options select", function() {
 		$parent.find( "#nwm-location-flag" ).hide(); 
 	} else {
 		$parent.find( "#nwm-location-flag" ).show(); 
+	}
+});
+
+$( "#nwm-content-options input[type=radio]" ).change(function() {
+	if ( $(this).val() == "tooltip" ) {
+		$( "#nwm-hide-tooltip" ).show();
+	} else {
+		$( "#nwm-hide-tooltip" ).hide();
 	}
 });
 

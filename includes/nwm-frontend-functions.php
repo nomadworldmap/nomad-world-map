@@ -438,8 +438,7 @@ function nwm_get_thumb( $thumb_id ) {
 /* Change the date format from example 2013-06-28 00:00:00 into M j, Y */
 function nwm_convert_date_format( $date_format, $route_date ) {
 	if ( $route_date != '0000-00-00 00:00:00' ) {
-		$date = new DateTime( $route_date );
-		return $date->format( $date_format );
+        return mysql2date( $date_format, $route_date, true );
 	}
 }
 
@@ -468,10 +467,10 @@ function nwm_get_post_excerpt ( $post_id ) {
 /* Load the front-end scripts and localize the required js data */
 function nwm_frontend_scripts( $frontend_data, $map_count ) {
     
-	wp_enqueue_style( 'nwm', NWM_URL.'css/styles.css', false );
+	wp_enqueue_style( 'nwm', NWM_URL . 'css/styles.css', false );
 	wp_enqueue_script( 'nwm-gmap', ( "//maps.google.com/maps/api/js?sensor=false" ),'' ,'' ,true );
-	wp_enqueue_script( 'nwm-gmap3', NWM_URL.'js/gmap3.min.js', array( 'jquery' ) ); 	/* the not minified version of gmap3 library is in the js folder -> gmap3.js */
-	wp_enqueue_script( 'nwm-gmap-markers', NWM_URL.'js/nwm-gmap3.js' );
+	wp_enqueue_script( 'nwm-gmap3', NWM_URL . 'js/gmap3.min.js', array( 'jquery' ) ); /* the not minified version of gmap3 library is in the js folder -> gmap3.js */
+	wp_enqueue_script( 'nwm-gmap-markers', NWM_URL . 'js/nwm-gmap3.js' );
 
     /* We only need to add the general map settings on the first loop */
     if ( $map_count == 0 ) {
@@ -487,6 +486,7 @@ function nwm_frontend_scripts( $frontend_data, $map_count ) {
              'readMore' 	   => $frontend_data['settings']['read_more'],
              'readMoreLabel'   => sanitize_text_field( stripslashes( $frontend_data['settings']['read_more_label'] ) ),
              'locationHeader'  => $frontend_data['settings']['location_header'],
+             'hideTooltip'  => $frontend_data['settings']['initial_tooltip']
          );
 
          wp_localize_script( 'nwm-gmap-markers', 'nwmSettings', $params );

@@ -180,6 +180,19 @@ function nwm_version_updates() {
     if ( version_compare( $current_version, '1.2.21', '<' ) ) {
        nwm_delete_all_transients(); 
     }
+    
+    if ( version_compare( $current_version, '1.2.30', '<' ) ) {
+       $settings = get_option( 'nwm_settings' );	
+        
+        if ( is_array( $settings ) ) {
+            if ( empty( $settings['initial_tooltip'] ) ) {
+                $settings['initial_tooltip'] = 0;
+                update_option( 'nwm_settings', $settings );
+            }
+        }
+        
+       nwm_delete_all_transients();  
+    }
 	
 	update_option( 'nwm_version', NWN_VERSION_NUM );
 }

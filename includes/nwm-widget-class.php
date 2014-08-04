@@ -40,10 +40,10 @@ class NWM_Widget extends WP_Widget {
                     ); 
                 } else {
                      delete_transient( 'nwm_widget_'.$instance['map_id'] );
-                    _e( '<p>There is a problem geocoding your location, please check your route on the selected map.</p>', 'nwm' );  
+                    echo '<p>' . __( 'There is a problem geocoding your location, please check your route on the selected map.', 'nwm' ) . '</p>';  
                 }                    
             } else {
-                _e( '<p>Please select a map in the Nomad World Map widget settings.</p>', 'nwm' );  
+                echo '<p>' . __( 'Please select a map in the Nomad World Map widget settings.', 'nwm' ) . '</p>';  
             }  
         } // end auto detect location
             

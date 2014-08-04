@@ -14,8 +14,10 @@ function nwm_manage_maps() {
    	<?php
 	
 	/* Check if we just finished an action */
-	if ( $_GET['action'] ) {
-		switch ( $_GET['action'] ) {
+    $action = ( isset( $_GET['action'] ) ) ? $_GET['action'] : '';
+    
+	if ( $action ) {
+		switch ( $action ) {
 			case 'delete_entries':
 				$msg = __( 'Map entries successfully removed', 'nwm' );
 				break;
@@ -70,6 +72,8 @@ function nwm_manage_maps() {
             </thead>
             <tbody id="the-list">
             <?php
+            $alternate_class = '';
+            
             foreach ( $nwm_map_ids as $map_id => $map_name ) {
 				$route_count = explode( ',' ,$nwm_route_order[$map_id] );
                 $alternate_class = ( $alternate_class == 'class="alternate"' ) ? '' : 'class="alternate"';
@@ -88,7 +92,7 @@ function nwm_manage_maps() {
                     <td>
                     	<a href="<?php echo admin_url( 'admin.php?page=nwm_map_editor&map_id=' . absint( $map_id ) ); ?>" class="nwm-current-name"><?php echo esc_html( $map_name ); ?></a>
                     	<div class="row-actions">
-                        	<a href="#" class="nwm-edit-name" title="edit this item"><?php _e( 'Edit name', 'nwm' ); ?></a>
+                        	<a href="#" class="nwm-edit-name" title="<?php _e( 'edit this item', 'nwm' ); ?>"><?php _e( 'Edit name', 'nwm' ); ?></a>
                         </div>
                     </td>
                     <td><?php echo $route_count; ?></td>

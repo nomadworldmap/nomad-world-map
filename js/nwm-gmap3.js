@@ -47,7 +47,7 @@ function initializeGmap() {
 		nwmLocations = window['nwmMap_'+i];
 		
 		/* For each map we set the correct maptype, zoomlevel and content location */
-		mapType = setMapType( nwmLocations );
+		mapType   = setMapType( nwmLocations );
 		zoomLevel = parseInt( nwmLocations.settings.zoomLevel );
 		
 		/* Check if we need to remove the slider, and show the content in the tooltip instead */
@@ -86,8 +86,8 @@ function initializeGmap() {
 							}
 						});
 					}
-				},
-			},
+				}
+			}
 		}); //end gmap3 init
 		i++;
 	});
@@ -97,8 +97,8 @@ function initializeGmap() {
  * Get the correct value for the maptType
  *
  * @since 1.2
- * @param object The map data
- * @return string mapType The correct Google Map maptype
+ * @param {object} The map data
+ * @return {string} mapType The correct Google Map maptype
  */
 function setMapType( nwmLocations ) {
 	var mapType;
@@ -137,9 +137,9 @@ function setMapType( nwmLocations ) {
  * Otherwise we only send the collected location data to the addDestination function. 
  *
  * @since 1.0
- * @param object $this The current map we are working with
- * @param object nwmLocations Holds the location data
- * @param number mapId The ID of the map we are working with
+ * @param {object} $this The current map we are working with
+ * @param {object} nwmLocations Holds the location data
+ * @param {number} mapId The ID of the map we are working with
  * @return void
  */
 function processLocationData( $this, nwmLocations, mapId ) {
@@ -237,11 +237,11 @@ function processLocationData( $this, nwmLocations, mapId ) {
  * sets the correct location values, also binds the mouseover events for the tooltip / slider.
  *
  * @since 1.0
- * @param object $this The current map we are working with
- * @param number i Keeps track of the amount of destinations added to the map, is used to number the marker content and slider li items
- * @param object destination Holds the location data
- * @param number zoomToIndex Contains the marker index we should zoom to on page load ( first, last, first future item )
- * @param number mapId The ID of the map we are working with
+ * @param {object} $this The current map we are working with
+ * @param {number} i Keeps track of the amount of destinations added to the map, is used to number the marker content and slider li items
+ * @param {object} destination Holds the location data
+ * @param {number} zoomToIndex Contains the marker index we should zoom to on page load ( first, last, first future item )
+ * @param {number} mapId The ID of the map we are working with
  * @return void
  */
 function addDestination( $this, i, destination, zoomToIndex, mapId ) {	
@@ -251,12 +251,12 @@ function addDestination( $this, i, destination, zoomToIndex, mapId ) {
 		marker:{
 			latLng: [destination.lat, destination.lng],
 			options: {
-				icon: newMarker,
+				icon: newMarker
 			},
 			events:{
 			click: function( marker ){
-					$(this).gmap3({clear: "overlay" })
-				},
+					$(this).gmap3({clear: "overlay" });
+				}
 			},
 			callback: function( marker ) {
 				var markerData = {};
@@ -267,7 +267,7 @@ function addDestination( $this, i, destination, zoomToIndex, mapId ) {
 						content = destination.data.content;
 					
 					markerData = getMarkerData( destination, nwmSettings, 'slider' );
-					content = content + markerData.readMore;
+					content = content + markerData.readMore;					
 											
 					if ( destination.data.arrival ) {
 						if ( destination.data.departure ) {	
@@ -299,7 +299,7 @@ function addDestination( $this, i, destination, zoomToIndex, mapId ) {
 											y:-15
 										  }
 										}
-									},
+									}
 								});
 							}
 					});
@@ -330,21 +330,23 @@ function addDestination( $this, i, destination, zoomToIndex, mapId ) {
 						markerData = getMarkerData( destination, nwmSettings, "tooltip" );
 						markerContent = '<div class="marker-style marker-' + i + '"><div class="nwm-marker-wrap">' + markerData.thumb + '<div class="marker-txt"><h2>' + markerData.title + '</h2><p>' + markerData.date + markerData.readMore + '</p></div></div></div>';
 				
-						$this.gmap3( "get" ).panTo( marker.position );					
-						$this.gmap3(
-						  {clear: "overlay" },
-							 {
-								overlay:{  /* Show the overlay with the location name at the marker location */
-									latLng: marker.position,
-									options:{
-									content: markerContent,
-									  offset: {
-										x:11,
-										y:-15
-									  }
+						if ( nwmSettings.hideTooltip != 1 ) { 
+							$this.gmap3( "get" ).panTo( marker.position );					
+							$this.gmap3(
+							  {clear: "overlay" },
+								 {
+									overlay:{  /* Show the overlay with the location name at the marker location */
+										latLng: marker.position,
+										options:{
+										content: markerContent,
+										  offset: {
+											x:11,
+											y:-15
+										  }
+										}
 									}
-								},
-							});
+								});
+						}
 					}
 				}
 			},
@@ -382,20 +384,20 @@ function addDestination( $this, i, destination, zoomToIndex, mapId ) {
 						}
 					  }				  
 				});
-			  },
-			},
+			  }
+			}
 		}
 	});	
-}	
+}
 
 /**
  * Create the data that is either shown inside the tooltip or slider
  * 
  * @since 1.0
- * @param object destination Holds the location data
- * @param object nwmSettings Holds the map settings
- * @param string contentType Is either set to 'tooltip' or 'slider'
- * @return object markerData
+ * @param {object} destination Holds the location data
+ * @param {object} nwmSettings Holds the map settings
+ * @param {string} contentType Is either set to 'tooltip' or 'slider'
+ * @return {object} markerData
  */
 function getMarkerData( destination, nwmSettings, contentType ) {
 	var markerData = {},
@@ -461,42 +463,33 @@ function getMarkerData( destination, nwmSettings, contentType ) {
  * Load the required image for the route location
  * 
  * @since 1.0
- * @param object $map A reference to the ul in the current map
+ * @param {object} $map A reference to the ul in the current map
  * @return void
  */
 function imageLoader( $map ) {
-	var $li = $map.find( ".nwm-active-destination" ),
-		img = $li.find( ".nwm-thumb" ),
-		imgSrc = $li.find( ".nwm-thumb" ).data( "src" ),
-		id = $li.data( "id" ),
+	var $li		  = $map.find( ".nwm-active-destination" ),
+		img		  = new Image(),
+		imgTarget = $li.find( ".nwm-thumb" ),
+		imgSrc	  = $li.find( ".nwm-thumb" ).data( "src" ),
+		id	      = $li.data( "id" ),
 		preloader = '<img class="nwm-preloader" id="nwm-preload-img-' + id + '" src="' + nwmSettings.path + 'admin/img/ajax-loader.gif" />';
 	
 	/* 
 	Check if we have loaded the thumbnail before, 
-	if not then we make an ajax request todo so and show a preloader. Otherwise we just change the src attr.
+	if not then we try todo so and show a preloader. 
+	Otherwise we just change the src attr.
 	*/
 	if ( $.inArray( id, loadedImageList ) === -1 ) {
 		$li.append( preloader );
-		$.ajax({
-			url: imgSrc,
-			cache: true,
-			statusCode: {
-				404: function() {
-					alert( "Image not found" );
-					$( "#nwm-preload-img-" + id ).remove();
-				}
-			}
-		}).done( function( ) {
-			/*
-			Remove the preloaders, set the correct src attribute and push the value to 
-			the array were we keep track of the already loaded thumbs 
-			 */
+
+		img.onload = function(){
 			$( "#nwm-preload-img-" + id ).remove();
-			img.attr( "src", imgSrc);
+			imgTarget.attr( "src", this.src );
 			loadedImageList.push( id );
-		});	
+		};
+		img.src = imgSrc;
 	} else {
-		img.attr( "src", imgSrc );
+		imgTarget.attr( "src", imgSrc );
 	}
 }
 
@@ -506,10 +499,10 @@ function imageLoader( $map ) {
  * Either show a link with the title in it, just show the title or only show the destination.
  * 
  * @since 1.0
- * @param string markerUrl The url that can be used in the marker
- * @param string markerTitle The post title
- * @param string destination The destination name
- * @return string title The correct header format
+ * @param {string} markerUrl The url that can be used in the marker
+ * @param {string} markerTitle The post title
+ * @param {string] destination The destination name
+ * @return {string} title The correct header format
  */
 function checkHeaderFormat( markerUrl, markerTitle, destination ) {
 	var title;
@@ -531,8 +524,8 @@ function checkHeaderFormat( markerUrl, markerTitle, destination ) {
  * Check which class we need to use on the thumbnails
  * 
  * @since 1.0
- * @param number thumbCircles Either 1 or 0 to enable/disable the circles on the thumbs
- * @return string circleClass The circle class
+ * @param {number} thumbCircles Either 1 or 0 to enable/disable the circles on the thumbs
+ * @return {string} circleClass The circle class
  */
 function checkCircleClass( thumbCircles ) {
 	var circleClass;
@@ -550,7 +543,7 @@ function checkCircleClass( thumbCircles ) {
  * Bind the back and forward buttons
  * 
  * @since 1.0
- * @param string mapId The ID of the map
+ * @param {string} mapId The ID of the map
  * @return void
  */
 function enableControls( mapId ) {

@@ -3,8 +3,8 @@ Contributors: tijmensmit
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NFZ6NCFKXQ8EA
 Tags: google maps, route, travel, travel blog, trip, geocoding
 Requires at least: 3.5
-Tested up to: 3.8.1
-Stable tag: 1.2.21
+Tested up to: 3.9.1
+Stable tag: 1.2.30
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -104,6 +104,17 @@ You can suggest new features [here](http://nomadworldmap.uservoice.com/), or vot
 
 
 == Changelog ==
+
+= 1.2.30 =
+* Fixed the location thumbnails breaking when the images are loaded from another domain
+* Fixed the js script sometimes breaking in IE
+* Fixed the date translations not working for custom posts
+* Fixed the date description text sometimes disappearing when switching between 'Add location' and 'Edit Location'
+* Fixed a compatibility issue with the Advanced Custom Fields plugin, reported by [ShaneShipston](https://github.com/ShaneShipston)
+* Code improvements reported by [ShaneShipston](https://github.com/ShaneShipston)  
+* Added the option to define where a new location is inserted in the route list when you create/edit an entry
+* Added the option to hide the tooltip on initial page load when the content is set to be shown in the tooltips
+* Added Polish (pl_PL) and Dutch (nl_NL) translations
 
 = 1.2.21 =
 * Fixed an issue where on some servers the map would remain empty

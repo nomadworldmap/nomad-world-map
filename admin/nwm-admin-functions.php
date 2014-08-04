@@ -709,14 +709,17 @@ function nwm_map_editor_data( $nwm_map_id ) {
 	global $wpdb;
 
 	$nwm_route_order = get_option( 'nwm_route_order' );
-	$route_data = $wpdb->get_results( 
-						$wpdb->prepare( "SELECT nwm_id, post_id, thumb_id, schedule, lat, lng, location, iso2_country_code, arrival, departure 
-										 FROM $wpdb->nwm_routes 
-										 WHERE nwm_id IN ( $nwm_route_order[$nwm_map_id] ) 
-										 ORDER BY field(nwm_id, $nwm_route_order[$nwm_map_id])", 
-										 $nwm_map_id 
-									   ) 
-						 );
+    
+    if ( $nwm_route_order[$nwm_map_id] ) {
+        $route_data = $wpdb->get_results( 
+                            $wpdb->prepare( "SELECT nwm_id, post_id, thumb_id, schedule, lat, lng, location, iso2_country_code, arrival, departure 
+                                             FROM $wpdb->nwm_routes 
+                                             WHERE nwm_id IN ( $nwm_route_order[$nwm_map_id] ) 
+                                             ORDER BY field(nwm_id, $nwm_route_order[$nwm_map_id])", 
+                                             $nwm_map_id 
+                                           ) 
+                             );
+    }
 		
 	foreach ( $route_data as $k => $route_stop ) {	
 		if ( !$route_stop->post_id ) {
@@ -735,6 +738,7 @@ function nwm_map_editor_data( $nwm_map_id ) {
 			
 		if ( $route_stop->thumb_id ) {
 			$thumb_url = wp_get_attachment_image_src( $route_stop->thumb_id );
+            $thumb_url = $thumb_url[0];
 		} else {
 			$thumb_url = '';
 		}
@@ -745,7 +749,7 @@ function nwm_map_editor_data( $nwm_map_id ) {
             'thumb_id'           => $route_stop->thumb_id,
             'schedule'           => $route_stop->schedule,
             'url'                => $url,
-            'thumb_url'          => $thumb_url[0],
+            'thumb_url'          => $thumb_url,
             'location'           => $route_stop->location,
             'country_code'       => $route_stop->iso2_country_code,
             'arrival'            => $route_stop->arrival,
@@ -789,7 +793,7 @@ function nwm_faq() {
             </dl>
             <dl>   
                 <dt><?php _e( 'I created a route and added the shortcode to a page, but when I view the page in the browser it only shows a blank map?', 'nwm' ); ?></dt>
-                <dd><?php _e( 'Make sure your theme doesn\'t use AJAX to navigate between pages, if so try to disable it. Also make sure there are no <a href="http://codex.wordpress.org/Using_Your_Browser_to_Diagnose_JavaScript_Errors">JavaScript errors</a> on your site. Last thing you can try is to switch to another theme and disable other plugins and see if that fixes it.' , 'nwm' ); ?></dd>
+                <dd><?php echo sprintf( __( 'Make sure your theme doesn\'t use AJAX to navigate between pages, if so try to disable it. Also make sure there are no <a href="%s">JavaScript errors</a> on your site. Last thing you can try is to switch to another theme and disable other plugins and see if that fixes it.', 'nwm' ), 'http://codex.wordpress.org/Using_Your_Browser_to_Diagnose_JavaScript_Errors' ); ?></dd>
             </dl>
             <dl>   
                 <dt><?php _e( 'Can I disable the lines between locations for independent maps?', 'nwm' ); ?></dt>
@@ -799,7 +803,7 @@ function nwm_faq() {
                 <dt><?php _e( 'Can I set different zoom levels for independent maps?', 'nwm' ); ?></dt>
                 <dd><?php _e( 'Yes, you can add a zoom attribute to the shortcode <code>[nwm_map zoom="3"]</code>. This will set it to zoom level 3. You can set the zoom to anything between 1 and 12.' , 'nwm' ); ?></dd>
             </dl>
-                        <dl>   
+            <dl>   
                 <dt><?php _e( 'Can I change the map type for independent maps?', 'nwm' ); ?></dt>
                 <dd><?php _e( 'Yes, you can add a maptype attribute to the shortcode <code>[nwm_map maptype="roadmap"]</code>. Other valid values are satellite, hybrid  and terrain.' , 'nwm' ); ?></dd>
             </dl>
@@ -809,11 +813,11 @@ function nwm_faq() {
             </dl>
             <dl>   
                 <dt><?php _e( 'When I search for a blog post title it returns no results?', 'nwm' ); ?></dt>
-                <dd><?php _e( 'Make sure the blog post you search for is published, and that the search input matches exactly with the title you see in the blog post editor. Otherwise please open a support request in the <a href="http://wordpress.org/support/plugin/nomad-world-map">support form</a>.' , 'nwm' ); ?></dd>
+                <dd><?php echo sprintf( __( 'Make sure the blog post you search for is published, and that the search input matches exactly with the title you see in the blog post editor. Otherwise please open a support request in the <a href="%s">support form</a>.', 'nwm' ), 'http://wordpress.org/support/plugin/nomad-world-map' ); ?></dd>
             </dl>              
             <dl>
                 <dt><?php _e( 'Where can I suggest new features?', 'nwm' ) ; ?></dt>
-                <dd><?php _e( 'You can suggest new features <a href="http://nomadworldmap.uservoice.com/">here</a>, or vote for existing suggestions from others.', 'nwm' ); ?></dd>
+                <dd><?php echo sprintf( __( 'You can suggest new features <a href="%s">here</a>, or vote for existing suggestions from others.', 'nwm' ), 'http://nomadworldmap.uservoice.com/' ); ?></dd>
             </dl>
         </div>
     </div>    
@@ -1025,6 +1029,40 @@ function nwm_check_icon_font_usage() {
 }
 
 /**
+ * Make the text in the js file translatable
+ * 
+ * @since 1.2.30
+ * @return array $admin_js_l10n All the text available for translation in the nwm-admin.js file
+ */
+function nwm_admin_js_l10n() {
+    $admin_js_l10n = array(
+        'locationImage'     => __( 'Set Location Image', 'nwm' ),
+        'wordsRemaining'    => __( 'words remaining', 'nwm' ),
+        'noWordsRemaining'  => __( '0 words remaining', 'nwm' ),
+        'editMapName'       => __( 'Edit Map Name', 'nwm' ),
+        'addMapName'        => __( 'Add Map Name', 'nwm' ),
+        'loadFailed'        => __( 'There was a problem loading the data, reload the page and try again.', 'nwm' ),
+        'securityFailed'    => __( 'Security check failed, reload the page and try again.', 'nwm' ),
+        'noPostsFound'      => __( 'No blog post found, please try again!', 'nwm' ),
+        'selectDestination' => __( 'Select destination to edit', 'nwm' ),
+        'delete'            => __( 'Delete', 'nwm' ),
+        'saveFailed'        => __( 'Failed to save the data, please try again', 'nwm' ),
+        'updateFailed'      => __( 'Update failed, please try again', 'nwm' ),
+        'deleteFailed'      => __( 'Failed to delete the data, please try again', 'nwm' ),
+        'locationAdded'     => __( 'Location added...', 'nwm' ),
+        'locationUpdated'   => __( 'Location updated...', 'nwm' ),
+        'arrivalDataError'  => __( 'The arrival date has to be before or equal to the departure date.', 'nwm' ), 
+        'geocodeFailed'     => __( 'Geocode was not successful for the following reason: ', 'nwm' ),
+        'addressFailed'     => __( 'Cannot determine address at this location.', 'nwm' ),
+        'locationPosition'  => __( 'After the last item', 'nwm' ),
+        'currentPosition'   => __( 'Current position', 'nwm'),
+        'before'            => __( 'Before', 'nwm' )
+    );
+
+    return $admin_js_l10n;
+}
+
+/**
  * Add all the required scripts for the admin section
  *
  * @since 1.0
@@ -1032,19 +1070,29 @@ function nwm_check_icon_font_usage() {
  */
 function nwm_admin_scripts() {	
     
-	wp_enqueue_media();
-	wp_enqueue_style( 'wp-color-picker' );
-	wp_enqueue_script( 'jquery-ui-sortable' );
-	wp_enqueue_script( 'jquery-ui-datepicker' );
-	wp_enqueue_script( 'jquery-ui-dialog' );
-	wp_enqueue_style( 'jquery-style', '//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css' );
-	wp_enqueue_script( 'json2' );
+    $screen = get_current_screen();
+
+    /* Only enqueue the styles and scripts if we are on a page that belongs to the store locator */
+    if ( strpos( $screen->id, 'nwm_' ) !== false ) {
+        wp_enqueue_media();
+        wp_enqueue_style( 'wp-color-picker' );
+        wp_enqueue_script( 'jquery-ui-sortable' );
+        wp_enqueue_script( 'jquery-ui-datepicker' );
+        wp_enqueue_script( 'jquery-ui-dialog' );
+        wp_enqueue_style( 'jquery-style', '//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css' );
+        wp_enqueue_script( 'json2' );
+
+        wp_enqueue_style( 'nwm-admin-css', plugins_url( '/css/style.css', __FILE__ ), false );
+        wp_enqueue_script( 'nwm-gmap', ( "//maps.google.com/maps/api/js?sensor=false" ), false, '', true );
+        wp_enqueue_script( 'nwm-admin-js', plugins_url( '/js/nwm-admin.js', __FILE__ ), array('jquery', 'wp-color-picker'), false );
+        wp_enqueue_script( 'jquery-queue', plugins_url( '/js/ajax-queue.js', __FILE__ ), array('jquery'), false );
+
+        wp_localize_script( 'nwm-admin-js', 'nwmL10n', nwm_admin_js_l10n() );
+
+        $nwm_marker = array( 'path' => NWM_URL. 'img/' );
+        wp_localize_script( 'nwm-admin-js', 'nwmMarker', $nwm_marker );
+    }
+    
     nwm_check_icon_font_usage();
-	wp_enqueue_style( 'nwm-admin-css', plugins_url( '/css/style.css', __FILE__ ), false );
-	wp_enqueue_script( 'nwm-gmap', ( "//maps.google.com/maps/api/js?sensor=false" ), false );
-	wp_enqueue_script( 'nwm-admin-js', plugins_url( '/js/nwm-admin.js', __FILE__ ), array('jquery', 'wp-color-picker'), false );
-	wp_enqueue_script( 'jquery-queue', plugins_url( '/js/ajax-queue.js', __FILE__ ), array('jquery'), false );
-	
-	$nwm_marker = array( 'path' => NWM_URL. 'img/' );
-    wp_localize_script( 'nwm-admin-js', 'nwmMarker', $nwm_marker );
+    
 }

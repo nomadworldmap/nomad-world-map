@@ -77,27 +77,27 @@
 	margin-bottom:10px;
 }*/
 .gmap-wrap {
-	position: relative;
-	margin-left: 364px; 
+    position: relative;
+    margin-left: 364px; 
 }
 	
 #gmap-nwm {
-	float:left; 
-	height:526px; 
-	width:100%; 
-	border-radius:3px; 
+    float:left; 
+    height:587px; 
+    width:100%; 
+    border-radius:3px; 
 }
 #gmap-nwm.no-float {
-	float:none;
+    float:none;
 }
 #gmap-nwm label span {
-	display:block; 
-	font-style:italic;
+    display:block; 
+    font-style:italic;
 }
 #nwm-trip-cat {
-	height:auto; 
-	padding:5px; 
-	width:160px;
+    height:auto; 
+    padding:5px; 
+    width:160px;
 }
 #nwm-trips label, 
 #nwm-wrap label,
@@ -156,10 +156,16 @@
 	margin:0;
 }
 #nwm-marker-content, 
-#nwm-search-link {
+#nwm-search-link,
+#nwm-location-position {
 	float:left; 
 	width:100%;
 }
+
+#nwm-location-position p {
+   margin: 0.75em 0 0.35em
+}
+
 #nwm-search-link .nwm-active,
 .nwm-textarea-wrap .nwm-preloader,
 .nwm-marker-wrap  {

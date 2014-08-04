@@ -3,7 +3,7 @@
 Plugin Name: Nomad World Map
 Plugin URI: http://nomadworldmap.com/
 Description: Create your own custom travel map. Link locations on the map to blog posts and share your travel plans.
-Version: 1.2.21
+Version: 1.2.30
 Author: Tijmen Smit
 Author URI: http://nomadworldmap.com/
 License: GPLv2
@@ -28,7 +28,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 if ( ! defined( 'NWN_VERSION_NUM' ) )	
-	define( 'NWN_VERSION_NUM', '1.2.21' );
+	define( 'NWN_VERSION_NUM', '1.2.30' );
 	
 if ( ! defined( 'NWM_URL' ) )
 	define( 'NWM_URL', plugin_dir_url( __FILE__ ) );

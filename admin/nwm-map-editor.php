@@ -5,8 +5,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 function nwm_map_editor() {
 	$nwm_map_ids            = get_option( 'nwm_map_ids' );
 	$collected_destinations = nwm_map_editor_data( $nwm_map_id = 1 ); // 1 is the id of the default map					
-	$nwm_route_order        = get_option( 'nwm_route_order' );	
-	$option_values          = get_option( 'nwm_post_ids' );
     $options                = get_option( 'nwm_settings' );
     
     if ( $options['latlng_input'] ) {
@@ -75,7 +73,7 @@ function nwm_map_editor() {
                         <div id="nwm-blog-excerpt" class="nwm-blog-title nwm-marker-option">
                             <label for="nwm-post-title"><?php _e( 'Title of the post you want to link to:', 'nwm' ); ?></label> 
                             <input id="nwm-post-title" type="text" class="textinput"> <input id="find-nwm-title" class="button-primary" type="button" name="text" value="Search" />
-                            <div id="nwm-search-link"><?php _e( 'Link: ', 'nwm' ); ?><span></span></div>
+                            <div id="nwm-search-link"><?php _e( 'Link: ', 'nwm' ); ?> <span></span></div>
                              <input id="nwm-search-nonce" type="hidden" value="<?php echo wp_create_nonce('nwm_nonce_search'); ?>"  />
                         </div>
                         
@@ -88,6 +86,24 @@ function nwm_map_editor() {
                                 <em id="char-limit" class="nwm-desc"><?php _e( 'Keep it short, 25 words remaining.', 'nwm' ); ?></em>
                             </p>
                         </div>
+                    </div>
+                    
+                    <div id="nwm-location-position">
+                        <p>
+                            <label for="nwm-position"><?php _e( 'Location position:', 'nwm' ); ?></label> 
+                            <select id="nwm-position">
+                                <option value="0" selected="selected"><?php _e( 'After the last item', 'nwm' ); ?></option>
+                                <?php 
+                                $x = 1;
+                                if ( $collected_destinations ) {
+                                    foreach ( $collected_destinations as $k => $nwm_destination ) {
+                                        echo '<option value ="' . $x . '">' . __( 'Before', 'nwm' ) . ' ' . $x . ' - ' . esc_html( $nwm_destination['data']['location'] ) . '</option>';
+                                        $x++;
+                                    }
+                                }
+                                ?>	
+                             </select>
+                        </p>
                     </div>
                     
                     <div id="nwm-thumb-wrap">
@@ -105,17 +121,17 @@ function nwm_map_editor() {
                         <p><strong><?php _e( 'Travel dates', 'nwm' ); ?></strong></p>
                         <div>
                             <label for="nwm-from-date"><?php _e( 'Arrival:', 'nwm' ); ?></label>
-                            <input type="text" placeholder="optional" id="nwm-from-date" />
+                            <input type="text" placeholder="<?php _e( 'optional', 'nwm' ); ?>" id="nwm-from-date" />
                             <input type="hidden" name="from_date" />
                         </div>
                         <div>
                             <label for="nwm-till-date"><?php _e( 'Departure:', 'nwm' ); ?></label>
-                            <input type="text" placeholder="optional" id="nwm-till-date" />
+                            <input type="text" placeholder="<?php _e( 'optional', 'nwm' ); ?>" id="nwm-till-date" />
                             <input type="hidden" name="till_date" />
                         </div>
                     </div>
                     <p class="nwm-date-desc"><em class="nwm-desc"><?php _e( 'If no dates are set, then the publish date of the linked post is shown as the travel date.', 'nwm' ); ?></em></p>
-                    <p><input id="nwm-add-trip" type="submit" name="nwm-add-trip" class="button-primary" value="Save" /></p>
+                    <p><input id="nwm-add-trip" type="submit" name="nwm-add-trip" class="button-primary" value="<?php _e( 'Save', 'nwm' ); ?>" /></p>
                     <input id="nwm-post-id" type="hidden" name="nwm-post-id" value="" />
                     <input id="nwm-post-type" type="hidden" name="nwm-post-type" value="" />
                 </form>      
@@ -230,7 +246,7 @@ function nwm_build_tr_list( $collected_destinations ) {
 		$output .= '<td class="nwm-departure">'. $departure_date .' <span>'. esc_html( $nwm_location['data']['departure_formated'] ) .'</span></td>'."\n";	
 		$output .= '<td class="nwm-thumb-td">'. $thumb .'</td>'."\n";						
 		$output .= '<td class="nwm-btn">
-						<input class="delete-nwm-destination button" type="button" name="text" value="Delete" /> 
+						<input class="delete-nwm-destination button" type="button" name="text" value="' . __( 'Delete', 'nwm' ) . '" /> 
 						<input type="hidden" name="delete_nonce" value="'. wp_create_nonce( 'nwm_nonce_delete_'.$nwm_location['data']['nwm_id'] ) .'" />
 						<input type="hidden" name="update_nonce" value="'. wp_create_nonce( 'nwm_nonce_update_'.$nwm_location['data']['nwm_id'] ) .'" /> ' 
 						.$nwm_load_nonce. 

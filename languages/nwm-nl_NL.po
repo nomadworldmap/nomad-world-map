@@ -1,0 +1,763 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Nomad World MapReport-Msgid-Bugs-To:\n"
+"POT-Creation-Date: 2014-08-04 10:57+0100\n"
+"PO-Revision-Date: 2014-08-04 11:02+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.6.5\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: ../\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: admin/nwm-admin-functions.php:776
+msgid "FAQ"
+msgstr "FAQ"
+
+#: admin/nwm-admin-functions.php:779
+msgid "How do I show the map on my page?"
+msgstr "Hoe toon ik de kaart op mijn pagina?"
+
+#: admin/nwm-admin-functions.php:780
+msgid ""
+"Add this shortcode <code>[nwm_map]</code> to the page where you want to show "
+"the map."
+msgstr ""
+"Voeg deze shortcode  <code>[nwm_map]</code> toen aan de pagina waar je de "
+"kaart wil laten zien."
+
+#: admin/nwm-admin-functions.php:783
+msgid "How do I add multiple maps to a page?"
+msgstr "Hoe voeg ik meerdere kaarten toe aan een pagina?"
+
+#: admin/nwm-admin-functions.php:784
+msgid ""
+"You add the shortcode like you normally would, only this time you also need "
+"to define the map ID. So if you want to show the maps with ids 1,4 and 5 you "
+"would add the following shortcodes.<code>[nwm_map id=\"1\"]</"
+"code><code>[nwm_map id=\"4\"]</code><code>[nwm_map id=\"5\"]</code>"
+msgstr ""
+"Je voegt de shortcode toe zoals je normaal doet, alleen moet je in dit geval "
+"ook een ID opgeven. Dus als je alleen kaarten wil tonen met ID 1,4 en 5 dan "
+"moet je het als volgt doen. <code>[nwm_map id=\"1\"]</code><code>[nwm_map id="
+"\"4\"]</code><code>[nwm_map id=\"5\"]</code>"
+
+#: admin/nwm-admin-functions.php:787
+msgid "Can I specify the dimensions of the map?"
+msgstr "Kan ik het formaat van de kaart opgeven?"
+
+#: admin/nwm-admin-functions.php:788
+msgid ""
+"Yes, just add the width and height as an attribute to the shortcode. For "
+"example <code>[nwm_map height=\"500\" width=\"500\"]</code>."
+msgstr ""
+"Je kan de breedte en hoogte als en attribute meegeven bij de shortcode. "
+"Bijvoorbeeld <code>[nwm_map height=\"500\" width=\"500\"]</code>."
+
+#: admin/nwm-admin-functions.php:791
+msgid "How do I specify which map is shown?"
+msgstr "Hoe geef ik op welke kaart er getoond word?"
+
+#: admin/nwm-admin-functions.php:792
+msgid ""
+"You can add the id attribute to the <code>[nwm_map]</code> shortcode. This "
+"will show the map with ID 3 on your page. <code>[nwm_map id=\"3\"]</code>. "
+"<br> The map ID can be found on the \"Manage Maps\" page. If no ID is set it "
+"will show the default map with ID 1."
+msgstr ""
+"Je kan een ID attribute toevoegen aan de <code>[nwm_map]</code> shortcode. "
+"Deze code toont bijvoorbeeld de kaart met ID 3 <code>[nwm_map id=\"3\"]</"
+"code>. <br> De ID van de kaart kan gevonden worden op de  \"Beheer pagina\" "
+"pagina. Als er geen ID is ingesteld dan wordt de standaard kaart getoond met "
+"ID 1."
+
+#: admin/nwm-admin-functions.php:795
+msgid ""
+"I created a route and added the shortcode to a page, but when I view the "
+"page in the browser it only shows a blank map?"
+msgstr ""
+"Ik heb een route aangemaakt en de shortcode aan de pagina toegevoegd, maar "
+"als ik de pagina bekijk zie ik alleen een lege pagina?"
+
+#: admin/nwm-admin-functions.php:796
+#, php-format
+msgid ""
+"Make sure your theme doesn't use AJAX to navigate between pages, if so try "
+"to disable it. Also make sure there are no <a href=\"%s\">JavaScript errors</"
+"a> on your site. Last thing you can try is to switch to another theme and "
+"disable other plugins and see if that fixes it."
+msgstr ""
+"Controleer of dat je theme geen AJAX navigatie gebruikt, als dit het geval "
+"is zet het dan uit. Controleer ook of er geen <a href=\"%s\">JavaScript "
+"foutmeldingen</a> voorkomen op je site.  Je kan ook een andere theme "
+"proberen en alle andere plugins uitzetten om te kijken ofdat dit het "
+"probleem oplost.  "
+
+#: admin/nwm-admin-functions.php:799
+msgid "Can I disable the lines between locations for independent maps?"
+msgstr ""
+"Kan ik de lijnen tussen de verschillende locaties uitzetten voor losse "
+"kaarten?"
+
+#: admin/nwm-admin-functions.php:800
+msgid ""
+"Yes, you can add a lines attribute to the shortcode <code>[nwm_map lines="
+"\"0\"]</code> to disable them and <code>[nwm_map lines=\"1\"]</code> to "
+"enable them."
+msgstr ""
+"Je kan een lijnen attribute toevoegen aan de shortcode <code>[nwm_map lines="
+"\"0\"]</code> om het uit te schakelen, en <code>[nwm_map lines=\"1\"]</code> "
+"om het in te schakelen."
+
+#: admin/nwm-admin-functions.php:803
+msgid "Can I set different zoom levels for independent maps?"
+msgstr "Kan ik verschillende zoom niveaus instellen voor losse kaarten?"
+
+#: admin/nwm-admin-functions.php:804
+msgid ""
+"Yes, you can add a zoom attribute to the shortcode <code>[nwm_map zoom="
+"\"3\"]</code>. This will set it to zoom level 3. You can set the zoom to "
+"anything between 1 and 12."
+msgstr ""
+"Je kan een zoom attribute toevoegen aan de shortcode <code>[nwm_map zoom="
+"\"3\"]</code>. Dit stelt het zoom niveau in op 3. Het zoom niveau kan een "
+"getal tussen de 1 en 12 zijn."
+
+#: admin/nwm-admin-functions.php:807
+msgid "Can I change the map type for independent maps?"
+msgstr "Kan ik verschillende kaart soorten opgeven voor losse kaarten?"
+
+#: admin/nwm-admin-functions.php:808
+msgid ""
+"Yes, you can add a maptype attribute to the shortcode <code>[nwm_map maptype="
+"\"roadmap\"]</code>. Other valid values are satellite, hybrid  and terrain."
+msgstr ""
+"Je kan het kaart type wijzigen via een shortcode attribute<code>[nwm_map "
+"maptype=\"roadmap\"]</code>. Andere attribute waardes zijn satellite, hybrid "
+"en terrain."
+
+#: admin/nwm-admin-functions.php:811
+msgid "Can I show a list of all the destinations on the map?"
+msgstr "Kan ik een lijst tonen van alle bestemmingen op de kaart?"
+
+#: admin/nwm-admin-functions.php:812
+msgid ""
+"Yes, this shortcode <code>[nwm_list id=\"1\"]</code> will show the "
+"destination list for the map with id 1. If no ID is set, it will default to "
+"1. <br><br> Other shortcode options for the list: <br><br> <code>[nwm_list "
+"id=\"1\" dates=\"all\"]</code> Shows both the arrival and departure dates "
+"<br> <code>[nwm_list id=\"1\" dates=\"arrival\"]</code> Only show the "
+"arrival dates <br> <code>[nwm_list id=\"1\" dates=\"departure\"]</code> Only "
+"show the departure dates <br> <code>[nwm_list order=\"asc\"]</code> or "
+"<code>[nwm_list order=\"desc]</code> will change the sort order of the "
+"destination list"
+msgstr ""
+"Deze shortcode <code>[nwm_list id=\"1\"]</code> toont een bestemmings lijst "
+"voor de kaart met ID 1. Als er geen ID is ingesteld dan wordt de standaard "
+"kaart getoond met ID 1. <br><br> Andere shortcode opties voor de lijst zijn: "
+"<br><br> <code>[nwm_list id=\"1\" dates=\"all\"]</code> Toont de aankomst en "
+"vertrek data <br> <code>[nwm_list id=\"1\" dates=\"arrival\"]</code> Toont "
+"alleen de aankomst data <br> <code>[nwm_list id=\"1\" dates=\"departure\"]</"
+"code> Toont alleen de vertrek data. <code>[nwm_list order=\"desc]</code> "
+"Wijzigt de volgorde van de lijst."
+
+#: admin/nwm-admin-functions.php:815
+msgid "When I search for a blog post title it returns no results?"
+msgstr ""
+"Als ik zoek op de titel van een blog post krijg ik geen resultaten terug?"
+
+#: admin/nwm-admin-functions.php:816
+#, php-format
+msgid ""
+"Make sure the blog post you search for is published, and that the search "
+"input matches exactly with the title you see in the blog post editor. "
+"Otherwise please open a support request in the <a href=\"%s\">support form</"
+"a>."
+msgstr ""
+"Zorg dat de blog post waar je op zoekt gepubliceerd is en dat de titel waar "
+"je op zoekt ook exact overeenkomt met zoals het getoond wordt in de blog "
+"post editor. Als je er problemen mee blijft houden open dan een topic in het "
+"<a href=\"%s\">support form</a>."
+
+#: admin/nwm-admin-functions.php:819
+msgid "Where can I suggest new features?"
+msgstr "Waar kan ik suggesties doen voor nieuwe features?"
+
+#: admin/nwm-admin-functions.php:820
+#, php-format
+msgid ""
+"You can suggest new features <a href=\"%s\">here</a>, or vote for existing "
+"suggestions from others."
+msgstr ""
+"Je kan op deze <a href=\"%s\">site</a> suggesties doen voor nieuwe features, "
+"of stemmen voor bestaande suggesties van andere."
+
+#: admin/nwm-admin-functions.php:1039
+msgid "Set Location Image"
+msgstr "Kies locatie afbeelding"
+
+#: admin/nwm-admin-functions.php:1040
+msgid "words remaining"
+msgstr "woorden beschikbaar"
+
+#: admin/nwm-admin-functions.php:1041
+msgid "0 words remaining"
+msgstr "0 woorden beschikbaar"
+
+#: admin/nwm-admin-functions.php:1042
+msgid "Edit Map Name"
+msgstr "Wijzig kaart naam"
+
+#: admin/nwm-admin-functions.php:1043
+msgid "Add Map Name"
+msgstr "Voeg kaart naam toe"
+
+#: admin/nwm-admin-functions.php:1044
+msgid "There was a problem loading the data, reload the page and try again."
+msgstr ""
+"Er ging iets mis met het laden van de data,  herlaad de pagina en probeer "
+"het nog een keer."
+
+#: admin/nwm-admin-functions.php:1045
+msgid "Security check failed, reload the page and try again."
+msgstr ""
+"Beveiligings controle mislukt, herlaad de pagina en probeer het nog een keer."
+
+#: admin/nwm-admin-functions.php:1046
+msgid "No blog post found, please try again!"
+msgstr "Geen blog post gevonden, probeer het nog een keer!"
+
+#: admin/nwm-admin-functions.php:1047
+msgid "Select destination to edit"
+msgstr "Selecteer locatie om te bewerken"
+
+#: admin/nwm-admin-functions.php:1048 admin/nwm-manage-maps.php:53
+#: admin/nwm-map-editor.php:251
+msgid "Delete"
+msgstr "Verwijder"
+
+#: admin/nwm-admin-functions.php:1049
+msgid "Failed to save the data, please try again"
+msgstr "Het opslaan is mislukt, probeer het nog een keer"
+
+#: admin/nwm-admin-functions.php:1050
+msgid "Update failed, please try again"
+msgstr "Bijwerken mislukt, probeer het nog een keer"
+
+#: admin/nwm-admin-functions.php:1051
+msgid "Failed to delete the data, please try again"
+msgstr "Het verwijderen van de data is mislukt, probeer het een keer"
+
+#: admin/nwm-admin-functions.php:1052
+msgid "Location added..."
+msgstr "Locatie toegevoegd..."
+
+#: admin/nwm-admin-functions.php:1053
+msgid "Location updated..."
+msgstr "Locatie bijgewerkt..."
+
+#: admin/nwm-admin-functions.php:1054
+msgid "The arrival date has to be before or equal to the departure date."
+msgstr "De aankomst datum moet voor of gelijk zijn aan de vertrek datum."
+
+#: admin/nwm-admin-functions.php:1055
+msgid "Geocode was not successful for the following reason: "
+msgstr "Geocode was niet succesvol om de volgende reden:"
+
+#: admin/nwm-admin-functions.php:1056
+msgid "Cannot determine address at this location."
+msgstr "Kan het adres van deze locatie niet vaststellen."
+
+#: admin/nwm-admin-functions.php:1057 admin/nwm-map-editor.php:97
+msgid "After the last item"
+msgstr "Na het laatste item"
+
+#: admin/nwm-admin-functions.php:1058
+msgid "Current position"
+msgstr "Huidige positie"
+
+#: admin/nwm-admin-functions.php:1059 admin/nwm-map-editor.php:102
+msgid "Before"
+msgstr "Voor "
+
+#: admin/nwm-manage-maps.php:13
+msgid "Manage Maps"
+msgstr "Beheer kaarten"
+
+#: admin/nwm-manage-maps.php:22
+msgid "Map entries successfully removed"
+msgstr "Kaart locaties verwijderd"
+
+#: admin/nwm-manage-maps.php:25
+msgid "Map(s) successfully deleted"
+msgstr "Kaart(en) verwijderd"
+
+#: admin/nwm-manage-maps.php:28
+msgid "Name updated"
+msgstr "Naam bijgewerkt"
+
+#: admin/nwm-manage-maps.php:31
+msgid ""
+"Map successfully created. You can use this shortcode <strong>[nwm_map id=\""
+msgstr "De kaart is aangemaakt. "
+
+#: admin/nwm-manage-maps.php:35
+msgid "Invalid map name"
+msgstr "Ongeldige kaart naam"
+
+#: admin/nwm-manage-maps.php:39
+msgid ""
+"All the map entries are removed. But the map with ID 1 is used as the "
+"default map and cannot be removed"
+msgstr ""
+"Alle locaties zijn van de kaart verwijderd, maar de kaart met ID 1 kan zelf "
+"niet verwijderd worden."
+
+#: admin/nwm-manage-maps.php:52
+msgid "Bulk actions"
+msgstr "Bulk acties"
+
+#: admin/nwm-manage-maps.php:54
+msgid "Remove route entries"
+msgstr "Verwijder locaties"
+
+#: admin/nwm-manage-maps.php:56
+msgid "Apply"
+msgstr "Toepassen"
+
+#: admin/nwm-manage-maps.php:57
+msgid "Add new map"
+msgstr "Voeg nieuwe kaart toe"
+
+#: admin/nwm-manage-maps.php:65 admin/nwm-manage-maps.php:107
+msgid "Select All"
+msgstr "Selecteer alles"
+
+#: admin/nwm-manage-maps.php:68 admin/nwm-manage-maps.php:110
+msgid "ID"
+msgstr "ID"
+
+#: admin/nwm-manage-maps.php:69 admin/nwm-manage-maps.php:111
+msgid "Name"
+msgstr "Naam"
+
+#: admin/nwm-manage-maps.php:70 admin/nwm-manage-maps.php:112
+msgid "Entries"
+msgstr "Locaties"
+
+#: admin/nwm-manage-maps.php:95
+msgid "edit this item"
+msgstr "wijzig"
+
+#: admin/nwm-manage-maps.php:95
+msgid "Edit name"
+msgstr "Naam wijzigen"
+
+#: admin/nwm-manage-maps.php:124 admin/nwm-manage-maps.php:139
+msgid "Map name"
+msgstr "Kaart naam"
+
+#: admin/nwm-manage-maps.php:128
+msgid "Update"
+msgstr "Bijwerken"
+
+#: admin/nwm-manage-maps.php:129 admin/nwm-manage-maps.php:144
+msgid "Cancel"
+msgstr "Annuleer"
+
+#: admin/nwm-manage-maps.php:143
+msgid "Add"
+msgstr "Toevoegen"
+
+#: admin/nwm-map-editor.php:24
+msgid "Current map:"
+msgstr "Huidige kaart:"
+
+#: admin/nwm-map-editor.php:37
+msgid "Add location"
+msgstr "Voeg locatie toe:"
+
+#: admin/nwm-map-editor.php:38
+msgid "Edit location"
+msgstr "Wijzig locatie:"
+
+#: admin/nwm-map-editor.php:44
+msgid "City / Country:"
+msgstr "Stad, land"
+
+#: admin/nwm-map-editor.php:46
+msgid "Set"
+msgstr "Instellen"
+
+#: admin/nwm-map-editor.php:47
+msgid "You can drag the red marker to a specific location"
+msgstr "Je kan de rode marker verslepen naar elke locatie die je maar wilt"
+
+#: admin/nwm-map-editor.php:52
+msgid "Coordinates:"
+msgstr " Coördinaten:"
+
+#: admin/nwm-map-editor.php:54
+msgid "Preview"
+msgstr "Voorbeeld"
+
+#: admin/nwm-map-editor.php:68
+msgid "Location content:"
+msgstr "Locatie inhoud:"
+
+#: admin/nwm-map-editor.php:70
+msgid "Post excerpt"
+msgstr "Post samenvatting"
+
+#: admin/nwm-map-editor.php:71
+msgid "Custom content"
+msgstr "Eigen inhoud"
+
+#: admin/nwm-map-editor.php:72
+msgid "Travel schedule"
+msgstr "Reis schema"
+
+#: admin/nwm-map-editor.php:76
+msgid "Title of the post you want to link to:"
+msgstr "Titel van de pagina waar je naar wil linken:"
+
+#: admin/nwm-map-editor.php:78
+msgid "Link: "
+msgstr "Link:"
+
+#: admin/nwm-map-editor.php:83 includes/nwm-widget-class.php:234
+msgid "Title:"
+msgstr "Titel:"
+
+#: admin/nwm-map-editor.php:84
+msgid "Link:"
+msgstr "Link:"
+
+#: admin/nwm-map-editor.php:86
+msgid "Description:"
+msgstr "Omschrijving:"
+
+#: admin/nwm-map-editor.php:88
+msgid "Keep it short, 25 words remaining."
+msgstr "Hou het kort, 25 woorden beschikbaar. "
+
+#: admin/nwm-map-editor.php:95
+msgid "Location position:"
+msgstr "Locatie positie:"
+
+#: admin/nwm-map-editor.php:113 admin/nwm-map-editor.php:172
+msgid "Thumbnail"
+msgstr "Thumbnail"
+
+#: admin/nwm-map-editor.php:117
+msgid "Change thumbnail"
+msgstr "Wijzig thumbnail"
+
+#: admin/nwm-map-editor.php:118
+msgid "Use default"
+msgstr "Gebruik standaard"
+
+#: admin/nwm-map-editor.php:123
+msgid "Travel dates"
+msgstr "Reisdata"
+
+#: admin/nwm-map-editor.php:125
+msgid "Arrival:"
+msgstr "Aankomst:"
+
+#: admin/nwm-map-editor.php:126 admin/nwm-map-editor.php:131
+msgid "optional"
+msgstr "optioneel"
+
+#: admin/nwm-map-editor.php:130
+msgid "Departure:"
+msgstr "Vertrek:"
+
+#: admin/nwm-map-editor.php:135
+msgid ""
+"If no dates are set, then the publish date of the linked post is shown as "
+"the travel date."
+msgstr ""
+"Als er geen datum is ingesteld, dan wordt de datum van de blog post getoond "
+"als reisdatum."
+
+#: admin/nwm-map-editor.php:136
+msgid "Save"
+msgstr "Opslaan"
+
+#: admin/nwm-map-editor.php:144
+msgid "- Select destination to edit -"
+msgstr "- Kies bestemming om te wijzigen -"
+
+#: admin/nwm-map-editor.php:167
+msgid "Order"
+msgstr "Volgorde"
+
+#: admin/nwm-map-editor.php:168 includes/nwm-frontend-functions.php:332
+msgid "Location"
+msgstr "Locatie"
+
+#: admin/nwm-map-editor.php:169
+msgid "Url"
+msgstr "Url"
+
+#: admin/nwm-map-editor.php:170 includes/nwm-frontend-functions.php:338
+#: includes/nwm-frontend-functions.php:342
+msgid "Arrival"
+msgstr "Aankomst"
+
+#: admin/nwm-map-editor.php:171 includes/nwm-frontend-functions.php:339
+#: includes/nwm-frontend-functions.php:345
+msgid "Departure"
+msgstr "Vertrek"
+
+#: admin/nwm-map-settings.php:13
+msgid "Nomad World Map Settings"
+msgstr "Nomad World Map Instellingen"
+
+#: admin/nwm-map-settings.php:15
+msgid "Settings updated"
+msgstr "Instellingen gewijzigd"
+
+#: admin/nwm-map-settings.php:21
+msgid "General"
+msgstr "Algemeen"
+
+#: admin/nwm-map-settings.php:24
+msgid "Draw lines between the markers?"
+msgstr "Teken lijnen tussen de markers?"
+
+#: admin/nwm-map-settings.php:28
+msgid "Draw curved lines on the map?"
+msgstr "Toon gebogen lijnen op de kaart?"
+
+#: admin/nwm-map-settings.php:32
+msgid "On pageload zoom to:"
+msgstr "Als de pagina geladen wordt zoom naar:"
+
+#: admin/nwm-map-settings.php:36
+msgid "Zoom level:"
+msgstr "Zoom niveau:"
+
+#: admin/nwm-map-settings.php:40
+msgid "Map type:"
+msgstr "Kaart type:"
+
+#: admin/nwm-map-settings.php:44
+msgid "Past route color:"
+msgstr "Oude route kleur:"
+
+#: admin/nwm-map-settings.php:48
+msgid "Future route color:"
+msgstr "Toekomstige route kleur:"
+
+#: admin/nwm-map-settings.php:57
+msgid "Content Options"
+msgstr "Content opties"
+
+#: admin/nwm-map-settings.php:60
+msgid "Show the post thumbnails in a circle?"
+msgstr "Toon de blog post thumbnails in een cirkel?"
+
+#: admin/nwm-map-settings.php:64
+msgid "Include a \"read more\" link for blog post?"
+msgstr "Toon een \"lees meer\" link bij blog posts?"
+
+#: admin/nwm-map-settings.php:68
+msgid "Read more label"
+msgstr "Lees meer label"
+
+#: admin/nwm-map-settings.php:72
+msgid "Show the location content in the:"
+msgstr "Toon de locatie inhoud in de:"
+
+#: admin/nwm-map-settings.php:75
+msgid "Slider"
+msgstr "Slider"
+
+#: admin/nwm-map-settings.php:77
+msgid "Tooltip (this will remove the slider)"
+msgstr "Tooltip (dit verwijdert de slider)"
+
+#: admin/nwm-map-settings.php:81
+msgid "Hide tooltip on initial page load?"
+msgstr "Verberg de tooltip als de pagina geladen wordt?"
+
+#: admin/nwm-map-settings.php:85
+msgid "Show the location name under the header?"
+msgstr "Toon de locatie naam onder de titel?"
+
+#: admin/nwm-map-settings.php:94
+msgid "Route Editor Options"
+msgstr "Route editor opties"
+
+#: admin/nwm-map-settings.php:97
+msgid "Show the coordinates input field"
+msgstr "Toon het invul veld voor de coördinaten"
+
+#: admin/nwm-map-settings.php:106
+msgid "Map Controls"
+msgstr "Kaart bediening"
+
+#: admin/nwm-map-settings.php:109
+msgid "Show the street view controls?"
+msgstr "Toon de street view besturing?"
+
+#: admin/nwm-map-settings.php:113
+msgid "Position of the map controls"
+msgstr "Positie van de kaart bediening"
+
+#: admin/nwm-map-settings.php:116
+msgid "Left"
+msgstr "Links"
+
+#: admin/nwm-map-settings.php:118
+msgid "Right"
+msgstr "Rechts"
+
+#: admin/nwm-map-settings.php:122
+msgid "Zoom control style"
+msgstr "Zoom bediening stijl"
+
+#: admin/nwm-map-settings.php:125
+msgid "Small"
+msgstr "Klein"
+
+#: admin/nwm-map-settings.php:127
+msgid "Large"
+msgstr "Groot"
+
+#: admin/nwm-map-settings.php:138
+msgid "About"
+msgstr "Over"
+
+#: admin/nwm-map-settings.php:138
+msgid "Version"
+msgstr "Versie"
+
+#: admin/nwm-map-settings.php:140
+#, php-format
+msgid "by <a href=\"%s\">Tijmen Smit</a>"
+msgstr "door <a href=\"%s\">Tijmen Smit</a>"
+
+#: admin/nwm-map-settings.php:141
+#, php-format
+msgid ""
+"If you like this plugin, please rate it <strong>5 stars</strong> on <a href="
+"\"%s\">WordPress.org</a> or consider making a <a href=\"%s\">donation</a> to "
+"support the development."
+msgstr ""
+"Als deze plugin je bevalt, geef het dan <strong>5 sterren</strong> op <a "
+"href=\"%s\">WordPress.org</a> of maak een <a href=\"%s\">donatie</a> om de "
+"ontwikkeling te ondersteunen."
+
+#: admin/nwm-map-settings.php:147
+msgid "Update Settings"
+msgstr "Instellingen opslaan"
+
+#: admin/nwm-map-settings.php:218
+msgid "The first location (default)"
+msgstr "De eerste locatie (standaard)"
+
+#: admin/nwm-map-settings.php:219
+msgid "The last location before your scheduled route starts"
+msgstr "De laatste locatie voordat je geplande route begint"
+
+#: admin/nwm-map-settings.php:220
+msgid "The last location"
+msgstr "De laatste locatie"
+
+#: includes/nwm-widget-class.php:6
+msgid "Nomad World Map"
+msgstr "Nomad World Map"
+
+#: includes/nwm-widget-class.php:7
+msgid "Show your current location in the sidebar."
+msgstr "Toon je huidige locatie in de sidebar."
+
+#: includes/nwm-widget-class.php:43
+msgid ""
+"There is a problem geocoding your location, please check your route on the "
+"selected map."
+msgstr ""
+"Er is een probleem met het geocoden van de huidige locatie, controleer de "
+"route voor de gekozen kaart."
+
+#: includes/nwm-widget-class.php:46
+msgid "Please select a map in the Nomad World Map widget settings."
+msgstr "Selecteer een kaart in de Nomad World Map widget instellingen."
+
+#: includes/nwm-widget-class.php:222
+msgid "Show it on the map and as text"
+msgstr "Toon het op de kaart, en als tekst"
+
+#: includes/nwm-widget-class.php:223
+msgid "Text only"
+msgstr "Alleen tekst"
+
+#: includes/nwm-widget-class.php:224
+msgid "Map only"
+msgstr "Alleen de kaart"
+
+#: includes/nwm-widget-class.php:228
+msgid "I will fill it in manually"
+msgstr "Ik vul het zelf in"
+
+#: includes/nwm-widget-class.php:229
+msgid "Automatically, use my travel schedule"
+msgstr "Automatisch, gebruik mijn reis schema"
+
+#: includes/nwm-widget-class.php:237
+msgid "How do you want to display your location in the sidebar?"
+msgstr "Hoe wil je dat je locatie getoond word in de sidebar?"
+
+#: includes/nwm-widget-class.php:250
+msgid "Show a country flag before your location?"
+msgstr "Toon een vlag voor je locatie?"
+
+#: includes/nwm-widget-class.php:253
+msgid "How do you want to determine your current location?"
+msgstr "Hoe wil je dat je huidige locatie wordt vastgesteld?"
+
+#: includes/nwm-widget-class.php:265
+msgid "Your location:"
+msgstr "Locatie:"
+
+#: includes/nwm-widget-class.php:266
+msgid "City, Country"
+msgstr "Stad, land"
+
+#: includes/nwm-widget-class.php:269
+msgid "Select the map that should be used to determine your current location:"
+msgstr "Kies de kaart die gebruikt moet worden om je locatie vast te stellen:"
+
+#: includes/nwm-widget-class.php:271
+msgid "Select map"
+msgstr "Selecteer kaart"
+
+#: includes/nwm-widget-class.php:280
+msgid "Zoom level for the map"
+msgstr "Zoom niveau voor de kaart"
+
+#: includes/nwm-widget-class.php:306
+msgid "Optional text under your location:"
+msgstr "Optionele tekst onder de locatie:"
+
+#: includes/nwm-widget-class.php:307
+msgid "Here you can add more text or link back to a map page."
+msgstr "Hier kan je meer tekst, of een link naar de kaart plaatsen."
+
+#: includes/nwm-widget-class.php:308
+msgid "Link and strong tags are allowed."
+msgstr "Links en bold tags zijn toegestaan."
+
+#~ msgid "Before "
+#~ msgstr "Voor"
