@@ -1,0 +1,904 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Nomad World Map v1.2.21\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-09-06 15:48+0100\n"
+"PO-Revision-Date: 2014-09-06 19:17+0100\n"
+"Last-Translator: Elger Lindgren <elger@me.com>\n"
+"Language-Team: \n"
+"Language: sv_SE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 1.6.9\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: ../\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+
+# @ nwm
+#: admin/nwm-admin-functions.php:40
+msgid "Route Editor"
+msgstr "Ruttredigerare"
+
+# @ nwm
+#: admin/nwm-admin-functions.php:41 admin/nwm-manage-maps.php:13
+msgid "Manage Maps"
+msgstr "Underhåll kartor"
+
+# @ nwm
+#: admin/nwm-admin-functions.php:42
+msgid "Settings"
+msgstr "Inställningar"
+
+# @ nwm
+#: admin/nwm-admin-functions.php:43 admin/nwm-admin-functions.php:806
+msgid "FAQ"
+msgstr "FAQ"
+
+# @ nwm
+#: admin/nwm-admin-functions.php:809
+msgid "How do I show the map on my page?"
+msgstr "Hur visar jag kartan på min sida?"
+
+# @ nwm
+#: admin/nwm-admin-functions.php:810
+msgid ""
+"Add this shortcode <code>[nwm_map]</code> to the page where you want to show "
+"the map."
+msgstr ""
+"Lägg till den här kortkoden <code>[nwm_map]</code> till den sida som du vill "
+"visa kartan på."
+
+# @ nwm
+#: admin/nwm-admin-functions.php:813
+msgid "How do I add multiple maps to a page?"
+msgstr "Hur lägger jag till flera kartor till en sida?"
+
+# @ nwm
+#: admin/nwm-admin-functions.php:814
+msgid ""
+"You add the shortcode like you normally would, only this time you also need "
+"to define the map ID. So if you want to show the maps with ids 1,4 and 5 you "
+"would add the following shortcodes.<code>[nwm_map id=\"1\"]</"
+"code><code>[nwm_map id=\"4\"]</code><code>[nwm_map id=\"5\"]</code>"
+msgstr ""
+"Du lägger till kortkoden som vanligt, men den här gången måste du också "
+"definiera kartans ID. Så om du vill visa kartorna med id:na 1, 4 och 5 måste "
+"du lägga till följande kortkoder.<code>[nwm_map id=\"1\"]</"
+"code><code>[nwm_map id=\"4\"]</code><code>[nwm_map id=\"5\"]</code>"
+
+# @ nwm
+#: admin/nwm-admin-functions.php:817
+msgid "Can I specify the dimensions of the map?"
+msgstr "Kan jag definiera kartans dimensioner?"
+
+# @ nwm
+#: admin/nwm-admin-functions.php:818
+msgid ""
+"Yes, just add the width and height as an attribute to the shortcode. For "
+"example <code>[nwm_map height=\"500\" width=\"500\"]</code>."
+msgstr ""
+"Ja, lägg bara till bredd och höjd som ett attribut till kortkoden. Som "
+"exempel <code>[nwm_map height=\"500\" width=\"500\"]</code>."
+
+# @ nwm
+#: admin/nwm-admin-functions.php:821
+msgid "How do I specify which map is shown?"
+msgstr "Hur bestämmer jag vilken karta som ska visas?"
+
+# @ nwm
+#: admin/nwm-admin-functions.php:822
+msgid ""
+"You can add the id attribute to the <code>[nwm_map]</code> shortcode. This "
+"will show the map with ID 3 on your page. <code>[nwm_map id=\"3\"]</code>. "
+"<br> The map ID can be found on the \"Manage Maps\" page. If no ID is set it "
+"will show the default map with ID 1."
+msgstr ""
+"Du kan lägga till ID attributet till <code>[nwm_map]</code> kortkoden. "
+"Följande visar kartan med ID 3 på din sida. <code>[nwm_map id=\"3\"]</code>. "
+"<br> Kartans ID hittas på \"Underhåll kartor\" -sidan. Om inget ID är satt "
+"kommer den förvalda kartan med ID 1 att visas."
+
+# @ nwm
+#: admin/nwm-admin-functions.php:825
+msgid ""
+"I created a route and added the shortcode to a page, but when I view the "
+"page in the browser it only shows a blank map?"
+msgstr ""
+"Jag skapade en rutt och lade till kortkoden på sidan, men när jag tittar på "
+"sidan med min vebbläsare visas bara en tom karta?"
+
+# @ nwm
+#: admin/nwm-admin-functions.php:826
+#, php-format
+msgid ""
+"Make sure your theme doesn't use AJAX to navigate between pages, if so try "
+"to disable it. Also make sure there are no <a href=\"%s\">JavaScript errors</"
+"a> on your site. Last thing you can try is to switch to another theme and "
+"disable other plugins and see if that fixes it."
+msgstr ""
+"Se till att ditt tema inte använder AJAX för att navigera mellan sidor, om "
+"så försök att inaktivera det. Se också till att det inte finns några <a href="
+"\"%s\">JavaScript errors</a> på din webbplats. Det sista du kan prova är att "
+"byta till ett annat tema och inaktivera andra plugins och se om det löser "
+"det."
+
+# @ nwm
+#: admin/nwm-admin-functions.php:829
+msgid "Can I disable the lines between locations for independent maps?"
+msgstr "Kan jag inaktivera linjerna mellan platser för oberoende kartor?"
+
+# @ nwm
+#: admin/nwm-admin-functions.php:830
+msgid ""
+"Yes, you can add a lines attribute to the shortcode <code>[nwm_map lines="
+"\"0\"]</code> to disable them and <code>[nwm_map lines=\"1\"]</code> to "
+"enable them."
+msgstr ""
+"Ja, du kan lägga till ett linjeattribut till kortkoden <code>[nwm_map lines="
+"\"0\"]</code> för att inaktivera dem och <code>[nwm_map lines=\"1\"]</code> "
+"för att aktivera dem."
+
+# @ nwm
+#: admin/nwm-admin-functions.php:833
+msgid "Can I set different zoom levels for independent maps?"
+msgstr "Kan jag ställa in olika zoomnivåer för oberoende kartor?"
+
+# @ nwm
+#: admin/nwm-admin-functions.php:834
+msgid ""
+"Yes, you can add a zoom attribute to the shortcode <code>[nwm_map zoom="
+"\"3\"]</code>. This will set it to zoom level 3. You can set the zoom to "
+"anything between 1 and 12."
+msgstr ""
+"Ja, du kan lägga till en zoom attribut till kortkoden <code>[nwm_map zoom="
+"\"3\"]</code>. Detta kommer att ställa in den för att zooma nivå 3. Du kan "
+"ställa in zoomen på allt mellan 1 och 12."
+
+# @ nwm
+#: admin/nwm-admin-functions.php:837
+msgid "Can I change the map type for independent maps?"
+msgstr "Kan jag ändra karttyp för oberoende kartor?"
+
+# @ nwm
+#: admin/nwm-admin-functions.php:838
+msgid ""
+"Yes, you can add a maptype attribute to the shortcode <code>[nwm_map maptype="
+"\"roadmap\"]</code>. Other valid values are satellite, hybrid  and terrain."
+msgstr ""
+"Ja, du kan lägga till ett karttyp-attribut till kortkoden <code>[nwm_map "
+"maptype=\"roadmap\"]</code>.. Andra giltiga värden är satellit-, hybrid-och "
+"terräng."
+
+# @ nwm
+#: admin/nwm-admin-functions.php:841
+msgid "Can I show a list of all the destinations on the map?"
+msgstr "Kan jag visa en lista över alla destinationer på kartan?"
+
+# @ nwm
+#: admin/nwm-admin-functions.php:842
+msgid ""
+"Yes, this shortcode <code>[nwm_list id=\"1\"]</code> will show the "
+"destination list for the map with id 1. If no ID is set, it will default to "
+"1. <br><br> Other shortcode options for the list: <br><br> <code>[nwm_list "
+"id=\"1\" dates=\"all\"]</code> Shows both the arrival and departure dates "
+"<br> <code>[nwm_list id=\"1\" dates=\"arrival\"]</code> Only show the "
+"arrival dates <br> <code>[nwm_list id=\"1\" dates=\"departure\"]</code> Only "
+"show the departure dates <br> <code>[nwm_list order=\"asc\"]</code> or "
+"<code>[nwm_list order=\"desc]</code> will change the sort order of the "
+"destination list"
+msgstr ""
+"Ja, den här kortkoden <code>[nwm_list id=\"1\"]</code> kommer att visa "
+"destinationslistan för kartan med ID 1. Om inget ID är inställt, kommer den "
+"automatiskt att bli 1. <br><br> Andra kortkodsval för listan: <br><br> "
+"<code>[nwm_list id=\"1\" dates=\"all\"]</code> Visar både ankomst och "
+"avresedatum <br> <code>[nwm_list id=\"1\" dates=\"arrival\"]</code> Visar "
+"bara ankomstdatum <br> <code>[nwm_list id=\"1\" dates=\"departure\"]</code> "
+"Visar bara avresedatum <br> <code>[nwm_list order=\"asc\"]</code> eller "
+"<code>[nwm_list order=\"desc]</code> kommer att ändra sorteringsordning av "
+"destinationslistan"
+
+# @ nwm
+#: admin/nwm-admin-functions.php:845
+msgid "When I search for a blog post title it returns no results?"
+msgstr "När jag söker efter ett blogginläggs titel, får jag inga resultat?"
+
+# @ nwm
+#: admin/nwm-admin-functions.php:846
+#, php-format
+msgid ""
+"Make sure the blog post you search for is published, and that the search "
+"input matches exactly with the title you see in the blog post editor. "
+"Otherwise please open a support request in the <a href=\"%s\">support form</"
+"a>."
+msgstr ""
+"Se till att det blogginlägg du söker efter har publiceras, och att söktermen "
+"exakt matchar titeln du ser i bloggpost-editorn. Öppna annars en "
+"supportförfrågan på <a href=\"%s\">support form</a>."
+
+# @ nwm
+#: admin/nwm-admin-functions.php:849
+msgid "Where can I suggest new features?"
+msgstr "Var kan jag föreslå nya funktioner?"
+
+# @ nwm
+#: admin/nwm-admin-functions.php:850
+#, php-format
+msgid ""
+"You can suggest new features <a href=\"%s\">here</a>, or vote for existing "
+"suggestions from others."
+msgstr ""
+"Du kan föreslå nya funktioner <a href=\"%s\">här</a>, eller rösta på "
+"befintliga förslag från andra användare."
+
+# @ nwm
+#: admin/nwm-admin-functions.php:1069
+msgid "Set Location Image"
+msgstr "Sätt in platsbild"
+
+# @ nwm
+#: admin/nwm-admin-functions.php:1070
+msgid "words remaining"
+msgstr "ord kvar"
+
+# @ nwm
+#: admin/nwm-admin-functions.php:1071
+msgid "0 words remaining"
+msgstr "0 ord kvar"
+
+# @ nwm
+#: admin/nwm-admin-functions.php:1072
+msgid "Edit Map Name"
+msgstr "Redigera kartnamn"
+
+# @ nwm
+#: admin/nwm-admin-functions.php:1073
+msgid "Add Map Name"
+msgstr "Lägg till kartnamn"
+
+#: admin/nwm-admin-functions.php:1074
+msgid "There was a problem loading the data, reload the page and try again."
+msgstr "Det gick inte att läsa in datat, ladda om sidan och försök igen."
+
+#: admin/nwm-admin-functions.php:1075
+msgid "Security check failed, reload the page and try again."
+msgstr "Säkerhetskontroll misslyckades, ladda om sidan och försök igen."
+
+#: admin/nwm-admin-functions.php:1076
+msgid "No blog post found, please try again!"
+msgstr "Hittade inget blogginlägg, försök igen!"
+
+# @ nwm
+#: admin/nwm-admin-functions.php:1077
+msgid "Select destination to edit"
+msgstr "Välj destination som ska ändras"
+
+# @ nwm
+#: admin/nwm-admin-functions.php:1078 admin/nwm-manage-maps.php:53
+#: admin/nwm-map-editor.php:249
+msgid "Delete"
+msgstr "Radera"
+
+#: admin/nwm-admin-functions.php:1079
+msgid "Failed to save the data, please try again"
+msgstr "Kunde inte spara datat, försök igen"
+
+#: admin/nwm-admin-functions.php:1080
+msgid "Update failed, please try again"
+msgstr "Uppdateringen misslyckades, försök igen"
+
+#: admin/nwm-admin-functions.php:1081
+msgid "Failed to delete the data, please try again"
+msgstr "Kunde inte radera datat, försök igen"
+
+# @ nwm
+#: admin/nwm-admin-functions.php:1082
+msgid "Location added..."
+msgstr "Plats sattes..."
+
+# @ nwm
+#: admin/nwm-admin-functions.php:1083
+msgid "Location updated..."
+msgstr "Platsen uppdaterad..."
+
+#: admin/nwm-admin-functions.php:1084
+msgid "The arrival date has to be before or equal to the departure date."
+msgstr "Ankomstdatum måste vara före eller lika med avresedatum."
+
+#: admin/nwm-admin-functions.php:1085
+msgid "Geocode was not successful for the following reason: "
+msgstr "Geokodningen misslyckades av följande skäl:"
+
+#: admin/nwm-admin-functions.php:1086
+msgid "Cannot determine address at this location."
+msgstr "Kan inte bestämma adressen för den här platsen."
+
+#: admin/nwm-admin-functions.php:1087 admin/nwm-map-editor.php:95
+msgid "After the last item"
+msgstr "Efter det sista objektet"
+
+# @ nwm
+#: admin/nwm-admin-functions.php:1088
+msgid "Current position"
+msgstr "Nuvarande plats"
+
+#: admin/nwm-admin-functions.php:1089 admin/nwm-map-editor.php:100
+msgid "Before"
+msgstr "Före"
+
+# @ nwm
+#: admin/nwm-manage-maps.php:22
+msgid "Map entries successfully removed"
+msgstr "Kartposter har tagits bort"
+
+# @ nwm
+#: admin/nwm-manage-maps.php:25
+msgid "Map(s) successfully deleted"
+msgstr "Karta/kartor har raderats"
+
+# @ nwm
+#: admin/nwm-manage-maps.php:28
+msgid "Name updated"
+msgstr "Namn uppdaterat"
+
+#: admin/nwm-manage-maps.php:31
+msgid ""
+"Map successfully created. You can use this shortcode <strong>[nwm_map id=\""
+msgstr "Kartan är skapad. Du kan använda denna kortkod <strong>[nwm_map id=\""
+
+# @ nwm
+#: admin/nwm-manage-maps.php:35
+msgid "Invalid map name"
+msgstr "Ogiltigt kartnamn"
+
+# @ nwm
+#: admin/nwm-manage-maps.php:39
+msgid ""
+"All the map entries are removed. But the map with ID 1 is used as the "
+"default map and cannot be removed"
+msgstr ""
+"Alla kartposter är borttagna. Men kartan med ID 1 används som förvald karta "
+"och kan inte raderas"
+
+# @ nwm
+#: admin/nwm-manage-maps.php:52
+msgid "Bulk actions"
+msgstr "Massåtgärder"
+
+# @ nwm
+#: admin/nwm-manage-maps.php:54
+msgid "Remove route entries"
+msgstr "Ta bort ruttanteckningar"
+
+# @ nwm
+#: admin/nwm-manage-maps.php:56
+msgid "Apply"
+msgstr "Tillämpa"
+
+# @ nwm
+#: admin/nwm-manage-maps.php:57
+msgid "Add new map"
+msgstr "Lägg till ny karta"
+
+# @ nwm
+#: admin/nwm-manage-maps.php:65 admin/nwm-manage-maps.php:110
+msgid "Select All"
+msgstr "Välj alla"
+
+# @ nwm
+#: admin/nwm-manage-maps.php:68 admin/nwm-manage-maps.php:113
+msgid "ID"
+msgstr "ID"
+
+# @ nwm
+#: admin/nwm-manage-maps.php:69 admin/nwm-manage-maps.php:114
+msgid "Name"
+msgstr "Namn"
+
+# @ nwm
+#: admin/nwm-manage-maps.php:70 admin/nwm-manage-maps.php:115
+msgid "Entries"
+msgstr "Poster"
+
+#: admin/nwm-manage-maps.php:98
+msgid "edit this item"
+msgstr "redigera detta objekt"
+
+# @ nwm
+#: admin/nwm-manage-maps.php:98
+msgid "Edit name"
+msgstr "Redigera namn"
+
+# @ nwm
+#: admin/nwm-manage-maps.php:127 admin/nwm-manage-maps.php:142
+msgid "Map name"
+msgstr "Kartnamn"
+
+# @ nwm
+#: admin/nwm-manage-maps.php:131
+msgid "Update"
+msgstr "Uppdatera"
+
+# @ nwm
+#: admin/nwm-manage-maps.php:132 admin/nwm-manage-maps.php:147
+msgid "Cancel"
+msgstr "Ångra"
+
+# @ nwm
+#: admin/nwm-manage-maps.php:146
+msgid "Add"
+msgstr "Lägg till"
+
+# @ nwm
+#: admin/nwm-map-editor.php:22
+msgid "Current map:"
+msgstr "Aktuell karta: "
+
+# @ nwm
+#: admin/nwm-map-editor.php:35
+msgid "Add location"
+msgstr "Lägg till plats"
+
+# @ nwm
+#: admin/nwm-map-editor.php:36
+msgid "Edit location"
+msgstr "Redigera plats"
+
+# @ nwm
+#: admin/nwm-map-editor.php:42
+msgid "City / Country:"
+msgstr "Ort / Land:"
+
+# @ nwm
+#: admin/nwm-map-editor.php:44
+msgid "Set"
+msgstr "Sätt"
+
+# @ nwm
+#: admin/nwm-map-editor.php:45
+msgid "You can drag the red marker to a specific location"
+msgstr "Du kan dra den röda markören till en viss plats"
+
+# @ nwm
+#: admin/nwm-map-editor.php:50
+msgid "Coordinates:"
+msgstr "Koordinater:"
+
+# @ nwm
+#: admin/nwm-map-editor.php:52
+msgid "Preview"
+msgstr "Förhandsvisa"
+
+# @ nwm
+#: admin/nwm-map-editor.php:66
+msgid "Location content:"
+msgstr "Platsinnehåll:"
+
+# @ nwm
+#: admin/nwm-map-editor.php:68
+msgid "Post excerpt"
+msgstr "Inläggsutdrag"
+
+# @ nwm
+#: admin/nwm-map-editor.php:69
+msgid "Custom content"
+msgstr "Anpassat innehåll"
+
+# @ nwm
+#: admin/nwm-map-editor.php:70
+msgid "Travel schedule"
+msgstr "Reseplanerare"
+
+# @ nwm
+#: admin/nwm-map-editor.php:74
+msgid "Title of the post you want to link to:"
+msgstr "Titel på inlägget du vill länka till:"
+
+#: admin/nwm-map-editor.php:75
+msgid "Search"
+msgstr "Sök"
+
+# @ nwm
+#: admin/nwm-map-editor.php:76
+msgid "Link: "
+msgstr "Länk:"
+
+# @ nwm
+# @ default
+#: admin/nwm-map-editor.php:81 includes/nwm-widget-class.php:234
+msgid "Title:"
+msgstr "Titel:"
+
+# @ nwm
+#: admin/nwm-map-editor.php:82
+msgid "Link:"
+msgstr "Länk:"
+
+# @ nwm
+#: admin/nwm-map-editor.php:84
+msgid "Description:"
+msgstr "Beskrivning:"
+
+# @ nwm
+#: admin/nwm-map-editor.php:86
+msgid "Keep it short, 25 words remaining."
+msgstr "Håll det kort, 25 ord kvar."
+
+# @ nwm
+#: admin/nwm-map-editor.php:93
+msgid "Location position:"
+msgstr "Platsens position:"
+
+# @ nwm
+#: admin/nwm-map-editor.php:111 admin/nwm-map-editor.php:170
+msgid "Thumbnail"
+msgstr "Miniatyrbild"
+
+# @ nwm
+#: admin/nwm-map-editor.php:115
+msgid "Change thumbnail"
+msgstr "Ändra miniatyrbild"
+
+# @ nwm
+#: admin/nwm-map-editor.php:116
+msgid "Use default"
+msgstr "Använd förval"
+
+# @ nwm
+#: admin/nwm-map-editor.php:121
+msgid "Travel dates"
+msgstr "Resedatum"
+
+# @ nwm
+#: admin/nwm-map-editor.php:123
+msgid "Arrival:"
+msgstr "Ankomst:"
+
+# @ nwm
+#: admin/nwm-map-editor.php:124 admin/nwm-map-editor.php:129
+msgid "optional"
+msgstr "frivillig"
+
+# @ nwm
+#: admin/nwm-map-editor.php:128
+msgid "Departure:"
+msgstr "Avresa:"
+
+# @ nwm
+#: admin/nwm-map-editor.php:133
+msgid ""
+"If no dates are set, then the publish date of the linked post is shown as "
+"the travel date."
+msgstr ""
+"Om inga datum är inställda, kommer publiceringsdatum av det länkade inlägget "
+"att visas som resedatum."
+
+#: admin/nwm-map-editor.php:134
+msgid "Save"
+msgstr "Spara"
+
+# @ nwm
+#: admin/nwm-map-editor.php:142
+msgid "- Select destination to edit -"
+msgstr "-Välj destinationsort som ska ändras -"
+
+# @ nwm
+#: admin/nwm-map-editor.php:165
+msgid "Order"
+msgstr "Sorteringsordning"
+
+# @ nwm
+#: admin/nwm-map-editor.php:166 includes/nwm-frontend-functions.php:332
+msgid "Location"
+msgstr "Plats"
+
+# @ nwm
+#: admin/nwm-map-editor.php:167
+msgid "Url"
+msgstr "URL"
+
+# @ nwm
+#: admin/nwm-map-editor.php:168 includes/nwm-frontend-functions.php:338
+#: includes/nwm-frontend-functions.php:342
+msgid "Arrival"
+msgstr "Ankomst"
+
+# @ nwm
+#: admin/nwm-map-editor.php:169 includes/nwm-frontend-functions.php:339
+#: includes/nwm-frontend-functions.php:345
+msgid "Departure"
+msgstr "Avresa"
+
+# @ nwm
+#: admin/nwm-map-settings.php:13
+msgid "Nomad World Map Settings"
+msgstr "Nomad World Map inställningar"
+
+# @ nwm
+#: admin/nwm-map-settings.php:15
+msgid "Settings updated"
+msgstr "Inställningar uppdaterade"
+
+# @ nwm
+#: admin/nwm-map-settings.php:21
+msgid "General"
+msgstr "Generell"
+
+# @ nwm
+#: admin/nwm-map-settings.php:24
+msgid "Draw lines between the markers?"
+msgstr "Dra linjer mellan markörerna?"
+
+# @ nwm
+#: admin/nwm-map-settings.php:28
+msgid "Draw curved lines on the map?"
+msgstr "Dra kurvlinjer på kartan?"
+
+# @ nwm
+#: admin/nwm-map-settings.php:32
+msgid "On pageload zoom to:"
+msgstr "Vid sidladdning zooma till:"
+
+# @ nwm
+#: admin/nwm-map-settings.php:36
+msgid "Zoom level:"
+msgstr "Zoomnivå:"
+
+# @ nwm
+#: admin/nwm-map-settings.php:40
+msgid "Map type:"
+msgstr "Karttyp:"
+
+# @ nwm
+#: admin/nwm-map-settings.php:44
+msgid "Past route color:"
+msgstr "Färg för historisk rutt:"
+
+# @ nwm
+#: admin/nwm-map-settings.php:48
+msgid "Future route color:"
+msgstr "Färg för Framtida rutt:"
+
+# @ nwm
+#: admin/nwm-map-settings.php:57
+msgid "Content Options"
+msgstr "Innehållsalternativ"
+
+# @ nwm
+#: admin/nwm-map-settings.php:60
+msgid "Show the post thumbnails in a circle?"
+msgstr "Visa inläggsminiatyrer i en cirkel?"
+
+# @ nwm
+#: admin/nwm-map-settings.php:64
+msgid "Include a \"read more\" link for blog post?"
+msgstr "Inkludera en \"läs mer\" länk till blogginlägget?"
+
+# @ nwm
+#: admin/nwm-map-settings.php:68
+msgid "Read more label"
+msgstr "Läs mer etikett"
+
+# @ nwm
+#: admin/nwm-map-settings.php:72
+msgid "Show the location content in the:"
+msgstr "Visa platsinnehållet i:"
+
+# @ nwm
+#: admin/nwm-map-settings.php:75
+msgid "Slider"
+msgstr "Slider"
+
+# @ nwm
+#: admin/nwm-map-settings.php:77
+msgid "Tooltip (this will remove the slider)"
+msgstr "Verktygstips (detta tar bort slidern)"
+
+#: admin/nwm-map-settings.php:81
+msgid "Hide tooltip on initial page load?"
+msgstr "Dölj verktygstips då startsidan laddas initialt?"
+
+# @ nwm
+#: admin/nwm-map-settings.php:85
+msgid "Show the location name under the header?"
+msgstr "Visa platsnamnet under rubriken?"
+
+# @ nwm
+#: admin/nwm-map-settings.php:94
+msgid "Route Editor Options"
+msgstr "Ruttredigerings-alternativ"
+
+# @ nwm
+#: admin/nwm-map-settings.php:97
+msgid "Show the coordinates input field"
+msgstr "Visa inmatningsfält för koordinaterna"
+
+# @ nwm
+#: admin/nwm-map-settings.php:106
+msgid "Map Controls"
+msgstr "Kartkontroller"
+
+# @ nwm
+#: admin/nwm-map-settings.php:109
+msgid "Show the street view controls?"
+msgstr "Visa gatuvy-kontrollerna?"
+
+# @ nwm
+#: admin/nwm-map-settings.php:113
+msgid "Position of the map controls"
+msgstr "Placering av kartkontrollerna"
+
+# @ nwm
+#: admin/nwm-map-settings.php:116
+msgid "Left"
+msgstr "Vänster"
+
+# @ nwm
+#: admin/nwm-map-settings.php:118
+msgid "Right"
+msgstr "Höger"
+
+# @ nwm
+#: admin/nwm-map-settings.php:122
+msgid "Zoom control style"
+msgstr "Stil på zoomkontroll"
+
+# @ nwm
+#: admin/nwm-map-settings.php:125
+msgid "Small"
+msgstr "Liten"
+
+# @ nwm
+#: admin/nwm-map-settings.php:127
+msgid "Large"
+msgstr "Stor"
+
+# @ nwm
+#: admin/nwm-map-settings.php:138
+msgid "About"
+msgstr "Om"
+
+#: admin/nwm-map-settings.php:138
+msgid "Version"
+msgstr "Version"
+
+#: admin/nwm-map-settings.php:140
+#, php-format
+msgid "by <a href=\"%s\">Tijmen Smit</a>"
+msgstr "av <a href=\"%s\">Tijmen Smit</a>"
+
+#: admin/nwm-map-settings.php:141
+#, php-format
+msgid ""
+"If you like this plugin, please rate it <strong>5 stars</strong> on <a href="
+"\"%s\">WordPress.org</a> or consider making a <a href=\"%s\">donation</a> to "
+"support the development."
+msgstr ""
+"Om du gillar denna plugin, betygsätt det <strong>5 stjärnor</strong> på <a "
+"href=\"%s\">WordPress.org</a> eller överväga att göra en <a href=\"%s"
+"\">donation</a> för att stödja utvecklingen."
+
+# @ nwm
+#: admin/nwm-map-settings.php:147
+msgid "Update Settings"
+msgstr "Uppdateringsinställningar"
+
+#: admin/nwm-map-settings.php:218
+msgid "The first location (default)"
+msgstr "Första platsen (standard)"
+
+#: admin/nwm-map-settings.php:219
+msgid "The last location before your scheduled route starts"
+msgstr "Den sista platsen före din planerade rutt börjar"
+
+# @ nwm
+#: admin/nwm-map-settings.php:220
+msgid "The last location"
+msgstr "Senaste platsen"
+
+# @ nwm
+#: includes/nwm-widget-class.php:6
+msgid "Nomad World Map"
+msgstr "Nomad World Map"
+
+# @ nwm
+#: includes/nwm-widget-class.php:7
+msgid "Show your current location in the sidebar."
+msgstr "Visa aktuell plats i sidomenyn."
+
+# @ nwm
+#: includes/nwm-widget-class.php:43
+msgid ""
+"There is a problem geocoding your location, please check your route on the "
+"selected map."
+msgstr ""
+"Det är problem att geokoda din plats, kontrollera rutten på den valda kartan."
+
+# @ nwm
+#: includes/nwm-widget-class.php:46
+msgid "Please select a map in the Nomad World Map widget settings."
+msgstr "Välj en karta i widgetinställningarna för Nomad Map."
+
+# @ nwm
+#: includes/nwm-widget-class.php:222
+msgid "Show it on the map and as text"
+msgstr "Visa det på kartan och som text"
+
+# @ nwm
+#: includes/nwm-widget-class.php:223
+msgid "Text only"
+msgstr "Bara text"
+
+# @ nwm
+#: includes/nwm-widget-class.php:224
+msgid "Map only"
+msgstr "Bara karta"
+
+# @ nwm
+#: includes/nwm-widget-class.php:228
+msgid "I will fill it in manually"
+msgstr "Jag fyller i det manuellt"
+
+# @ nwm
+#: includes/nwm-widget-class.php:229
+msgid "Automatically, use my travel schedule"
+msgstr "Automatiskt, använd min reseplanering"
+
+# @ nwm
+#: includes/nwm-widget-class.php:237
+msgid "How do you want to display your location in the sidebar?"
+msgstr "Hur vill du visa din plats i sidomenyn?"
+
+# @ nwm
+#: includes/nwm-widget-class.php:250
+msgid "Show a country flag before your location?"
+msgstr "Visa en landsflagga före din plats?"
+
+# @ nwm
+#: includes/nwm-widget-class.php:253
+msgid "How do you want to determine your current location?"
+msgstr "Hur vill du fastställa din aktuella plats?"
+
+# @ nwm
+#: includes/nwm-widget-class.php:265
+msgid "Your location:"
+msgstr "Din plats:"
+
+# @ nwm
+#: includes/nwm-widget-class.php:266
+msgid "City, Country"
+msgstr "Ort, Land"
+
+# @ nwm
+#: includes/nwm-widget-class.php:269
+msgid "Select the map that should be used to determine your current location:"
+msgstr "Välj den karta som ska användas för att fastställa din aktuella plats:"
+
+# @ nwm
+#: includes/nwm-widget-class.php:271
+msgid "Select map"
+msgstr "Välj karta"
+
+# @ nwm
+#: includes/nwm-widget-class.php:280
+msgid "Zoom level for the map"
+msgstr "Zoomnivå för kartan"
+
+# @ nwm
+#: includes/nwm-widget-class.php:306
+msgid "Optional text under your location:"
+msgstr "Alternativ text under din plats:"
+
+# @ nwm
+#: includes/nwm-widget-class.php:307
+msgid "Here you can add more text or link back to a map page."
+msgstr "Här kan du lägga till mer text eller länka tillbaks till kartsidan."
+
+# @ nwm
+#: includes/nwm-widget-class.php:308
+msgid "Link and strong tags are allowed."
+msgstr "Länka och starka taggar är tillåtna."

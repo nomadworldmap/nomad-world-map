@@ -75,10 +75,13 @@ function nwm_manage_maps() {
             $alternate_class = '';
             
             foreach ( $nwm_map_ids as $map_id => $map_name ) {
-				$route_count = explode( ',' ,$nwm_route_order[$map_id] );
+                if ( isset( $nwm_route_order[$map_id] ) ) {
+                    $route_count = explode( ',' ,$nwm_route_order[$map_id] );
+                }
+                
                 $alternate_class = ( $alternate_class == 'class="alternate"' ) ? '' : 'class="alternate"';
 						
-				if ( !empty( $route_count[0] ) ) {
+				if ( ( isset( $route_count ) ) && ( !empty( $route_count[0] ) ) ) {
 					$route_count = count( $route_count );
 				} else {
 					$route_count = 0;

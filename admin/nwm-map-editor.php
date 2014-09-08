@@ -72,7 +72,7 @@ function nwm_map_editor() {
                         </p>
                         <div id="nwm-blog-excerpt" class="nwm-blog-title nwm-marker-option">
                             <label for="nwm-post-title"><?php _e( 'Title of the post you want to link to:', 'nwm' ); ?></label> 
-                            <input id="nwm-post-title" type="text" class="textinput"> <input id="find-nwm-title" class="button-primary" type="button" name="text" value="Search" />
+                            <input id="nwm-post-title" type="text" class="textinput"> <input id="find-nwm-title" class="button-primary" type="button" name="text" value="<?php _e( 'Search', 'nwm' ); ?>" />
                             <div id="nwm-search-link"><?php _e( 'Link: ', 'nwm' ); ?> <span></span></div>
                              <input id="nwm-search-nonce" type="hidden" value="<?php echo wp_create_nonce('nwm_nonce_search'); ?>"  />
                         </div>

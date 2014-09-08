@@ -37,10 +37,10 @@ function nwm_init() {
 
 function nwm_create_admin_menu() {
 	add_menu_page( 'Nomad Map', 'Nomad Map', 'manage_options', 'nwm_map_editor', 'nwm_map_editor' );
-	add_submenu_page( 'nwm_map_editor', 'Route Editor', 'Route Editor', 'manage_options', 'nwm_map_editor', 'nwm_map_editor' );
-	add_submenu_page( 'nwm_map_editor', 'Manage Maps', 'Manage Maps', 'manage_options', 'nwm_manage_maps', 'nwm_manage_maps' );
-	add_submenu_page( 'nwm_map_editor', 'Settings', 'Settings', 'manage_options', 'nwm_settings', 'nwm_settings_page' );	
-	add_submenu_page( 'nwm_map_editor', 'FAQ', 'FAQ', 'manage_options', 'nwm_faq', 'nwm_faq' );	
+	add_submenu_page( 'nwm_map_editor', __( 'Route Editor', 'nwm' ), __( 'Route Editor', 'nwm' ), 'manage_options', 'nwm_map_editor', 'nwm_map_editor' );
+	add_submenu_page( 'nwm_map_editor', __( 'Manage Maps', 'nwm' ), __( 'Manage Maps', 'nwm' ), 'manage_options', 'nwm_manage_maps', 'nwm_manage_maps' );
+	add_submenu_page( 'nwm_map_editor', __( 'Settings', 'nwm' ), __( 'Settings', 'nwm' ), 'manage_options', 'nwm_settings', 'nwm_settings_page' );	
+	add_submenu_page( 'nwm_map_editor', __( 'FAQ', 'nwm' ), __( 'FAQ', 'nwm' ), 'manage_options', 'nwm_faq', 'nwm_faq' );	
 }
 
 /* Save a new location */
@@ -52,7 +52,7 @@ function nwm_save_location() {
 		
 	$recieved_data = json_decode( stripslashes( $_POST['last_update'] ) );
 	
-	if ( ( $recieved_data->excerpt ) || ( $recieved_data->schedule ) ) {
+	if ( ( ( isset( $recieved_data->excerpt ) ) && ( !empty( $recieved_data->excerpt ) ) ) || ( isset( $recieved_data->schedule ) && ( !empty( $recieved_data->schedule ) ) ) ) {
 		$last_id = nwm_save_location_excerpt( $recieved_data );
 	} else {
 		$last_id = nwm_save_location_custom( $recieved_data );
@@ -103,9 +103,9 @@ function nwm_check_map_id ( $recieved_map_id ) {
 /* Save the new location */
 function nwm_save_location_excerpt( $recieved_data ) {
     
-    $thumb_id = absint( $recieved_data->thumb_id );
+    $thumb_id = nwm_get_thumb_id( $recieved_data );
 	
-	if ( $recieved_data->schedule ) {
+	if ( ( isset( $recieved_data->schedule ) ) && ( !empty( $recieved_data->schedule ) ) ) {
 		$post_id       = 0;
 		$schedule      = 1;
 		$recieved_data = $recieved_data->schedule;
@@ -144,7 +144,7 @@ function nwm_save_location_custom( $recieved_data ) {
     
     $location_data = array(
         "post_id"      => 0,
-        "thumb_id"     => absint( $recieved_data->thumb_id ),
+        "thumb_id"     => nwm_get_thumb_id( $recieved_data ),
         "latlng"       => nwm_check_latlng( $recieved_data->custom->latlng  ),
         "location"     => sanitize_text_field( $recieved_data->custom->location ),
         "country_code" => sanitize_text_field( $recieved_data->custom->country_code ),
@@ -177,6 +177,18 @@ function nwm_save_location_custom( $recieved_data ) {
 		return $last_id;		
 	}
 	
+}
+
+/* Check if we have a thumb_id */
+function nwm_get_thumb_id( $recieved_data ) {
+    
+    if ( ( isset( $recieved_data->thumb_id ) ) && ( !empty( $recieved_data->thumb_id ) ) ) {
+        $thumb_id = absint( $recieved_data->thumb_id );  
+    } else {
+        $thumb_id = '';
+    }
+    
+    return $thumb_id;
 }
 
 /* Delete a single location */
@@ -220,7 +232,7 @@ function nwm_update_option_value( $option_name, $map_id, $last_id ) {
 	
 	$option_values = get_option( $option_name );
 	
-	if ( ( !$option_values ) || ( !count( $option_values[$map_id] ) ) ) {
+	if ( ( !$option_values ) || ( !isset( $option_values[$map_id] ) ) ) {
 		$option_values[$map_id] = $last_id;
 	} else {
 		$option_values[$map_id] = $option_values[$map_id].','.$last_id;
@@ -264,14 +276,14 @@ function nwm_update_location() {
 	$recieved_data = json_decode( stripslashes( $_POST['last_update'] ) );
 	$nwm_id        = absint( $recieved_data->nwm_id );
 	$map_id        = absint( $recieved_data->map_id );
-	$thumb_id      = absint( $recieved_data->thumb_id );
+	$thumb_id      = nwm_get_thumb_id( $recieved_data );
 
 	if ( !current_user_can( 'manage_options' ) )
 		die( '-1' );
 	check_ajax_referer( 'nwm_nonce_update_'.$nwm_id );	
 	
 	/* Check if the received data is for a post excerpt */
-	if ( $recieved_data->excerpt ) {
+	if ( ( isset( $recieved_data->excerpt ) ) && ( !empty( $recieved_data->excerpt ) ) ) {
 		$post_id = absint( $recieved_data->excerpt->post_id );
 			
 		if ( $post_id ) { 
@@ -312,7 +324,7 @@ function nwm_update_location() {
 	}
 	
 	/* Check if the recieved data contains custom content */
-	if ( $recieved_data->custom ) {
+	if ( ( isset( $recieved_data->custom ) ) && ( !empty( $recieved_data->custom ) ) ) {
         $location_data = array(
             "post_id"      => 0,
             "nwm_id"       => $nwm_id,
@@ -360,7 +372,7 @@ function nwm_update_location() {
 	}
 	
 	/* Check if the received data info about a travel schedule */
-	if ( $recieved_data->schedule ) {        
+	if ( ( isset( $recieved_data->schedule ) ) && ( !empty( $recieved_data->schedule ) ) ) {       
         $location_data = array(
             "post_id"      => 0,
             "nwm_id"       => $nwm_id,
@@ -663,12 +675,26 @@ function nwm_find_post_title() {
 	if ( $result === false ) {
 		wp_send_json_error();
 	} else {	
-		$post_thumbnail_id = get_post_thumbnail_id( $result[0]->id );
-		$permalink         = get_permalink( $result[0]->id );
+        
+        if ( isset( $result[0]->id ) ) {
+            $id = $result[0]->id;
+        } else {
+            $id = '';
+        }
+        
+		$post_thumbnail_id = get_post_thumbnail_id( $id );
+		$permalink         = get_permalink( $id );
 		$thumb             = wp_get_attachment_image_src( $post_thumbnail_id );
+        
+        if ( isset( $thumb ) ) {
+            $thumb_url = $thumb[0];
+        } else {
+            $thumb_url = '';
+        }
+        
         $response          = array( 'post' => 
                                  array( 
-                                     'id'        => $result[0]->id, 
+                                     'id'        => $id, 
                                      'permalink' => $permalink,
                                      'thumb_id'  => $post_thumbnail_id,
                                      'thumb'     => $thumb[0]
@@ -708,62 +734,66 @@ function nwm_map_editor_data( $nwm_map_id ) {
 	
 	global $wpdb;
 
-	$nwm_route_order = get_option( 'nwm_route_order' );
+	$nwm_route_order        = get_option( 'nwm_route_order' );
+    $route_data             = '';
+    $collected_destinations = array();
     
-    if ( $nwm_route_order[$nwm_map_id] ) {
-        $route_data = $wpdb->get_results( 
-                            $wpdb->prepare( "SELECT nwm_id, post_id, thumb_id, schedule, lat, lng, location, iso2_country_code, arrival, departure 
-                                             FROM $wpdb->nwm_routes 
-                                             WHERE nwm_id IN ( $nwm_route_order[$nwm_map_id] ) 
-                                             ORDER BY field(nwm_id, $nwm_route_order[$nwm_map_id])", 
-                                             $nwm_map_id 
-                                           ) 
-                             );
+    if ( isset( $nwm_route_order[$nwm_map_id] ) ) {
+        $route_order = esc_sql( implode( ',', wp_parse_id_list( $nwm_route_order[$nwm_map_id] ) ) );
+        $route_data  = $wpdb->get_results( 
+                                          "SELECT nwm_id, post_id, thumb_id, schedule, lat, lng, location, iso2_country_code, arrival, departure 
+                                           FROM $wpdb->nwm_routes 
+                                           WHERE nwm_id IN ( $route_order ) 
+                                           ORDER BY field(nwm_id, $route_order )
+                                          "
+                                         );   
     }
-		
-	foreach ( $route_data as $k => $route_stop ) {	
-		if ( !$route_stop->post_id ) {
-			$custom_data = $wpdb->get_results( "SELECT url FROM $wpdb->nwm_custom WHERE nwm_id = $route_stop->nwm_id" );
-			$post_id = 0;
-			$url = '';
-			
-			if ( count( $custom_data ) ) {
-				$url = $custom_data[0]->url;
-			}
+    
+    if ( $route_data ) {
+        foreach ( $route_data as $k => $route_stop ) {	
+            if ( !$route_stop->post_id ) {
+                $custom_data = $wpdb->get_results( "SELECT url FROM $wpdb->nwm_custom WHERE nwm_id = $route_stop->nwm_id" );
+                $post_id = 0;
+                $url = '';
 
-		} else {
-			$post_id = $route_stop->post_id;
-			$url = get_permalink( $route_stop->post_id );
-		}
-			
-		if ( $route_stop->thumb_id ) {
-			$thumb_url = wp_get_attachment_image_src( $route_stop->thumb_id );
-            $thumb_url = $thumb_url[0];
-		} else {
-			$thumb_url = '';
-		}
-		
-		$post_data = array( 
-            'nwm_id'             => $route_stop->nwm_id,
-            'post_id'            => $post_id,
-            'thumb_id'           => $route_stop->thumb_id,
-            'schedule'           => $route_stop->schedule,
-            'url'                => $url,
-            'thumb_url'          => $thumb_url,
-            'location'           => $route_stop->location,
-            'country_code'       => $route_stop->iso2_country_code,
-            'arrival'            => $route_stop->arrival,
-            'arrival_formated'   => nwm_date_format( $route_stop->arrival ),
-            'departure'          => $route_stop->departure,
-            'departure_formated' => nwm_date_format( $route_stop->departure )
-        );
-		
-		$collected_destinations[] = array( 
-            'lat'  => $route_stop->lat,
-            'lng'  => $route_stop->lng,
-            'data' => $post_data
-        );	
-	}	
+                if ( count( $custom_data ) ) {
+                    $url = $custom_data[0]->url;
+                }
+
+            } else {
+                $post_id = $route_stop->post_id;
+                $url = get_permalink( $route_stop->post_id );
+            }
+
+            if ( $route_stop->thumb_id ) {
+                $thumb_url = wp_get_attachment_image_src( $route_stop->thumb_id );
+                $thumb_url = $thumb_url[0];
+            } else {
+                $thumb_url = '';
+            }
+
+            $post_data = array( 
+                'nwm_id'             => $route_stop->nwm_id,
+                'post_id'            => $post_id,
+                'thumb_id'           => $route_stop->thumb_id,
+                'schedule'           => $route_stop->schedule,
+                'url'                => $url,
+                'thumb_url'          => $thumb_url,
+                'location'           => $route_stop->location,
+                'country_code'       => $route_stop->iso2_country_code,
+                'arrival'            => $route_stop->arrival,
+                'arrival_formated'   => nwm_date_format( $route_stop->arrival ),
+                'departure'          => $route_stop->departure,
+                'departure_formated' => nwm_date_format( $route_stop->departure )
+            );
+
+            $collected_destinations[] = array( 
+                'lat'  => $route_stop->lat,
+                'lng'  => $route_stop->lng,
+                'data' => $post_data
+            );	
+        }
+    }
 	
 	return $collected_destinations;
 	
@@ -852,9 +882,9 @@ function nwm_limit_words( $string, $word_limit ) {
 
 /* Validate the date format */
 function nwm_check_date( $date ) {
-	
-	$date = date( 'Y-m-d', $date );
-	
+    
+	$date = date( 'Y-m-d', strtotime( str_replace( '-','/', $date) ) );
+    
 	if ( !$date ) {
 		return false;
 	} else {

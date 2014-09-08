@@ -389,7 +389,6 @@ function addTrip( elem ) {
 			dropdownValue: $( "#nwm-marker-content-option" ).val()
 		};
 
-	
 	/* Show the preloader next to the clicked button */
 	showPreloader( elem );
 	
@@ -404,6 +403,8 @@ function addTrip( elem ) {
 		}
 	}
 	
+	tripData.destinationUrl = destinationUrl;
+	
 	/* Make sure we have a latlng value and a destination name before saving the data */
 	if ( checkFormData( tripData.destinationLatlng, tripData.destinationName ) ) {
 		saveDestination( tripData );
@@ -414,6 +415,7 @@ function addTrip( elem ) {
 function saveDestination( tripData ) {
 	var ajaxData,
 		lastData = {
+			post_id: tripData.postId,
 			map_id: tripData.mapId,
 			thumb_id: tripData.thumbId
 		},
@@ -1239,7 +1241,7 @@ $( "#nwm-blog-excerpt" ).on( "click", "input[type=button]", function( e ) {
 			if ( response == -1 ) {
 				$( "#nwm-add-trip" ).after( "<span id='nwm-nonce-fail'>" + nwmL10n.securityFailed + "</span>" );
 			} else {									
-				if ( response.post.id == null ) { 
+				if ( !response.post.id ) { 
 					$( "#nwm-search-link span" ).html( "<strong>" + nwmL10n.noPostsFound + "</strong>" );
 					$( "#nwm-post-title" ).val( "" );
 				} else {
@@ -1648,10 +1650,11 @@ $(document.body).on( "click", "#nwm-media-upload", function( e ) {
 	uploadFrame.on( "select", function(){
 		var media_attachment = uploadFrame.state().get( "selection" ).first().toJSON();
 
-		if(media_attachment.sizes.length > 0)
+		if ( media_attachment.sizes.length > 0 ) {
 			setLocationThumb( media_attachment.sizes.thumbnail.url, media_attachment.id ); 
-		else
+		} else {
 			setLocationThumb( media_attachment.url, media_attachment.id );
+		}
 
 	});
 
@@ -1743,7 +1746,7 @@ function changeMarkerPosition( adjustedLatlng, i ) {
 }
 /* Load the map */
 if ( $( "#gmap-nwm" ).length ) {
-	google.maps.event.addDomListener( window, "load", initializeGmap );
+	initializeGmap();
 }
                 
 });

@@ -162,6 +162,10 @@
 	width:100%;
 }
 
+#nwm-position {
+    max-width: 313px;
+}
+
 #nwm-location-position p {
    margin: 0.75em 0 0.35em
 }

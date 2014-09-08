@@ -49,7 +49,7 @@ function nwm_show_map( $atts, $content = null ) {
 	} else {
         $map_settings['contentLocation'] = $settings['content_location'];
     }
-    
+
 	/* Check if there is an existing transient we can use */
 	if ( false === ( $map_data = get_transient( 'nwm_locations_'.$id ) ) ) {	
 		$nwm_route_order = get_option( 'nwm_route_order' );
