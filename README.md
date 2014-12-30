@@ -1,6 +1,8 @@
 ﻿Nomad World Map
 ===============
 
+Unfortunately I no longer have time to actively maintain and this plugin.
+
 This repository is intended for developers to browse the code and to contribute to 
 the development of Nomad World Map. 
 
