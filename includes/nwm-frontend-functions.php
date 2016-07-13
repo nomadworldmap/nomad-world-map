@@ -8,7 +8,7 @@ add_shortcode( 'nwm_map', 'nwm_show_map' );
 function nwm_show_map( $atts, $content = null ) {
 	
 	global $wpdb;
-    
+	$data = array();
     /* Required to keep track of the amount of maps on the page */
     static $map_count;
     
@@ -57,6 +57,7 @@ function nwm_show_map( $atts, $content = null ) {
 		$route_order     = esc_sql( implode( ',', wp_parse_id_list( $nwm_route_order[$id] ) ) );
 		$i               = 0;	
 		$json_data       = '';
+		$first_future_date = null;
 
 		$nwm_location_data = $wpdb->get_results("
 												SELECT nwm_id, post_id, thumb_id, lat, lng, location, arrival, departure
@@ -181,7 +182,9 @@ function nwm_show_map( $atts, $content = null ) {
             'locationData' => $data,
             'settings' 	   => $map_settings
         );
-            
+
+		$transient_lifetime = '';
+
 		/* Calculate the duration of the transient lifetime  */
 		if ( !empty( $first_future_date ) ) {
 			$current_epoch     = time();
@@ -468,7 +471,7 @@ function nwm_get_post_excerpt ( $post_id ) {
 function nwm_frontend_scripts( $frontend_data, $map_count ) {
     
 	wp_enqueue_style( 'nwm', NWM_URL . 'css/styles.css', false );
-	wp_enqueue_script( 'nwm-gmap', ( "//maps.google.com/maps/api/js?sensor=false" ),'' ,'' ,true );
+	wp_enqueue_script( 'nwm-gmap', ( nvm_add_key_to_gmaps_url("//maps.google.com/maps/api/js?sensor=false") ),'' ,'' ,true );
 	wp_enqueue_script( 'nwm-gmap3', NWM_URL . 'js/gmap3.min.js', array( 'jquery' ) ); /* the not minified version of gmap3 library is in the js folder -> gmap3.js */
 	wp_enqueue_script( 'nwm-gmap-markers', NWM_URL . 'js/nwm-gmap3.js' );
 

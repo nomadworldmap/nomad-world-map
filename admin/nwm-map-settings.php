@@ -6,6 +6,9 @@ function nwm_settings_page() {
 	global $wpdb;	 
 		
 	$options         = get_option( 'nwm_settings' );
+    $options['initial_tooltip']  = isset( $options['initial_tooltip'] ) ? $options['initial_tooltip'] : 0;
+    $options['google_api_browser_key']  = isset( $options['google_api_browser_key'] ) ? $options['google_api_browser_key'] : '';
+    $options['google_api_server_key']  = isset( $options['google_api_server_key'] ) ? $options['google_api_server_key'] : '';
     $nwm_route_order = get_option( 'nwm_route_order' );
 	?>
     <div class="wrap">
@@ -20,6 +23,22 @@ function nwm_settings_page() {
                         <div class="postbox">
                             <h3 class="hndle"><span><?php _e( 'General', 'nwm' ); ?></span></h3>
                             <div class="inside">
+                                <p>
+                                    <label for="nwm-google-api-browser-key"><?php _e( 'Google API Browser Key:', 'nwm' ); ?></label>
+                                    <input type="text" name="nwm-google-api-browser-key" value="<?php echo esc_attr( $options['google_api_browser_key'] ); ?>" id="nwm-google-api-browser-key" />
+                                    <br/>
+                                    <?php echo sprintf(
+                                        __('<b>Note:</b> Google API Browser Key is a requirement to use Google Maps, you can get a key from <a href="%s" target="_blank">here</a>', 'nvm'),
+                                        'https://console.developers.google.com/flows/enableapi?apiid=maps_backend,geocoding_backend,directions_backend,distance_matrix_backend,elevation_backend&keyType=CLIENT_SIDE&reusekey=true' ); ?>
+                                </p>
+                                <p>
+                                    <label for="nwm-google-api-server-key"><?php _e( 'Google API Server Key:', 'nwm' ); ?></label>
+                                    <input type="text" name="nwm-google-api-server-key" value="<?php echo esc_attr( $options['google_api_server_key'] ); ?>" id="nwm-google-api-server-key" />
+                                    <br/>
+                                    <?php echo sprintf(
+                                        __('<b>Note:</b> Google API Server Key is a requirement to use Google Maps, you can get a key from <a href="%s" target="_blank">here</a>', 'nvm'),
+                                        'https://console.developers.google.com/flows/enableapi?apiid=maps_backend,geocoding_backend,directions_backend,distance_matrix_backend,elevation_backend&keyType=CLIENT_SIDE&reusekey=true' ); ?>
+                                </p>
                                 <p>
                                    <label for="nwm-flightpath"><?php _e( 'Draw lines between the markers?', 'nwm' ); ?></label> 
                                    <input id="nwm-flightpath" type="checkbox" name="nwm-flightpath" value="" <?php checked( $options['flightpath'], true ); ?> />
@@ -137,7 +156,7 @@ function nwm_settings_page() {
                         <div class="postbox">
                             <h3 class="hndle"><span><?php _e( 'About', 'nwm' ); ?></span><span style="float:right;"><?php _e( 'Version', 'nwm' ); ?> <?php echo NWN_VERSION_NUM; ?></span></h3>
                             <div class="inside">
-                                <p><strong>Nomad World Map </strong><?php echo sprintf( __( 'by <a href="%s">Tijmen Smit</a>', 'nwm' ), 'http://twitter.com/tijmensmit' ); ?></dd>
+                                <p><strong>Nomad World Map </strong><?php echo sprintf( __( 'by <a href="%s">Tijmen Smit</a>', 'nwm' ), 'http://twitter.com/tijmensmit' ); ?></p>
                                 <p><?php echo sprintf( __( 'If you like this plugin, please rate it <strong>5 stars</strong> on <a href="%s">WordPress.org</a> or consider making a <a href="%s">donation</a> to support the development.', 'nwm' ), 'http://wordpress.org/plugins/nomad-world-map/', 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NFZ6NCFKXQ8EA' ); ?></p>        
                             </div>
                         </div>
@@ -188,9 +207,11 @@ function nwm_settings_check() {
 		$output['zoom_level'] = $_POST['nwm-zoom-level'];
 	} else {
 		$output['zoom_level'] = 3;	
-	}	
+	}
 
-	$output['flightpath']       = isset( $_POST['nwm-flightpath'] ) ? 1 : 0;
+    $output['google_api_browser_key']  = sanitize_text_field( $_POST['nwm-google-api-browser-key'] );
+    $output['google_api_server_key']  = sanitize_text_field( $_POST['nwm-google-api-server-key'] );
+    $output['flightpath']       = isset( $_POST['nwm-flightpath'] ) ? 1 : 0;
 	$output['curved_lines']     = isset( $_POST['nwm-curved-lines'] ) ? 1 : 0;		
 	$output['round_thumbs']     = isset( $_POST['nwm-round-thumbs'] ) ? 1 : 0;	
 	$output['past_color']       = sanitize_text_field( $_POST['nwm-past-color'] );

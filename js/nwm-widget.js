@@ -10,7 +10,7 @@ function appendBootstrap() {
 	} else {
 		var script = document.createElement( "script" );
 		script.type = "text/javascript";
-		script.src = "//maps.google.com/maps/api/js?sensor=false&callback=handleApiReady";
+		script.src = nwm_google_src_url;
 		document.body.appendChild(script);
 	}
 }

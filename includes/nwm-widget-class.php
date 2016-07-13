@@ -90,10 +90,14 @@ class NWM_Widget extends WP_Widget {
                     background:none !important;
                 }
             </style>
+
+            <script type="text/javascript">
+                var nwm_google_src_url = '<?php echo nvm_add_key_to_gmaps_url("//maps.google.com/maps/api/js?sensor=false&callback=handleApiReady"); ?>';
+            </script>
             <?php
 
             wp_enqueue_script( 'nwm-widget', NWM_URL.'js/nwm-widget.js' );
-            wp_localize_script( 'nwm-widget', 'nwmWidget', $widget_params ); 
+            wp_localize_script( 'nwm-widget', 'nwmWidget', $widget_params );
         }
         
         if ( !empty( $instance['map_description'] ) ) {
@@ -121,6 +125,8 @@ class NWM_Widget extends WP_Widget {
         $last_location = new StdClass;
         $transient_lifetime = 0;
         $remaining_time = '';
+        $first_future_date = null;
+        $current_index = null;
         
 		$nwm_location_data = $wpdb->get_results("
 												SELECT nwm_id, lat, lng, location, iso2_country_code, arrival
@@ -128,8 +134,9 @@ class NWM_Widget extends WP_Widget {
 												WHERE nwm_id IN ( $route_order )
 												ORDER BY field( nwm_id, $route_order )
 												"
-											    );	
-        
+											    );
+
+
 		foreach ( $nwm_location_data as $k => $nwm_location ) {	
 		
 			/* If the date is in the future, then we need to change the line color on the map */		
@@ -179,43 +186,30 @@ class NWM_Widget extends WP_Widget {
 		
     /* Backend of the widget */
     public function form( $instance ) {
-         
-        if ( isset( $instance['title'] ) ) {
-            $title = $instance['title'];
-        }
-        
-        if ( isset( $instance['map_id'] ) ) {
-            $selected_map = $instance['map_id'];
-        }
-        
-        if ( isset( $instance['zoom_level'] ) ) {
-            $zoom_level = $instance['zoom_level'];
-        }
-        
-        if ( isset( $instance['display_type'] ) ) {
-            $display_type = $instance['display_type'];
-        }
-        
-        if ( isset( $instance['flag'] ) ) {
-            $flag = $instance['flag'];
-        }
-        
-        if ( isset( $instance['map_description'] ) ) {
-            $map_description = $instance['map_description'];
-        }
-        
-        if ( isset( $instance['location_detection'] ) ) {
-            $location_detection = $instance['location_detection'];
-        }
-        
-        if ( isset( $instance['manual_location'] ) ) {
-            $manual_location = $instance['manual_location'];
-        }
-        
-        if ( isset( $instance['latlng'] ) ) {
-            $latlng = $instance['latlng'];
-        }
-        
+
+        $instance = wp_parse_args((array)$instance,
+            array(
+                'title' => '',
+                'map_id' => '',
+                'zoom_level' => '3',
+                'display_type' => '',
+                'flag' => '',
+                'map_description' => '',
+                'location_detection' => '',
+                'manual_location' => '',
+                'latlng' => ''
+            )
+        );
+        $title = strip_tags($instance['title']);
+        $selected_map = strip_tags($instance['map_id']);
+        $zoom_level = strip_tags($instance['zoom_level']);
+        $display_type = strip_tags($instance['display_type']);
+        $flag = strip_tags($instance['flag']);
+        $map_description = strip_tags($instance['map_description']);
+        $location_detection = strip_tags($instance['location_detection']);
+        $manual_location = strip_tags($instance['manual_location']);
+        $latlng = strip_tags($instance['latlng']);
+
         $map_ids = get_option( 'nwm_map_ids' );
         
         $display_options = array(
