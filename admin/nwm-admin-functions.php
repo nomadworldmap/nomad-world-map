@@ -659,18 +659,42 @@ function nwm_find_post_title() {
 	
 	$post = implode( "', '", $post_types );
 
-	$result = $wpdb->get_results( 
+	$title = stripslashes( $_POST['post_title'] );
+
+	$query_by_id = false;
+	if (ctype_digit($title)) {
+		$query_by_id = true;
+		$title = (int) $title;
+	}
+
+	if ($query_by_id) {
+		$result = $wpdb->get_results(
 				$wpdb->prepare(
 						"
-						SELECT id, post_title 
+						SELECT id, post_title
 						FROM $wpdb->posts
 						WHERE post_type IN ('$post')
-						AND post_status = 'publish' 
+						AND post_status = 'publish'
+						AND id = %d
+						",
+						$title
+				), OBJECT
+		);
+	} else {
+		$result = $wpdb->get_results(
+				$wpdb->prepare(
+						"
+						SELECT id, post_title
+						FROM $wpdb->posts
+						WHERE post_type IN ('$post')
+						AND post_status = 'publish'
 						AND post_title = %s
-						", 
-						stripslashes( $_POST['post_title'] )
-				 ), OBJECT
-		   );			   
+						",
+						$title
+				), OBJECT
+		);
+	}
+
 		
 	if ( $result === false ) {
 		wp_send_json_error();
@@ -1126,3 +1150,20 @@ function nwm_admin_scripts() {
     nwm_check_icon_font_usage();
     
 }
+
+
+function nwm_google_key_notices() {
+	$options         = get_option( 'nwm_settings' );
+	$google_api_browser_key  = isset( $options['google_api_browser_key'] ) ? $options['google_api_browser_key'] : '';
+	$google_api_server_key  = isset( $options['google_api_server_key'] ) ? $options['google_api_server_key'] : '';
+
+	if (empty($google_api_browser_key) && empty($google_api_server_key)) {
+		echo '<div class="error"><p><strong>' . sprintf(__('Google Maps API Browser and Server KEYS not set, %sclick here%s to set one.', 'nwm'), '<a href=\'' . admin_url('admin.php?page=nwm_settings') . '\'>', '</a>') . '</strong></p></div>';
+	} elseif (empty($google_api_browser_key)) {
+		echo '<div class="error"><p><strong>' . sprintf(__('Google Maps API Browser KEY not set, %sclick here%s to set one.', 'nwm'), '<a href=\'' . admin_url('admin.php?page=nwm_settings') . '\'>', '</a>') . '</strong></p></div>';
+	} elseif (empty($google_api_server_key)) {
+		echo '<div class="error"><p><strong>' . sprintf(__('Google Maps API Server KEY not set, %sclick here%s to set one.', 'nwm'), '<a href=\'' . admin_url('admin.php?page=nwm_settings') . '\'>', '</a>') . '</strong></p></div>';
+	}
+
+}
+add_action( 'admin_notices', 'nwm_google_key_notices' );
