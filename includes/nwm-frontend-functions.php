@@ -471,7 +471,7 @@ function nwm_get_post_excerpt ( $post_id ) {
 function nwm_frontend_scripts( $frontend_data, $map_count ) {
     
 	wp_enqueue_style( 'nwm', NWM_URL . 'css/styles.css', false );
-	wp_enqueue_script( 'nwm-gmap', ( nvm_add_key_to_gmaps_url("//maps.google.com/maps/api/js?sensor=false") ),'' ,'' ,true );
+	wp_enqueue_script( 'nwm-gmap', ( nvm_add_key_to_gmaps_url("//maps.google.com/maps/api/js") ),'' ,'' ,true );
 	wp_enqueue_script( 'nwm-gmap3', NWM_URL . 'js/gmap3.min.js', array( 'jquery' ) ); /* the not minified version of gmap3 library is in the js folder -> gmap3.js */
 	wp_enqueue_script( 'nwm-gmap-markers', NWM_URL . 'js/nwm-gmap3.js' );
 

@@ -8,10 +8,14 @@ function appendBootstrap() {
 	if ( typeof google === "object" && typeof google.maps === "object" ) {
 		handleApiReady();
 	} else {
-		var script = document.createElement( "script" );
-		script.type = "text/javascript";
-		script.src = nwm_google_src_url;
-		document.body.appendChild(script);
+		var content = document.body.textContent || document.body.innerText;
+		var count = (content.match(/maps.google.com\/maps\/api\/js/g) || []).length;
+		if(count == 1){
+			var script = document.createElement( "script" );
+			script.type = "text/javascript";
+			script.src = nwm_google_src_url;
+			document.body.appendChild(script);
+		}
 	}
 }
 
@@ -48,4 +52,6 @@ function handleApiReady() {
 	  });
 }
 
-appendBootstrap();
+jQuery(document).ready(function() {
+	appendBootstrap();
+});

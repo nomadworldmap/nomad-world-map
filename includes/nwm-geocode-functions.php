@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 function nwm_geocode_location( $location ) {
 
-    $url = nvm_add_key_to_gmaps_url('https://maps.googleapis.com/maps/api/geocode/json?address='.urlencode( $location ).'&sensor=false', 'server');
+    $url = nvm_add_key_to_gmaps_url('https://maps.googleapis.com/maps/api/geocode/json?address='.urlencode( $location ).'', 'server');
 
     $resp = wp_remote_get( $url );
 

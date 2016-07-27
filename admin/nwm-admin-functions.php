@@ -1137,7 +1137,7 @@ function nwm_admin_scripts() {
         wp_enqueue_script( 'json2' );
 
         wp_enqueue_style( 'nwm-admin-css', plugins_url( '/css/style.css', __FILE__ ), false );
-        wp_enqueue_script( 'nwm-gmap', ( nvm_add_key_to_gmaps_url("//maps.google.com/maps/api/js?sensor=false") ), false, '', true );
+        wp_enqueue_script( 'nwm-gmap', ( nvm_add_key_to_gmaps_url("//maps.google.com/maps/api/js") ), false, '', true );
         wp_enqueue_script( 'nwm-admin-js', plugins_url( '/js/nwm-admin.js', __FILE__ ), array('jquery', 'wp-color-picker'), false );
         wp_enqueue_script( 'jquery-queue', plugins_url( '/js/ajax-queue.js', __FILE__ ), array('jquery'), false );
 

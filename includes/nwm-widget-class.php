@@ -92,7 +92,7 @@ class NWM_Widget extends WP_Widget {
             </style>
 
             <script type="text/javascript">
-                var nwm_google_src_url = '<?php echo nvm_add_key_to_gmaps_url("//maps.google.com/maps/api/js?sensor=false&callback=handleApiReady"); ?>';
+                var nwm_google_src_url = '<?php echo nvm_add_key_to_gmaps_url("//maps.google.com/maps/api/js?callback=handleApiReady"); ?>';
             </script>
             <?php
 
