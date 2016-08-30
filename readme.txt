@@ -1,10 +1,10 @@
 === Nomad World Map ===
-Contributors: tijmensmit
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NFZ6NCFKXQ8EA
-Tags: google maps, route, travel, travel blog, trip, geocoding
+Contributors: worldnomadmap
+Donate link: http://nomadworldmap.com/
+Tags: google maps, route, travel, travel blog, trip, geocoding, travel directory, directory plugin
 Requires at least: 3.5
-Tested up to: 4.0
-Stable tag: 1.2.31
+Tested up to: 4.6
+Stable tag: 1.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,9 +31,7 @@ The location content itself is shown in a carousel underneath the map. When you 
 
 [Demo](http://nomadworldmap.com/)
 
-You can suggest new features [here](http://nomadworldmap.uservoice.com/), or vote for existing suggestions from others.
-
-If you want to contribute to the development of this plugin, you can do so through [GitHub](https://github.com/Tijmen/Nomad-World-Map). 
+If you want to contribute to the development of this plugin, you can do so through [GitHub](https://github.com/nomadworldmap/nomad-world-map).
 
 == Installation ==
 
@@ -94,10 +92,6 @@ Other shortcode options for the list:
 Make sure the blog post you search for is published, and that it matches exactly with the title you see in the blog post editor.
 Otherwise please open a support request in the support form.
 
-= Where can I suggest new features? =
-
-You can suggest new features [here](http://nomadworldmap.uservoice.com/), or vote for existing suggestions from others.
-
 == Screenshots ==
 
 1. Front-end of the plugin
@@ -106,13 +100,19 @@ You can suggest new features [here](http://nomadworldmap.uservoice.com/), or vot
 
 
 == Changelog ==
+= 1.3.1 =
+* Few minor bug fixed
+
+= 1.3.0 =
+* Fixed the Google API compatibility bug
+* Title of the post you want to link to form field also accepts post ID now
 
 = 1.2.31 =
 * Fixed the post id not being saved when the location content was set to "post excerpt" ( if you have tried to link blog post to locations but the excerpt was missing. Then you need to edit the location under "Route Editor -> Edit location" and search for the blog post again and then update the location )
 * Fixed sometimes not being able to add new routes after creating a new map
 * Fixed several php notices breaking the route editor when WP_DEBUG was enabled
 * Fixed the linked url not showing up correctly in the location list in the route editor
-* Restricted the width of the location position dropdown 
+* Restricted the width of the location position dropdown
 * Added Swedish (sv_SE) translations, via [Elger](http://20x.se/)
 
 = 1.2.30 =
@@ -121,7 +121,7 @@ You can suggest new features [here](http://nomadworldmap.uservoice.com/), or vot
 * Fixed the date translations not working for custom posts
 * Fixed the date description text sometimes disappearing when switching between 'Add location' and 'Edit Location'
 * Fixed a compatibility issue with the Advanced Custom Fields plugin, reported by [ShaneShipston](https://github.com/ShaneShipston)
-* Several code improvements supplied by [ShaneShipston](https://github.com/ShaneShipston)  
+* Several code improvements supplied by [ShaneShipston](https://github.com/ShaneShipston)
 * Added the option to define where a new location is inserted in the route list when you create/edit an entry
 * Added the option to hide the tooltip on initial page load when the content is set to be shown in the tooltips
 * Added Polish (pl_PL) and Dutch (nl_NL) translations
