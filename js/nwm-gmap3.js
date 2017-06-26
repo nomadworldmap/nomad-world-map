@@ -1,7 +1,9 @@
 jQuery( document ).ready( function( $ ) {
 
-if ( $( "#nwm-map-0" ).length ) {
-	$( ".nwm-wrap" ).eq(0).parent().wrap( "<div id='nwm-outer'>", "</div>" );
+var count = 0 ;
+while ( $( "#nwm-map-"+count ).length ) {
+	$( ".nwm-wrap" ).eq(count).parent().wrap( "<div id='nwm-outer'>", "</div>" );
+	count ++;
 }
 
 var flightPath = [],
