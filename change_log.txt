@@ -1,3 +1,8 @@
+v1.3.2
+Added the option to style the frontend map via Snazzy Maps [urban1702](https://github.com/urban1702)
+Fixed wordpress css style support for the existing admin tables [urban1702](https://github.com/urban1702)
+Fixed FAQ page
+
 v1.3
 Google API compatibility bug fixes
 Title of the post you want to link to form field also accepts post ID now

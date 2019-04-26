@@ -160,7 +160,7 @@ function nwm_map_editor() {
     	</div>
                 
         <div class="nwn-current-destinations-wrap postbox">            
-        	<table id="nwm-destination-list" width="100%" border="0" cellspacing="0" data-map-id="1" data-nonce-sort="<?php echo wp_create_nonce( 'nwm_nonce_sort' ); ?>">
+        	<table class="wp-list-table widefat striped" id="nwm-destination-list" width="100%" border="0" cellspacing="0" data-map-id="1" data-nonce-sort="<?php echo wp_create_nonce( 'nwm_nonce_sort' ); ?>">
             	<thead>
                     <th scope="col" class="nwm-order"><?php _e( 'Order', 'nwm' ); ?></th>
                     <th scope="col"><?php _e( 'Location', 'nwm' ); ?></th>
@@ -168,7 +168,7 @@ function nwm_map_editor() {
                     <th scope="col"><?php _e( 'Arrival', 'nwm' ); ?></th>
                     <th scope="col"><?php _e( 'Departure', 'nwm' ); ?></th>
                     <th scope="col"><?php _e( 'Thumbnail', 'nwm' ); ?></th>
-                    <th scope="col"></th>
+                    <th scope="col"><?php _e( 'Edit', 'nwm' ); ?></th>
                 </thead>
                 <tbody>
                 <?php
@@ -217,13 +217,13 @@ function nwm_build_tr_list( $collected_destinations ) {
 		if ( $nwm_location['data']['url'] ) {
 			$url = '<a href="'. esc_url( $nwm_location['data']['url'] ) .'" title="'. esc_url( $nwm_location['data']['url'] ) .'">' . esc_url( $nwm_location['data']['url']  ) .'</a>';
 		} else {
-			$url = '';
+			$url = '-';
 		}
 		
 		if ( $nwm_location['data']['thumb_id'] ) {
 			$thumb = '<img class="nwm-circle" src="'. esc_url( $nwm_location['data']['thumb_url'] ) .'" data-thumb-id="'. esc_attr( $nwm_location['data']['thumb_id'] ). '" width="24" height="24" />';
 		} else {
-			$thumb = '';	
+			$thumb = '-';	
 		}
         
         if ( $nwm_location['data']['country_code'] ) {

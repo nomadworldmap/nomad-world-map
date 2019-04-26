@@ -13,7 +13,7 @@ var flightPath = [],
 		new google.maps.Size( 30,30 ),
 		new google.maps.Point( 0,0 ),
 		new google.maps.Point( 8,8 )
-	);	
+	);
 
 /**
  * Initialize the map
@@ -21,17 +21,17 @@ var flightPath = [],
  * @since 1.2
  * @return void
  */
-function initializeGmap() {	
+function initializeGmap() {
 	var mapId, mapType, zoomControlPosition, zoomControlStyle, zoomTo, mapType, zoomLevel;
-	
-	/* Set correct postion of the controls */		
+
+	/* Set correct postion of the controls */
 	if ( nwmSettings.controlPosition == "right" ) {
 		zoomControlPosition = google.maps.ControlPosition.RIGHT_TOP
 	} else {
 		zoomControlPosition = google.maps.ControlPosition.LEFT_TOP
 	}
 
-	/* Set correct control style */	
+	/* Set correct control style */
 	if ( nwmSettings.controlStyle == "small" ) {
 		zoomControlStyle = google.maps.ZoomControlStyle.SMALL
 	} else {
@@ -39,38 +39,39 @@ function initializeGmap() {
 	}
 
 	/* Initialize the map(s) */
-	$( ".nomad-world-map" ).each( function( i ) {			
+	$( ".nomad-world-map" ).each( function( i ) {
 		mapId = $(this).attr( "id" );
 		var nwmLocations = "";
-		
+
 		/* Get the correct location data */
 		nwmLocations = window['nwmMap_'+i];
-		
+
 		/* For each map we set the correct maptype, zoomlevel and content location */
 		mapType   = setMapType( nwmLocations );
 		zoomLevel = parseInt( nwmLocations.settings.zoomLevel );
-		
+
 		/* Check if we need to remove the slider, and show the content in the tooltip instead */
 		if ( nwmLocations.settings.contentLocation == "tooltip" ) {
 			$( "#" + mapId + "" ).parent( ".nwm-wrap" ).addClass( "nwm-no-slider" );
 		}
 
-		/* Initialize the map */			
+		/* Initialize the map */
 		$( "#" + mapId + "" ).gmap3({
 			map:{
 				options:{
-				  center: [zoomTo],
-				  scrollwheel: false,
-				  mapTypeControl: false,
-				  navigationControl: false,
-				  panControl: false,
-				  zoom: zoomLevel,
-				  mapTypeId: mapType,
-				  streetViewControl: streetViewVisible,
-				  zoomControlOptions: {
+					center: [zoomTo],
+					scrollwheel: false,
+					mapTypeControl: false,
+					navigationControl: false,
+					panControl: false,
+					zoom: zoomLevel,
+					mapTypeId: mapType,
+					streetViewControl: streetViewVisible,
+					zoomControlOptions: {
 						style: zoomControlStyle,
 						position: zoomControlPosition
-					}
+					},
+					styles: JSON.parse(nwmSettings.googleMapsStyle)
 				},
 				callback: function( map ) {
 					if ( map.getBounds() ) {
@@ -102,7 +103,7 @@ function initializeGmap() {
  */
 function setMapType( nwmLocations ) {
 	var mapType;
-	
+
 	if ( typeof( nwmLocations.settings.mapType !== "undefined" ) ) {
 		mapType = nwmLocations.settings.mapType;
 	} else {
@@ -122,7 +123,7 @@ function setMapType( nwmLocations ) {
 		  break;
 		case "terrain":
 		  mapType = google.maps.MapTypeId.TERRAIN
-		  break;		  
+		  break;
 		default:
 		  mapType = google.maps.MapTypeId.ROADMAP
 	}
@@ -131,10 +132,10 @@ function setMapType( nwmLocations ) {
 }
 
 /**
- * Loop over the location data. 
- * 
- * If lines between markers are enabled we build the flightpath arrays and draw the lines on the map. 
- * Otherwise we only send the collected location data to the addDestination function. 
+ * Loop over the location data.
+ *
+ * If lines between markers are enabled we build the flightpath arrays and draw the lines on the map.
+ * Otherwise we only send the collected location data to the addDestination function.
  *
  * @since 1.0
  * @param {object} $this The current map we are working with
@@ -151,17 +152,17 @@ function processLocationData( $this, nwmLocations, mapId ) {
 	/* Reset the flightpaths, otherwise line data from the previous map will up on all the maps that follow it */
 	flightPath.length = 0;
 	futureFlightPath.length = 0;
-		
+
 	if ( $( "#nwm-map-1" ).length ) {
 		mapId = mapId-1;
 	} else {
 		mapId = 0;
 	}
-	
+
 	/* Loop over the location data */
 	for ( var key in nwmLocations.locationData ) {
 		if ( nwmLocations.locationData.hasOwnProperty( key ) ) {
-			
+
 			/* Only create a flightpath if the lines are enabled */
 			if ( nwmLocations.settings.lines == 1 ) {
 				if ( ( nwmLocations.locationData[i].data.future ) || ( futurePathCount > 0 ) ) {
@@ -177,25 +178,25 @@ function processLocationData( $this, nwmLocations, mapId ) {
 						flightPath.push( [nwmLocations.locationData[i].lat, nwmLocations.locationData[i].lng] );
 					}
 
-					futureFlightPath.push( [nwmLocations.locationData[i].lat, nwmLocations.locationData[i].lng] );	
+					futureFlightPath.push( [nwmLocations.locationData[i].lat, nwmLocations.locationData[i].lng] );
 					futurePathCount++;
 				} else {
 					flightPath.push( [nwmLocations.locationData[i].lat, nwmLocations.locationData[i].lng] );
 				}
 			} // end lines check
-			
+
 			/* Add the marker the correct map and if enabled, create the html slider */
 			addDestination( $this, i, nwmLocations.locationData[i], zoomToIndex, mapId );
 		}
 		i++;
 	}
-	
+
 	/* Check if we need to draw lines between the markers */
 	if ( nwmLocations.settings.lines == 1 ) {
-		
+
 		/* Check if we need to draw a line for past locations */
 		if ( flightPath.length ) {
-			$this.gmap3({ 
+			$this.gmap3({
 				polyline:{
 					options:{
 					  strokeColor: nwmSettings.pastLineColor,
@@ -207,10 +208,10 @@ function processLocationData( $this, nwmLocations, mapId ) {
 				}
 			});
 		}
-		
+
 		/* Check if we need to draw a line for future locations */
 		if ( futureFlightPath.length ) {
-			$this.gmap3({ 
+			$this.gmap3({
 				polyline:{
 					options:{
 					  strokeColor: nwmSettings.futureLineColor,
@@ -223,7 +224,7 @@ function processLocationData( $this, nwmLocations, mapId ) {
 			});
 		}
 	}
-	
+
 	/* Only bind the back and forward buttons if the content is set to slider */
 	if ( nwmLocations.settings.contentLocation == 'slider' ) {
 		enableControls( mapId );
@@ -232,7 +233,7 @@ function processLocationData( $this, nwmLocations, mapId ) {
 
 /**
  * Add the destination data to the map.
- * 
+ *
  * If enabled, creates the html output for the slider. Adds the markers to the correct location on the map and
  * sets the correct location values, also binds the mouseover events for the tooltip / slider.
  *
@@ -244,10 +245,10 @@ function processLocationData( $this, nwmLocations, mapId ) {
  * @param {number} mapId The ID of the map we are working with
  * @return void
  */
-function addDestination( $this, i, destination, zoomToIndex, mapId ) {	
+function addDestination( $this, i, destination, zoomToIndex, mapId ) {
 	var $sliderTarget = $( "#nwm-map-" + mapId + "" ).next().find( "ul" );
 
-	$this.gmap3({ 
+	$this.gmap3({
 		marker:{
 			latLng: [destination.lat, destination.lng],
 			options: {
@@ -260,17 +261,17 @@ function addDestination( $this, i, destination, zoomToIndex, mapId ) {
 			},
 			callback: function( marker ) {
 				var markerData = {};
-				
+
 				/* Check if there is an active slider or not, if so we add the slider content */
-				if ( !$( "#nwm-map-" + mapId + "" ).parent( ".nwm-wrap" ).hasClass( "nwm-no-slider" ) ) {	
+				if ( !$( "#nwm-map-" + mapId + "" ).parent( ".nwm-wrap" ).hasClass( "nwm-no-slider" ) ) {
 					var destinationHtml,
 						content = destination.data.content;
-					
+
 					markerData = getMarkerData( destination, nwmSettings, 'slider' );
-					content = content + markerData.readMore;					
-											
+					content = content + markerData.readMore;
+
 					if ( destination.data.arrival ) {
-						if ( destination.data.departure ) {	
+						if ( destination.data.departure ) {
 							destinationHtml = '<li data-id="' + destination.data.nwm_id + '">' + markerData.thumb + '<h2>' + markerData.title + '</h2><p class="nwm-travel-schedule"><span>' + destination.data.arrival + '</span><span> - ' + destination.data.departure + '</span></p><p>' + content + '</p></li>';
 						} else {
 							destinationHtml = '<li data-id="' + destination.data.nwm_id + '">' + markerData.thumb + '<h2>' + markerData.title + '</h2><p class="nwm-travel-schedule"><span>' + destination.data.arrival + '</span></p><p>' + content + '</p></li>';
@@ -278,9 +279,9 @@ function addDestination( $this, i, destination, zoomToIndex, mapId ) {
 					} else {
 						destinationHtml = '<li data-id="' + destination.data.nwm_id + '">' + markerData.thumb + '<h2>' + markerData.title + '<span>' + destination.data.date + '</span></h2><p>' + content + '</p></li>';
 					}
-									
+
 					$sliderTarget.append( destinationHtml );
-					
+
 					/* On mouseover we move the map to the corresponding location */
 					$sliderTarget.find( "li" ).eq( i ).bind( "mouseover", function( ) {
 						$this.gmap3( "get" ).panTo(marker.position);
@@ -303,11 +304,11 @@ function addDestination( $this, i, destination, zoomToIndex, mapId ) {
 								});
 							}
 					});
-					
-					/* 
-					Check which marker we need to set active on page load, either the first / last one, 
+
+					/*
+					Check which marker we need to set active on page load, either the first / last one,
 					or the one just before the future route starts
-					*/	
+					*/
 					if ( i == zoomToIndex ) {
 						$sliderTarget.find( "li:eq(" + zoomToIndex + ")" ).addClass( "nwm-active-destination" ).mouseover();
 
@@ -316,22 +317,22 @@ function addDestination( $this, i, destination, zoomToIndex, mapId ) {
 							imageLoader( $sliderTarget );
 						}
 					}
-					
-					/* 
-					This fixes a case where the settings are set to focus on the last marker before the future route starts, 
-					but no previous entry exist before the future route starts. So instead we just focus on the first marker we find (the first future entry). 
+
+					/*
+					This fixes a case where the settings are set to focus on the last marker before the future route starts,
+					but no previous entry exist before the future route starts. So instead we just focus on the first marker we find (the first future entry).
 					Not what the user selected, but no other way to fix it?
 					 */
 					if ( ( zoomToIndex == -1 ) && ( i == 0 ) ) {
-						$( "#nwm-map-" + mapId + " .nwm-destination-list li:first-child" ).addClass( "nwm-active-destination" ).mouseover();					
+						$( "#nwm-map-" + mapId + " .nwm-destination-list li:first-child" ).addClass( "nwm-active-destination" ).mouseover();
 					}
 				} else {
 					if ( i == zoomToIndex ) {
 						markerData = getMarkerData( destination, nwmSettings, "tooltip" );
 						markerContent = '<div class="marker-style marker-' + i + '"><div class="nwm-marker-wrap">' + markerData.thumb + '<div class="marker-txt"><h2>' + markerData.title + '</h2><p>' + markerData.date + markerData.readMore + '</p></div></div></div>';
-				
-						if ( nwmSettings.hideTooltip != 1 ) { 
-							$this.gmap3( "get" ).panTo( marker.position );					
+
+						if ( nwmSettings.hideTooltip != 1 ) {
+							$this.gmap3( "get" ).panTo( marker.position );
 							$this.gmap3(
 							  {clear: "overlay" },
 								 {
@@ -353,23 +354,23 @@ function addDestination( $this, i, destination, zoomToIndex, mapId ) {
 			events:{
 			  mouseover: function( marker ) {
 				var markerContent;
-				
+
 				/* Check if there is an active slider or not, if so we move the slider to the correct location */
-				if ( !$( "#nwm-map-" + mapId + "" ).parent( ".nwm-wrap" ).hasClass( "nwm-no-slider" ) ) {  
-					$sliderTarget.find( "li" ).removeClass(); 
+				if ( !$( "#nwm-map-" + mapId + "" ).parent( ".nwm-wrap" ).hasClass( "nwm-no-slider" ) ) {
+					$sliderTarget.find( "li" ).removeClass();
 					$sliderTarget.find( "li" ).eq(i).addClass( "nwm-active-destination" );
 					$sliderTarget.find( ".nwm-active-destination img" ).attr( "src", placeholder );
-	
+
 					if ( !$sliderTarget.find( ".nwm-active-destination span.nwm-thumb" ).length ) {
 						imageLoader( $sliderTarget );
 					}
-										
+
 					markerContent = "<div class='marker-style marker-" + i + "'>" + destination.data.location + "</div>";
 				} else {
 					markerData = getMarkerData( destination, nwmSettings, 'tooltip' );
 					markerContent = '<div class="marker-style marker-' + i + '"><div class="nwm-marker-wrap">' + markerData.thumb + '<div class="marker-txt"><h2>' + markerData.title + '</h2><p>' + markerData.date + markerData.readMore + '</p></div></div></div>';
 				}
-								
+
 				$(this).gmap3(
 				  {clear:"overlay"},
 					{
@@ -382,17 +383,17 @@ function addDestination( $this, i, destination, zoomToIndex, mapId ) {
 							y:-15
 						  }
 						}
-					  }				  
+					  }
 				});
 			  }
 			}
 		}
-	});	
+	});
 }
 
 /**
  * Create the data that is either shown inside the tooltip or slider
- * 
+ *
  * @since 1.0
  * @param {object} destination Holds the location data
  * @param {object} nwmSettings Holds the map settings
@@ -401,25 +402,25 @@ function addDestination( $this, i, destination, zoomToIndex, mapId ) {
  */
 function getMarkerData( destination, nwmSettings, contentType ) {
 	var markerData = {},
-		circleClass = checkCircleClass( nwmSettings.thumbCircles ), 
-		thumbHtml = "", 
+		circleClass = checkCircleClass( nwmSettings.thumbCircles ),
+		thumbHtml = "",
 		titleHtml = "",
-		spanDate = "", 
+		spanDate = "",
 		readMoreLabel = "",
 		readMoreHtml = "";
-				
+
 	if ( destination.data.arrival ) {
 		spanDate = "<span>" + destination.data.arrival + " - " + destination.data.departure + "</span>";
 	} else {
 		spanDate = "<span>" + destination.data.date + "</span>";
 	}
-	
+
 	/* Check which thumb format to use, and whether we should show the placeholder. */
 	if ( contentType == 'tooltip' ) {
-		if ( destination.data.thumb != null ) {		
+		if ( destination.data.thumb != null ) {
 			thumbHtml = '<img class="nwm-thumb nwm-marker-img ' + circleClass + '" src="' + destination.data.thumb + '" width="64" height="64" />';
 		} else {
-			thumbHtml = '';	
+			thumbHtml = '';
 		}
 	} else {
 		if ( destination.data.thumb != null ) {
@@ -428,10 +429,10 @@ function getMarkerData( destination, nwmSettings, contentType ) {
 			thumbHtml = '<div><span class="nwm-thumb ' + circleClass + '" /></span></div>';
 		}
 	}
-	
+
 	/* Create the correct header based on the available data */
 	titleHtml = checkHeaderFormat( destination.data.url, destination.data.title, destination.data.location );
-	
+
 	/* Check if we should show the read more link */
 	if ( ( destination.data.url.length > 0 ) && ( nwmSettings.readMore == 1 ) ) {
 		if ( typeof( nwmSettings.readMoreLabel ) !== "undefined" ) {
@@ -439,15 +440,15 @@ function getMarkerData( destination, nwmSettings, contentType ) {
 		} else {
 			readMoreLabel = "Read more";
 		}
-		
+
 		readMoreHtml = "<a class='nwm-read-more' href='" + destination.data.url + "'>" + readMoreLabel + "</a>";
 	}
-	
+
 	/* Check if we should show the location name under the header */
 	if ( ( destination.data.url.length > 0 ) && ( nwmSettings.locationHeader == 1 ) ) {
 		titleHtml = titleHtml + "<span>" + destination.data.location + "</span>";
-	}	
-	
+	}
+
 	markerData = {
 		circleClass: circleClass,
 		thumb: thumbHtml,
@@ -455,13 +456,13 @@ function getMarkerData( destination, nwmSettings, contentType ) {
 		readMore: readMoreHtml,
 		title: titleHtml
 	};
-	
+
 	return markerData;
 }
 
 /**
  * Load the required image for the route location
- * 
+ *
  * @since 1.0
  * @param {object} $map A reference to the ul in the current map
  * @return void
@@ -473,10 +474,10 @@ function imageLoader( $map ) {
 		imgSrc	  = $li.find( ".nwm-thumb" ).data( "src" ),
 		id	      = $li.data( "id" ),
 		preloader = '<img class="nwm-preloader" id="nwm-preload-img-' + id + '" src="' + nwmSettings.path + 'admin/img/ajax-loader.gif" />';
-	
-	/* 
-	Check if we have loaded the thumbnail before, 
-	if not then we try todo so and show a preloader. 
+
+	/*
+	Check if we have loaded the thumbnail before,
+	if not then we try todo so and show a preloader.
 	Otherwise we just change the src attr.
 	*/
 	if ( $.inArray( id, loadedImageList ) === -1 ) {
@@ -495,9 +496,9 @@ function imageLoader( $map ) {
 
 /**
  * Create the correct header format.
- * 
+ *
  * Either show a link with the title in it, just show the title or only show the destination.
- * 
+ *
  * @since 1.0
  * @param {string} markerUrl The url that can be used in the marker
  * @param {string} markerTitle The post title
@@ -513,44 +514,44 @@ function checkHeaderFormat( markerUrl, markerTitle, destination ) {
 		if ( markerTitle ) {
 			title = markerTitle;
 		} else {
-			title = destination; 
-		}		
-	}	
-	
+			title = destination;
+		}
+	}
+
 	return title;
 }
 
 /**
  * Check which class we need to use on the thumbnails
- * 
+ *
  * @since 1.0
  * @param {number} thumbCircles Either 1 or 0 to enable/disable the circles on the thumbs
  * @return {string} circleClass The circle class
  */
 function checkCircleClass( thumbCircles ) {
 	var circleClass;
-	
+
 	if ( thumbCircles == 1 ) {
-		circleClass = "nwm-circle";	
+		circleClass = "nwm-circle";
 	} else {
-		circleClass = "";	
-	}		
+		circleClass = "";
+	}
 
 	return circleClass;
 }
 
 /**
  * Bind the back and forward buttons
- * 
+ *
  * @since 1.0
  * @param {string} mapId The ID of the map
  * @return void
  */
 function enableControls( mapId ) {
 	var $map = $( "#nwm-map-" + mapId + "" ).next();
-	
+
 	$map.find( ".nwm-forward" ).on( "click", function () {
-		var currentDestination = $map.find( ".nwm-active-destination" );	
+		var currentDestination = $map.find( ".nwm-active-destination" );
 
 		if ( currentDestination.next().length ){
 			currentDestination.removeClass()
@@ -560,12 +561,12 @@ function enableControls( mapId ) {
 		} else {
 			currentDestination.removeClass( "nwm-active-destination" );
 			$map.find( "li:first-child" ).addClass( "nwm-active-destination" )
-									     .mouseover();									 
+									     .mouseover();
 		}
-		
+
 		if ( !$map.find( ".nwm-active-destination span.nwm-thumb" ).length ) {
 			imageLoader( $map );
-		}		
+		}
 	});
 
 	$map.find( ".nwm-back" ).on( "click", function() {
@@ -584,15 +585,15 @@ function enableControls( mapId ) {
 
 		if ( !$map.find( ".nwm-active-destination span.nwm-thumb" ).length ) {
 			imageLoader( $map );
-		}	
-	});	
+		}
+	});
 }
 
 /**
  * Enable keyboard navigation for the slider.
- * 
+ *
  * Only enable this if we are dealing with a single map.
- * 
+ *
  * @since 1.0
  * @param string mapId The ID of the map
  * @return void
@@ -602,12 +603,12 @@ if ( !$( "#nwm-map-1" ).length ) {
 		 if ( eventObject.which == 37 ) {
 			$( ".nwm-back" ).trigger( "click" );
 		 } else if ( eventObject.which == 39 ) {
-			$( ".nwm-forward" ).trigger( "click" ); 
+			$( ".nwm-forward" ).trigger( "click" );
 		 }
 	});
 }
 
 /* Once the 'window' has finished loading initialize the map */
 google.maps.event.addDomListener( window, "load", initializeGmap );
-		 
+
 });

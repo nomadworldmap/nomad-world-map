@@ -206,7 +206,6 @@ function nwm_show_map( $atts, $content = null ) {
     $frontend_data['location_data'] = $map_data;
     
     if ( $map_count == 0 ) {
-        $output .= '<!-- Nomad World Map - http://nomadworldmap.com -->';
         $frontend_data['settings'] = $settings;
     }
         
@@ -489,7 +488,8 @@ function nwm_frontend_scripts( $frontend_data, $map_count ) {
              'readMore' 	   => $frontend_data['settings']['read_more'],
              'readMoreLabel'   => sanitize_text_field( stripslashes( $frontend_data['settings']['read_more_label'] ) ),
              'locationHeader'  => $frontend_data['settings']['location_header'],
-             'hideTooltip'  => $frontend_data['settings']['initial_tooltip']
+			 'hideTooltip'  => $frontend_data['settings']['initial_tooltip'],
+			 'googleMapsStyle'  => sanitize_text_field( stripslashes($frontend_data['settings']['google_maps_style'] ) ),
          );
 
          wp_localize_script( 'nwm-gmap-markers', 'nwmSettings', $params );
