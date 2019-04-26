@@ -5,16 +5,16 @@ var map, geocoder, preloadImgSrc, uploadFrame,
 	markersArray	= [], 
 	flightPlanArray = [],
 	preloadImgSrc   = $( "#nwm-preload-img img" ).attr( "src" ),
-	defaultLatlng	= new google.maps.LatLng( "52.378153", "4.899363" ),
+	defaultLatlng	= new google.maps.LatLng( "53.551085", "9.993682" ),
 	url				= window.location.href;
 
 /* Load Google Maps */
-function initializeGmap() {
+function initializeGmap() { 
 	var myOptions = {
 			zoom: 2,
 			center: defaultLatlng,
 			mapTypeId: google.maps.MapTypeId.ROADMAP,
-			streetViewControl: false
+			streetViewControl: false,
 		};
 
 	map		 = new google.maps.Map( document.getElementById( "gmap-nwm" ), myOptions );
@@ -77,7 +77,7 @@ function drawFlightPlan( flightPlanCoordinates ) {
 		flightPath = new google.maps.Polyline({
 			path: flightPlanCoordinates,
 			geodesic: true,
-			strokeColor: "#ad1700",
+			strokeColor: '#ad1700',
 			strokeOpacity: 1.0,
 			strokeWeight: 2
 		});

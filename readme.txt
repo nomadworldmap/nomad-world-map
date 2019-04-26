@@ -4,7 +4,7 @@ Donate link: http://nomadworldmap.com/
 Tags: google maps, route, travel, travel blog, trip, geocoding, travel directory, directory plugin
 Requires at least: 3.5
 Tested up to: 4.6
-Stable tag: 1.3.1
+Stable tag: 1.3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,6 +21,7 @@ The location content itself is shown in a carousel underneath the map. When you 
 
 * Create multiple independent maps
 * Add multiple maps to the same page
+* Style your map
 * A sidebar widget that can show your last location
 * Show a list of visited locations with optional arrival and departure dates
 * Set custom thumbnails for each location
@@ -29,9 +30,7 @@ The location content itself is shown in a carousel underneath the map. When you 
 * Specify if you want the map to zoom to the first or last location of your travel route.
 * Choose from three different content types for each location. Either link to a blog post, write a custom description or show the travel dates.
 
-[Demo](http://nomadworldmap.com/)
-
-If you want to contribute to the development of this plugin, you can do so through [GitHub](https://github.com/nomadworldmap/nomad-world-map).
+If you want to contribute to the development of this plugin, you can do so through [GitHub](https://github.com/nomadworldmap/nomad-world-map). 
 
 == Installation ==
 
@@ -100,6 +99,11 @@ Otherwise please open a support request in the support form.
 
 
 == Changelog ==
+= 1.3.2 =
+* Added the option to style the frontend map via Snazzy Maps [urban1702](https://github.com/urban1702)
+* Added wordpress css style support for the existing admin tables [urban1702](https://github.com/urban1702)
+* Updated FAQ page
+
 = 1.3.1 =
 * Few minor bug fixed
 
@@ -112,7 +116,7 @@ Otherwise please open a support request in the support form.
 * Fixed sometimes not being able to add new routes after creating a new map
 * Fixed several php notices breaking the route editor when WP_DEBUG was enabled
 * Fixed the linked url not showing up correctly in the location list in the route editor
-* Restricted the width of the location position dropdown
+* Restricted the width of the location position dropdown 
 * Added Swedish (sv_SE) translations, via [Elger](http://20x.se/)
 
 = 1.2.30 =
@@ -121,7 +125,7 @@ Otherwise please open a support request in the support form.
 * Fixed the date translations not working for custom posts
 * Fixed the date description text sometimes disappearing when switching between 'Add location' and 'Edit Location'
 * Fixed a compatibility issue with the Advanced Custom Fields plugin, reported by [ShaneShipston](https://github.com/ShaneShipston)
-* Several code improvements supplied by [ShaneShipston](https://github.com/ShaneShipston)
+* Several code improvements supplied by [ShaneShipston](https://github.com/ShaneShipston)  
 * Added the option to define where a new location is inserted in the route list when you create/edit an entry
 * Added the option to hide the tooltip on initial page load when the content is set to be shown in the tooltips
 * Added Polish (pl_PL) and Dutch (nl_NL) translations

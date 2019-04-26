@@ -27,15 +27,15 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-if ( ! defined( 'NWN_VERSION_NUM' ) )
-	define( 'NWN_VERSION_NUM', '1.2.31' );
-
+if ( ! defined( 'NWN_VERSION_NUM' ) )	
+	define( 'NWN_VERSION_NUM', '1.3.2' );
+	
 if ( ! defined( 'NWM_URL' ) )
 	define( 'NWM_URL', plugin_dir_url( __FILE__ ) );
 
 if ( !defined( 'NWM_BASENAME' ) )
 	define( 'NWM_BASENAME', plugin_basename( __FILE__ ) );
-
+	
 nwm_version_check();
 nwm_define_tables();
 
@@ -50,10 +50,10 @@ require 'includes/nwm-geocode-functions.php';
 
 if ( is_admin() ) {
 	require 'admin/nwm-admin-functions.php';
-
+	
 	register_activation_hook( __FILE__, 'nwm_activate' );
 	register_deactivation_hook( __FILE__, 'nwm_deactivate' );
-
+	
 	add_action( 'admin_enqueue_scripts', 'nwm_admin_scripts' );
 } else {
 	require 'includes/nwm-frontend-functions.php';
@@ -66,14 +66,14 @@ function nwm_version_check() {
 
 	if ( ( version_compare( $wp_version, '3.5', '<' ) == TRUE ) ) {
 		if ( is_admin() && ( !defined( 'DOING_AJAX' ) || !DOING_AJAX ) ) {
-			require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+			require_once( ABSPATH . 'wp-admin/includes/plugin.php' ); 
 			deactivate_plugins( NWM_BASENAME );
 			wp_die( "<strong>Nomad World Map</strong> requires WordPress 3.5 or higher, and has been disabled. Please upgrade WordPress and try again. <br /><br />Back to the WordPress <a href='".get_admin_url( null, 'plugins.php' )."'>Plugins page</a>." );
 		} else {
-			return;
+			return;	
 		}
 	}
-
+	
 }
 
 function nwm_define_tables() {

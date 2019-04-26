@@ -83,7 +83,7 @@
 	
 #gmap-nwm {
     float:left; 
-    height:587px; 
+    height:706px; 
     width:100%; 
     border-radius:3px; 
 }
@@ -190,13 +190,10 @@
 #nwm-destination-list tbody {
 	background:#fff;
 }
-#nwm-destination-list td {
-	border-top:1px dotted #ccc;
-}
+
 #nwm-destination-list td.nwm-order span {
     float:left; 
     color:#000; 
-    font-weight:bold; 
     text-align:center;
 }
 #nwm-destination-list tbody tr:hover {
@@ -367,6 +364,7 @@
 #nwm-destination-list th.nwm-order, 
 #nwm-destination-list td.nwm-order {
 	padding-left:25px;
+	width: 50px !important;
 }
 .delete-nwm-destination {
 	float:left;
@@ -436,7 +434,7 @@
     margin-top:10px !important;
 }
 .nwm-latlng-input #gmap-nwm {
-    height:587px;
+    height:706px;
 }
 
 /* Faq */

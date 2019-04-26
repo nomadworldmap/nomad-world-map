@@ -13,10 +13,10 @@ function nwm_default_settings()
             'curved_lines' => '0',
             'map_type' => 'roadmap',
             'round_thumbs' => '1',
-            'zoom_to' => 'first',
-            'zoom_level' => '3',
-            'past_color' => '#ad1700',
-            'future_color' => '#001d70',
+            'zoom_to' => 'last',
+            'zoom_level' => '2',
+            'past_color' => '#bcbcbc',
+            'future_color' => '#51a57c',
             'streetview' => '0',
             'control_position' => 'left',
             'control_style' => 'small',
@@ -24,7 +24,8 @@ function nwm_default_settings()
             'content_location' => 'slider',
             'location_header' => '0',
             'read_more_label' => 'Read more',
-            'latlng_input' => '0'
+			'latlng_input' => '0',
+			'google_maps_style' => '[ { "featureType": "administrative", "elementType": "labels.text.fill", "stylers": [ { "color": "#444444" } ] }, { "featureType": "administrative.country", "elementType": "geometry", "stylers": [ { "visibility": "off" } ] }, { "featureType": "administrative.country", "elementType": "labels", "stylers": [ { "visibility": "off" } ] }, { "featureType": "landscape", "elementType": "all", "stylers": [ { "color": "#f2f2f2" } ] }, { "featureType": "landscape", "elementType": "labels", "stylers": [ { "visibility": "off" } ] }, { "featureType": "poi", "elementType": "all", "stylers": [ { "visibility": "off" } ] }, { "featureType": "road", "elementType": "all", "stylers": [ { "saturation": -100 }, { "lightness": 45 }, { "visibility": "off" } ] }, { "featureType": "road.highway", "elementType": "all", "stylers": [ { "visibility": "simplified" } ] }, { "featureType": "road.arterial", "elementType": "labels.icon", "stylers": [ { "visibility": "off" } ] }, { "featureType": "transit", "elementType": "all", "stylers": [ { "visibility": "off" } ] }, { "featureType": "water", "elementType": "all", "stylers": [ { "color": "#ffffff" }, { "visibility": "on" } ] } ]'
         );
 
         update_option('nwm_settings', $settings);

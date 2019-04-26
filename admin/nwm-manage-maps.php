@@ -58,13 +58,13 @@ function nwm_manage_maps() {
             </div>
         </div>
         
-        <table class="wp-list-table widefat fixed" cellspacing="0">
+        <table class="wp-list-table widefat fixed striped media">
             <thead>
                 <tr>
-                    <th id="cb" class="manage-column column-cb check-column" scope="col">
-                        <label for="cb-select-all-1" class="screen-reader-text"><?php _e( 'Select All', 'nwm' ); ?></label>
-                        <input type="checkbox" id="cb-select-all-1">
-                    </th>
+					<td id="cb" class="manage-column column-cb check-column">
+						<label class="screen-reader-text" for="cb-select-all-1"><?php _e( 'Select All', 'nwm' ); ?></label>
+						<input id="cb-select-all-1" type="checkbox">
+					</td>
                     <th id="id" scope="col" class="manage-column column-id sortable asc"><?php _e( 'ID', 'nwm' ); ?></th>
                     <th id="description" scope="col" class="manage-column column-description"><?php _e( 'Name', 'nwm' ); ?></th>
                     <th id="route-entries" scope="col" class="manage-column column-description"><?php _e( 'Entries', 'nwm' ); ?></th>
@@ -106,10 +106,10 @@ function nwm_manage_maps() {
             </tbody>
             <tfoot>
                 <tr>
-                    <th class="manage-column column-cb check-column" scope="col">
-                        <label for="cb-select-all-2" class="screen-reader-text"><?php _e( 'Select All', 'nwm' ); ?></label>
-                        <input type="checkbox" id="cb-select-all-2">
-                    </th>
+					<td id="cb" class="manage-column column-cb check-column">
+						<label class="screen-reader-text" for="cb-select-all-1"><?php _e( 'Select All', 'nwm' ); ?></label>
+						<input id="cb-select-all-1" type="checkbox">
+					</td>
                     <th scope="col" class="manage-column column-id sortable asc"><?php _e( 'ID', 'nwm' ); ?></th>
                     <th scope="col" class="manage-column column-description"><?php _e( 'Name', 'nwm' ); ?></th>
                     <th scope="col" class="manage-column column-description"><?php _e( 'Entries', 'nwm' ); ?></th>

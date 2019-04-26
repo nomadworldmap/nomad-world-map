@@ -8,7 +8,7 @@ function nwm_settings_page() {
 	$options         = get_option( 'nwm_settings' );
     $options['initial_tooltip']  = isset( $options['initial_tooltip'] ) ? $options['initial_tooltip'] : 0;
     $options['google_api_browser_key']  = isset( $options['google_api_browser_key'] ) ? $options['google_api_browser_key'] : '';
-    $options['google_api_server_key']  = isset( $options['google_api_server_key'] ) ? $options['google_api_server_key'] : '';
+    $options['google_api_server_key']  = isset( $options['google_api_server_key'] ) ? $options['google_api_server_key'] : '[ { "featureType": "administrative", "elementType": "labels.text.fill", "stylers": [ { "color": "#444444" } ] }, { "featureType": "administrative.country", "elementType": "geometry", "stylers": [ { "visibility": "off" } ] }, { "featureType": "administrative.country", "elementType": "labels", "stylers": [ { "visibility": "off" } ] }, { "featureType": "landscape", "elementType": "all", "stylers": [ { "color": "#f2f2f2" } ] }, { "featureType": "landscape", "elementType": "labels", "stylers": [ { "visibility": "off" } ] }, { "featureType": "poi", "elementType": "all", "stylers": [ { "visibility": "off" } ] }, { "featureType": "road", "elementType": "all", "stylers": [ { "saturation": -100 }, { "lightness": 45 }, { "visibility": "off" } ] }, { "featureType": "road.highway", "elementType": "all", "stylers": [ { "visibility": "simplified" } ] }, { "featureType": "road.arterial", "elementType": "labels.icon", "stylers": [ { "visibility": "off" } ] }, { "featureType": "transit", "elementType": "all", "stylers": [ { "visibility": "off" } ] }, { "featureType": "water", "elementType": "all", "stylers": [ { "color": "#ffffff" }, { "visibility": "on" } ] } ]';
     $nwm_route_order = get_option( 'nwm_route_order' );
 	?>
     <div class="wrap">
@@ -17,6 +17,7 @@ function nwm_settings_page() {
           	<?php if ( ( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] == 'true' ) ) { ?>
             	<div id="message" class="message updated"><p><strong><?php _e( 'Settings updated', 'nwm' ) ?></strong></p></div>
             <?php } ?>
+			
             <form id="nwm-settings-form" action="options.php" method="post">
                 <div class="postbox-container">
                     <div class="metabox-holder">
@@ -25,15 +26,15 @@ function nwm_settings_page() {
                             <div class="inside">
                                 <p>
                                     <label for="nwm-google-api-browser-key"><?php _e( 'Google API Browser Key:', 'nwm' ); ?></label>
-                                    <input type="text" name="nwm-google-api-browser-key" value="<?php echo esc_attr( $options['google_api_browser_key'] ); ?>" id="nwm-google-api-browser-key" />
+                                    <input type="text" class="regular-text ltr" name="nwm-google-api-browser-key" value="<?php echo esc_attr( $options['google_api_browser_key'] ); ?>" id="nwm-google-api-browser-key" />
                                     <br/>
                                     <?php echo sprintf(
-                                        __('<b>Note:</b> Google API Browser Key is a requirement to use Google Maps, you can get a key from <a href="%s" target="_blank">here</a>', 'nvm'),
+                                        __('<small><b>Note:</b> Google API Browser Key is a requirement to use Google Maps, you can get a key from <a href="%s" target="_blank">here</a></small>', 'nvm'),
                                         'https://console.developers.google.com/flows/enableapi?apiid=maps_backend,geocoding_backend,directions_backend,distance_matrix_backend,elevation_backend&keyType=CLIENT_SIDE&reusekey=true' ); ?>
                                 </p>
                                 <p>
                                     <label for="nwm-google-api-server-key"><?php _e( 'Google API Server Key:', 'nwm' ); ?></label>
-                                    <input type="text" name="nwm-google-api-server-key" value="<?php echo esc_attr( $options['google_api_server_key'] ); ?>" id="nwm-google-api-server-key" />
+                                    <input type="text" class="regular-text ltr" name="nwm-google-api-server-key" value="<?php echo esc_attr( $options['google_api_server_key'] ); ?>" id="nwm-google-api-server-key" />
                                     <br/>
                                     <?php echo sprintf(
                                         __('<b>Note:</b> Google API Server Key is a requirement to use Google Maps, you can get a key from <a href="%s" target="_blank">here</a>', 'nvm'),
@@ -151,18 +152,32 @@ function nwm_settings_page() {
                     </div>  
                 </div>   
                 
-                <div class="postbox-container side">
-                	<div class="metabox-holder">
+                <div class="postbox-container side">  
+					<div class="metabox-holder">
                         <div class="postbox">
                             <h3 class="hndle"><span><?php _e( 'About', 'nwm' ); ?></span><span style="float:right;"><?php _e( 'Version', 'nwm' ); ?> <?php echo NWN_VERSION_NUM; ?></span></h3>
                             <div class="inside">
                                 <p><strong>Nomad World Map </strong><?php echo sprintf( __( 'by <a href="%s">Tijmen Smit</a>', 'nwm' ), 'http://twitter.com/tijmensmit' ); ?></p>
                                 <p><?php echo sprintf( __( 'If you like this plugin, please rate it <strong>5 stars</strong> on <a href="%s">WordPress.org</a> or consider making a <a href="%s">donation</a> to support the development.', 'nwm' ), 'http://wordpress.org/plugins/nomad-world-map/', 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NFZ6NCFKXQ8EA' ); ?></p>        
+                                <p><?php echo sprintf( __( 'Since <strong>Version 1.3.2</strong> the further development of the plugin is done by <a href="%s">Guido Grun</a>.', 'nwm' ), 'https://cathced.in' ); ?></p>        
                             </div>
                         </div>
-                	</div>        
-                </div>
- 
+                	</div>  
+					<div class="metabox-holder">
+                        <div class="postbox">
+                            <h3 class="hndle"><span><?php _e( 'Map Style', 'nwm' ); ?></span></h3>
+                            <div class="inside">
+								<p><textarea id="nwm-google-maps-style" rows="25" name="nwm-google-maps-style" class="widefat textarea"><?php echo esc_js( $options['google_maps_style'] ); ?></textarea>
+								<br/>
+                                    <?php echo sprintf(
+                                        __('<b>Note:</b> Map Styles can be created via Snazzy Maps <a href="%s" target="_blank">here</a>.', 'nvm'),
+                                        'https://snazzymaps.com/' ); ?>
+                                </p>
+                            </div>
+                        </div>
+                	</div>
+                </div>   
+                
                 <p class="nwm-update-btn"><input id="nwm-add-trip" type="submit" name="nwm-add-trip" class="button-primary" value="<?php _e( 'Update Settings', 'nwm' ); ?>" /></p>
                 <?php settings_fields( 'nwm_settings' ); ?>
             </form>
@@ -225,6 +240,8 @@ function nwm_settings_check() {
 	$output['content_location'] = ( wp_filter_nohtml_kses( $_POST['nwm-content-location'] == 'slider') ) ? 'slider' : 'tooltip';
     $output['initial_tooltip']  = isset( $_POST['nwm-initial-tooltip'] ) ? 1 : 0;
 	$output['latlng_input']     = isset( $_POST['nwm-latlng-input'] ) ? 1 : 0;
+	$output['google_maps_style']  = sanitize_text_field($_POST['nwm-google-maps-style']);
+
     
 	nwm_delete_all_transients();
 	
@@ -241,7 +258,7 @@ function nwm_zoom_to( $options ) {
         'last'           => __( 'The last location', 'nwm' )
     );
 				   
-	$dropdown = '<select id="nwm-zoom-to" name="nwm-zoom-to">';
+	$dropdown = '<select class="regular-text ltr" id="nwm-zoom-to" name="nwm-zoom-to">';
 	
 	foreach ( $items as $item => $value ) {
 		$selected = ( $options['zoom_to'] == $item ) ? 'selected="selected"' : '';
@@ -263,7 +280,7 @@ function nwm_map_types( $options ) {
         'hybrid', 
         'terrain' 
     );
-	$dropdown = '<select id="nwm-map-type" name="nwm-map-type">';
+	$dropdown = '<select class="regular-text ltr" id="nwm-map-type" name="nwm-map-type">';
 	
 	foreach ( $items as $item => $value ) {
 		$selected = ( $options['map_type'] == $value ) ? 'selected="selected"' : '';
@@ -279,7 +296,7 @@ function nwm_map_types( $options ) {
 /* Create the dropdown to select the zoom level */
 function nwm_zoom_level( $options ) {
 					   
-	$dropdown = '<select id="nwm-zoom-level" name="nwm-zoom-level">';
+	$dropdown = '<select class="regular-text ltr" id="nwm-zoom-level" name="nwm-zoom-level">';
 	
 	for ( $i = 1; $i < 13; $i++ ) {
         $selected = ( $options['zoom_level'] == $i ) ? 'selected="selected"' : '';
