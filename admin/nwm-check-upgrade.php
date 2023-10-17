@@ -17,7 +17,7 @@ function nwm_version_updates()
 
     $current_version = get_option('nwm_version');
 
-    if (version_compare($current_version, NWN_VERSION_NUM, '==='))
+    if (version_compare($current_version, NWN_VERSION_NUM, '=='))
         return;
 
     if (version_compare($current_version, '1.0.3', '<')) {
