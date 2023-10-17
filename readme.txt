@@ -3,8 +3,8 @@ Contributors: worldnomadmap
 Donate link: http://nomadworldmap.com/
 Tags: google maps, route, travel, travel blog, trip, geocoding, travel directory, directory plugin
 Requires at least: 3.5
-Tested up to: 4.6
-Stable tag: 1.3.1
+Tested up to: 6.3.1
+Stable tag: 1.3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -100,6 +100,9 @@ Otherwise please open a support request in the support form.
 
 
 == Changelog ==
+= 1.3.2 =
+* PHP 8.0 compatibility
+
 = 1.3.1 =
 * Few minor bug fixed
 
